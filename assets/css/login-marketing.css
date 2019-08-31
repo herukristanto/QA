@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+* {
+  margin: 0;
+  padding: 0; }
+
+@font-face {
+  font-family: avenir;
+  src: url("fonts/AvenirLTStd-Roman.otf") format("opentype"); }
+
+body {
+  background-color: #ffffff; }
+
+.wrapper-login {
+  max-width: 673px;
+  height: 100vh;
+  margin: 0 auto;
+  padding-bottom: 50px; }
+
+.wrap-login-logo {
+  margin-bottom: 89px; }
+
+.text-continue {
+  margin-bottom: 44px;
+  font-family: 'Noto Sans', sans-serif;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 28px; }
+
+.centering {
+  text-align: center; }
+
+div.btn-fb-google {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+a.fb-g-login {
+  text-decoration: none;
+  padding: 20px 65px 18px 45px;
+  color: #ffffff;
+  font-weight: bold;
+  line-Height: 20px;
+  margin: 0px 15px 0px 5px;
+  font-family: avenir; }
+
+div.btn-fb-google a.fb-g-login span {
+  font-size: 18px; }
+
+a.fb {
+  background-color: #3D5B97; }
+
+a.google {
+  background-color: #DB4C3F; }
+
+i.icon-l {
+  margin-right: 20px;
+  font-size: 24px;
+  position: relative;
+  top: 3px; }
+
+div.or {
+  margin-top: 46px;
+  margin-bottom: 27px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 28px;
+  font-size: 24px;
+  font-family: 'Noto Sans', sans-serif; }
+
+input[type=text] {
+  background-color: #ECEDEA;
+  width: 342px;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 21px;
+  font-size: 18px;
+  font-family: 'Noto Sans', sans-serif; }
+
+input[type=password] {
+  background-color: #ECEDEA;
+  width: 342px;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 21px;
+  font-size: 18px;
+  font-family: 'Noto Sans', sans-serif; }
+
+div.login-form .txt {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+div.login-form .txt a.signup {
+  text-decoration: none;
+  margin-right: 165px;
+  position: relative;
+  top: 10px;
+  font-family: Avenir;
+  line-height: 18px;
+  font-size: 18px;
+  color: #696969; }
+
+div.login-form .txt a.forgot-password {
+  text-decoration: none;
+  color: #DB4C3F;
+  font-family: Avenir;
+  line-height: 18px;
+  font-size: 18px;
+  position: relative;
+  top: 10px; }
+
+div.login-form .btn-login {
+  margin-top: 55px; }
+
+div.btn-login a.login {
+  text-decoration: none;
+  background-color: #A3EFD9;
+  padding: 8px 40px 8px 40px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 0.15em;
+  color: #4D4D4D;
+  font-family: 'Noto Sans', sans-serif; }

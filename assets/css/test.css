@@ -1,0 +1,12 @@
+.in-form-right input::-webkit-input-placeholder {
+  color: #8D8D8D;
+  font-size: 14px; }
+.in-form-right input:-ms-input-placeholder {
+  color: #8D8D8D;
+  font-size: 14px; }
+.in-form-right input::-ms-input-placeholder {
+  color: #8D8D8D;
+  font-size: 14px; }
+.in-form-right input::placeholder {
+  color: #8D8D8D;
+  font-size: 14px; }

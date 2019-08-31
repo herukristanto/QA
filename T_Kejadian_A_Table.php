@@ -8,7 +8,7 @@ include "koneksi.php";
 if (isset($_GET['katakunci']))
 {
     $katakunci = $_GET['katakunci'];
-    $query = "SELECT * FROM T_Kejadian_a WHERE no_lap like '%". $katakunci ."%' OR lokasi like '%". $katakunci ."%' OR no_rm like '%". $katakunci ."%'";
+    $query = "SELECT * FROM T_Kejadian_a WHERE no_lap like '%". $katakunci ."%' OR lokasi like '%". $katakunci ."%' OR no_rm like '%". $katakunci ."%' ORDER BY no_lap ASC";
     $sql = sqlsrv_query($conn,$query);
 
     if ($sql){
@@ -19,7 +19,6 @@ if (isset($_GET['katakunci']))
         <td>No. Lap</td>
         <td>Tgl Kejadian</td>
         <td>Jam Kejadian</td>
-
         <td>Lokasi</td>
         <td>No. RM</td>
         <td>Unit</td>
@@ -55,20 +54,26 @@ if (isset($_GET['katakunci']))
             "|".$rs['skor_prob'].
             "|".$rs['skor_prob'].
             "|".$rs['hasil_skor'].
+            "|".$rs['rawat_lain'].
+            "|".$rs['cedera_lain'].
 
             "'>
 
-            <td>".$rs['no_lap']."</td>
+            <td width=\"110px\">".$rs['no_lap']."</td>
             <td>".$rs['tgl_kejadian']->format('d/m/Y')."</td>
             <td>".$rs['jam_kejadian']."</td>
             <td>".$rs['lokasi']."</td>
             <td>".$rs['no_rm']."</td>
             <td>".$rs['kode_u']."</td>
-            <td>".$rs['tingkat_cidera']."</td>
+            <td width=\"60px\">".$rs['tingkat_cidera']."</td>
             <td>".$rs['kronologis']."</td>
-            <td>".$rs['hasil_skor']."</td>
-
-
+            "if ($rs['hasil_skor'] == 'Ekstrim') {
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;color:red\">".$rs['hasil_skor']."</td>"
+            }elseif ($rs['hasil_skor'] == 'Moderat') {
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;color:green\">".$rs['hasil_skor']."</td>"
+            }elseif ($rs['hasil_skor'] == 'Tinggi') {
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;color:red\">".$rs['hasil_skor']."</td>"
+            }"
             </tr>
             ";
         }
@@ -107,6 +112,9 @@ if (isset($_GET['katakunci']))
         var skor_prob = res[21];
         var hasil_skor = res[22];
 
+        var rawat_lain      = res[23];
+        var cedera_lain     = res[24];
+
         $("#no_lap").val(no_lap);
         $("#tgl_kejadian").val(tgl_kejadian);
         $("#jam_kejadian").val(jam_kejadian);
@@ -124,6 +132,8 @@ if (isset($_GET['katakunci']))
         $("#skor_prob").val(skor_prob);
         $("#skor_dampak").val(skor_dampak);
         $("#hasil_skor").val(hasil_skor);
+        $("#rawat_lain").val(rawat_lain);
+        $("#cedera_lain").val(cedera_lain);
 
         if (kjd_terjadi=="Ya"){
             radiobtn = document.getElementById("kjd_ya");
@@ -166,32 +176,50 @@ if (isset($_GET['katakunci']))
             radiobtn.checked = true;
         }
 
+        var elemen = document.getElementById("rawat_lain")
+
         if (tipe_layanan=="Rawat Inap"){
             radiobtn = document.getElementById("rawatinap");
             radiobtn.checked = true;
+            elemen.disabled = true;
         }else if(tipe_layanan=="Rawat Jalan"){
             radiobtn = document.getElementById("rawatjalan");
             radiobtn.checked = true;
-        }else if(tipe_layanan=="rawatlain"){
+            elemen.disabled = true;
+        }else if(tipe_layanan=="Rawat Lain"){
             radiobtn = document.getElementById("rawatlain");
             radiobtn.checked = true;
+              elemen.disabled = false;
         }
 
-        if (tingkat_cidera=="berat"){
+        var elemen1 = document.getElementById("cedera_lain")
+
+        if(tingkat_cidera=="kematian"){
+            radiobtn = document.getElementById("kematian");
+            radiobtn.checked = true;
+            elemen1.disabled = true;
+        }else if(tingkat_cidera=="berat"){
             radiobtn = document.getElementById("berat");
             radiobtn.checked = true;
+            elemen1.disabled = true;
         }else if(tingkat_cidera=="sedang"){
             radiobtn = document.getElementById("sedang");
             radiobtn.checked = true;
+            elemen1.disabled = true;
         }else if(tingkat_cidera=="ringan"){
             radiobtn = document.getElementById("ringan");
             radiobtn.checked = true;
-        }else if(tingkat_cidera=="tidakada"){
-            radiobtn = document.getElementById("tidakada");
+            elemen1.disabled = true;
+        }else if(tingkat_cidera=="tidak ada"){
+            radiobtn = document.getElementById("tidak ada");
             radiobtn.checked = true;
-        }else if(tingkat_cidera=="lainnya"){
-            radiobtn = document.getElementById("lainnya");
+            elemen1.disabled = true;
+        }else if(tingkat_cidera=="lain"){
+            radiobtn = document.getElementById("lain");
             radiobtn.checked = true;
+            if (radiobtn.checked == true) {
+              elemen.disabled = false;
+            }
         }
 
         if (skor_dampak=="5"){
@@ -227,6 +255,21 @@ if (isset($_GET['katakunci']))
             radiobtn = document.getElementById("prob_1");
             radiobtn.checked = true;
         }
+
+        var inputVal = document.getElementById("hasil_skor");
+         if (inputVal.value == "Ekstrim") {
+             inputVal.style.backgroundColor = "red"; //red
+         } else if (inputVal.value == "Tinggi") {
+             inputVal.style.backgroundColor = "yellow";
+         }else if (inputVal.value == "Moderat") {
+              inputVal.style.backgroundColor = "green";
+         }else if (inputVal.value == "Rendah") {
+              inputVal.style.backgroundColor = "#1E90FF";
+         }else if (inputVal.value == "") {
+              inputVal.style.backgroundColor = "";
+         }
+
+
 
             modal.style.display = "none";
 

@@ -13,7 +13,9 @@ date_default_timezone_set("Asia/Bangkok");
 		 $unit 					= $_GET['kode_u'];
 		 $nolap_unit		= $_GET['no_lap_1'];
 		 $radiolayanan	= $_GET['tipe_layanan'];
+		 $rawat_lain		= $_GET['rawat_lain'];
 		 $radiocedera		= $_GET['tingkat_cidera'];
+		 $cedera_lain		= $_GET['cedera_lain'];
 		 $indikator			= $_GET['kode_indikator'];
 		 $jenis_insiden	= $_GET['kode_insiden'];
 		 $tipe_insiden	= $_GET['tipe_insiden'];
@@ -22,9 +24,8 @@ date_default_timezone_set("Asia/Bangkok");
 		 $radioKlinis		= $_GET['skor_dampak'];
 		 $radioProb			= $_GET['skor_prob'];
 
-		 $DateTjd		= substr($TglTjd,6,4)."-".substr($TglTjd,3,2)."-".substr($TglTjd,0,2);
 
-
+		 $DateTjd				= substr($TglTjd,6,4)."-".substr($TglTjd,3,2)."-".substr($TglTjd,0,2);
 
 		 if ($radioKlinis == 5 && $radioProb == 5) {
 			 $hasil_grading = "Ekstrim";
@@ -79,18 +80,18 @@ date_default_timezone_set("Asia/Bangkok");
 		 }
 
 			$hasil_grading;
-			$kej_terjadi			= $_GET['kjd_terjadi'];
-			$pas_cedera			= $_GET['cedera'];
-			$pas_mengetahui			= $_GET['pasien_tahu'];
-			$hasil			= $_GET['hasil'];
+			$kej_terjadi			= $_GET['kejadian_terjadi'];
+			$pas_cedera				= $_GET['cedera'];
+			$pas_mengetahui		= $_GET['pasien_mengetahui'];
+			$hasil						= $_GET['hasil'];
 
-			$tanggal 	= date("Y-m-d");
-			$jam 			= date("H:i:s");
+			$tanggal 					= date("Y-m-d");
+			$jam 							= date("H:i:s");
 
 			$sql = "UPDATE T_Kejadian_a SET lokasi = '".$lokasi."',
 
-			tgl_kejadian = '".$DateTjd."' ,
-			jam_kejadian = '".$jam_kejadian."'  ,
+			tgl_kejadian = '".$DateTjd."',
+			jam_kejadian = '".$jam_kejadian."',
 			no_rm = '".$no_rm."',
 			kode_u = '".$unit."' ,
 			no_lap_1 = '".$nolap_unit."' ,
@@ -104,20 +105,20 @@ date_default_timezone_set("Asia/Bangkok");
 			skor_dampak = '".$radioKlinis."',
 			skor_prob = '".$radioProb."',
 			hasil_skor = '".$hasil_grading."',
-
 			kejadian_terjadi = '".$kej_terjadi."',
 			pasien_mengetahui = '".$pas_mengetahui."',
 			cedera = '".$pas_cedera."',
+			rawat_lain = '".$rawat_lain."',
+			cedera_lain = '".$cedera_lain."',
 			hasil = '".$hasil."' WHERE no_lap = '".$no_lap."'";
 
 			$result = sqlsrv_query( $conn, $sql);
 
 			if ( $result ){
 					$something = "Submission successful.";
-							echo
-							"
+							echo"
 					 		<script>
-					 		alert('Data Dengan No. Laporan : ".$no_lap."  Berhasil Update');
+					 		alert('Data No. Laporan : ".$no_lap."  Berhasil Update');
 					 		window.location.href='T_Kejadian_A_Change.php';
 					 		</script>";
 					}else{
@@ -128,5 +129,5 @@ date_default_timezone_set("Asia/Bangkok");
 					/* Free statement and connection resources. */
 					sqlsrv_free_stmt( $result);
 					sqlsrv_close( $conn);
-				}
-				?>
+			}
+			?>

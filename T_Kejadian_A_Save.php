@@ -7,22 +7,24 @@ date_default_timezone_set("Asia/Bangkok");
 	 if(isset($_POST['Submit'])) {
 		 $nolap					= $_POST['nolap'];
 		 $TglTjd				= $_POST['TglTjd'];
-		 $jam_kejadian	= $_POST['jam_kejadian'];
+		 $jam_kejadian			= $_POST['jam_kejadian'];
 		 $lokasi				= $_POST['lokasi'];
 		 $no_rm					= $_POST['no_rm'];
 		 $unit 					= $_POST['unit'];
-		 $nolap_unit		= $_POST['nolap_unit'];
-		 $radiolayanan	= $_POST['radiolayanan'];
-		 $radiocedera		= $_POST['radiocedera'];
-		 $indikator			= $_POST['indikator'];
-		 $jenis_insiden	= $_POST['jenis_insiden'];
-		 $tipe_insiden	= $_POST['tipe_insiden'];
-		 $sub_tipe			= $_POST['sub_tipe'];
-		 $kronologi			= $_POST['kronologi'];
-		 $radioKlinis		= $_POST['radioKlinis'];
-		 $radioProb			= $_POST['radioProbabilitas'];
+		 $nolap_unit			= $_POST['nolap_unit'];
+		 $radiolayanan			= $_POST['radiolayanan'];
+		 $radiocedera			= $_POST['radiocedera'];
+		 $indikator				= $_POST['indikator'];
+		 $jenis_insiden			= $_POST['jenis_insiden'];
+		 $tipe_insiden			= $_POST['tipe_insiden'];
+		 $sub_tipe				= $_POST['sub_tipe'];
+		 $kronologi				= $_POST['kronologi'];
+		 $radioKlinis			= $_POST['radioKlinis'];
+		 $radioProb				= $_POST['radioProbabilitas'];
+		 $tipe_lain				= $_POST['tipe_lain'];
+		 $cedera_lain		    = $_POST['cedera_lain'];
 
-		 $DateTjd		= substr($TglTjd,6,4)."-".substr($TglTjd,3,2)."-".substr($TglTjd,0,2);
+		 $DateTjd				= substr($TglTjd,6,4)."-".substr($TglTjd,3,2)."-".substr($TglTjd,0,2);
 
 
 
@@ -87,30 +89,31 @@ date_default_timezone_set("Asia/Bangkok");
 			$tanggal 	= date("Y-m-d");
 			$jam 			= date("H:i:s");
 
-			$tsql = "insert into T_Kejadian_a values('".$nolap."',
-																										'".$DateTjd."',
-																										'".$jam_kejadian."',
-																										'".$lokasi."',
-																										'".$no_rm."',
-																										'".$unit."',
-																										'".$nolap_unit."',
-																										'".$radiolayanan."',
-																										'".$radiocedera."',
-																										'".$indikator."',
-																										'".$jenis_insiden."',
-																										'".$tipe_insiden."',
-																										'".$sub_tipe."',
-																										'".$kronologi."',
-																										'".$radioKlinis."',
-																										'".$radioProb."',
-																										'".$hasil_grading."',
-																										'".$kej_terjadi."',
-																										'".$pas_cedera."',
-																										'".$pas_mengetahui."',
-																										'".$hasil."',
-																										'".$tanggal."',
-																										'".$jam."'
-																									)";
+			$tsql = "insert into T_Kejadian_a values('".$nolap."',																										'".$DateTjd."',
+														'".$jam_kejadian."',
+														'".$lokasi."',
+														'".$no_rm."',
+														'".$unit."',
+														'".$nolap_unit."',
+														'".$radiolayanan."',
+														'".$radiocedera."',
+														'".$indikator."',
+														'".$jenis_insiden."',
+														'".$tipe_insiden."',
+														'".$sub_tipe."',
+														'".$kronologi."',
+														'".$radioKlinis."',
+														'".$radioProb."',
+														'".$hasil_grading."',
+														'".$kej_terjadi."',
+														'".$pas_cedera."',
+														'".$pas_mengetahui."',
+														'".$hasil."',
+														'".$tanggal."',
+														'".$jam."',
+														'".$tipe_lain."',
+														'".$cedera_lain."'
+														)";
 
 					$result = sqlsrv_query( $conn, $tsql);
 

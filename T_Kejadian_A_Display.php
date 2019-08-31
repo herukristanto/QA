@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>T - Laporan Kejadian A - Create</title>
+<title>T - Laporan Kejadian - Display</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -142,56 +142,171 @@ td.mid{
         <tr>
           <tr>
             <td>Insiden Sudah Terjadi ?</td>
-            <td> : </td>
-            <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_ya" value="Ya" disabled="disabled">Ya</td>
+            <td>:</td>
+            <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_ya" value="Ya" disabled="disabled">
+              Ya</td>
             <td>&nbsp;</td>
-            <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_tidak" value="Tidak" disabled="disabled">Tidak</td>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_tidak" value="Tidak" disabled="disabled">
+              Tidak</td>
+            <td>&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
           </tr>
         </tr>
           <tr>
             <tr>
-              <td>Apakah Pasien Mengetahui ?</td>
-              <td> : </td>
-              <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_ya" value="Ya" disabled="disabled">Ya</td>
               <td>&nbsp;</td>
-              <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_tidak" value="Tidak" disabled="disabled">Tidak</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>Apakah Pasien Mengetahui ?</td>
+              <td>:</td>
+              <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_ya" value="Ya" disabled="disabled">
+              Ya</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_tidak" value="Tidak" disabled="disabled">
+              Tidak</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
             </tr>
           </tr>
 
           <tr>
             <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
               <td>Pasien Mengalami Cedera ?</td>
-                <td> : </td>
-                <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya" disabled="disabled">Ya</td>
+              <td>:</td>
+              <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya" disabled="disabled">
+              Ya</td>
+              <td>&nbsp;</td>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak" disabled="disabled">Tidak</td>
+                <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak" disabled="disabled">
+                Tidak</td>
+                <td>&nbsp;</td>
+                <td colspan="2">&nbsp;</td>
                 </tr>
               </tr>
               <tr>
                 <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
                   <td>Hasil Cidera</td>
-                  <td> : </td>
+                  <td>: </td>
+                  <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC" disabled>
+                  KTC</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC" disabled>
+                  KNC</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC" disabled>
+                  KPC</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD" disabled>
+                  KTD</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
 
 
-                    <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC" disabled>KTC</td>
+                    <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel" disabled>
+                    Sentinel</td>
                     <td>&nbsp;</td>
 
-                    <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC" disabled>KNC</td>
+                    <td colspan="2">&nbsp;</td>
                     <td>&nbsp;</td>
 
-                    <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC" disabled>KPC</td>
+                    <td colspan="2">&nbsp;</td>
                     <td>&nbsp;</td>
 
-                    <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD" disabled>KTD</td>
+                    <td colspan="2">&nbsp;</td>
                     <td>&nbsp;</td>
 
-                    <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel" disabled>Sentinel</td>
-
+                    <td colspan="2">&nbsp;</td>
                 </tr>
               </tr>
 
                 
-      <tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            <tr>
         <td>No. Laporan</td>
         <td> : </td>
         <td><input disabled name="nolap" id="no_lap" type="text" value="<?php echo $id; ?>" style="text-align:center;font-weight:bold;font-size:14px"></td>
@@ -233,8 +348,7 @@ td.mid{
                     }
                     ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>No. Laporan unit terkait</td>
@@ -245,21 +359,18 @@ td.mid{
         <tr>
           <td>Tipe Layanan</td>
           <td colspan="2">
-            <input type="radio" name="tipe_layanan" id="rawatinap" disabled="disabled" value="Rawat Inap">Rawat Inap
-          </td>
+            <input type="radio" name="tipe_layanan" id="rawatinap" disabled="disabled" value="Rawat Inap">Rawat Inap          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td colspan="2">
-            <input type="radio" name="tipe_layanan" id="rawatjalan" disabled="disabled" value="Rawat Jalan">Rawat Jalan
-          </td>
+            <input type="radio" name="tipe_layanan" id="rawatjalan" disabled="disabled" value="Rawat Jalan">Rawat Jalan          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td colspan="2">
             <input type="radio" name="tipe_layanan" id="rawatlain" disabled="disabled" value="rawatlain">Lainnya&nbsp;
-            <input type="text" id="rawat_lain" name="tipe_layanan" maxlength="50" disabled="disabled">
-          </td>
+            <input type="text" id="rawat_lain" name="rawat_lain" maxlength="50" disabled="disabled">          </td>
         </tr>
           <td>&nbsp;</td>
         <tr>
@@ -284,8 +395,8 @@ td.mid{
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input disabled="disabled" type="radio" name="tingkat_cidera" id="lainnya" value="lain">Lainnya&nbsp;
-            <input disabled="disabled" type="text" id="cedera_lain" name="tingkat_cidera" maxlength="50"></td>
+          <td colspan="2"><input disabled="disabled" type="radio" name="tingkat_cidera" id="lain" value="lain">Lainnya&nbsp;
+            <input disabled="disabled" type="text" id="cedera_lain" name="cedera_lain" maxlength="50"></td>
         </tr>
           <td>&nbsp;</td>
         <tr>
@@ -301,8 +412,7 @@ td.mid{
                   }
                 ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>Jenis insiden</td>
@@ -317,8 +427,7 @@ td.mid{
                 }
                 ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>Tipe insiden</td>
@@ -333,8 +442,7 @@ td.mid{
                   }
                 ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>Sub Tipe insiden</td>
@@ -349,8 +457,7 @@ td.mid{
                   }
                 ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>Kronologi Kejadian</td>
@@ -406,15 +513,14 @@ td.mid{
         <tr>
           <td>Hasil matriks grading resiko</td>
           <td> : </td>
-          <td><input type="text" id="hasil_skor" name="hasil_skor" maxlength="50" disabled="disabled"></td>
+          <td><input type="text" id="hasil_skor" name="hasil_skor" maxlength="50" style="text-align:center;font-weight:bold;font-size:14px;color:red" disabled="disabled"></td>
         </tr>
         <tr>
           <td height="43">&nbsp;</td>
           <td>&nbsp;</td>
 
-            <td><button id="myBtn">Search</button>&nbsp;&nbsp;&nbsp;
+            <td><button id="myBtn">Search</button>   
             <button type="reset" name="Reset">Reset</button></td>
-
         </tr>
       </table>
 <!-- </form> -->

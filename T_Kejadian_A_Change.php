@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>T - Laporan Kejadian A - Create</title>
+<title>T - Laporan Kejadian - Change</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -109,67 +109,133 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-<!-- <form  action="T_Kejadian_A_Save.php" method="POST"> -->
   <br>
 
 </br>
-  <span class="style1">Display Laporan Kejadian</span><br>
+  <span class="style1">Change Laporan Kejadian</span><br>
     <td>&nbsp;</td>
-
-<form class="" action="T_Kejadian_A_Update.php" method="GET">
+<form action="T_Kejadian_A_Update.php" method="get">
 
   <table>
     <tr>
       <tr>
-        <tr>
-          <td>Insiden Sudah Terjadi ?</td>
-          <td> : </td>
-          <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_ya" value="Ya">Ya</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_tidak" value="Tidak">Tidak</td>
-        </tr>
+        <td>Insiden Sudah Terjadi ?</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="kejadian_terjadi" id="kjd_ya" value="Ya">Ya</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="kejadian_terjadi" id="kjd_tidak" value="Tidak">Tidak</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
       </tr>
 
       <tr>
-        <tr>
-          <td>Apakah Pasien Mengetahui ?</td>
-          <td> : </td>
-          <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_ya" value="Ya">Ya</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_tidak" value="Tidak">Tidak</td>
-        </tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
       </tr>
 
       <tr>
-        <tr>
-          <td>Pasien Mengalami Cedera ?</td>
-          <td> : </td>
-          <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya" >Ya</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak" >Tidak</td>
-        </tr>
+        <td>Apakah Pasien Mengetahui ?</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="pasien_mengetahui" id="pasien_ya" value="Ya">Ya</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="pasien_mengetahui" id="pasien_tidak" value="Tidak">Tidak</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
       </tr>
 
       <tr>
-        <tr>
-          <td>Hasil Cidera</td>
-          <td> : </td>
-          <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC" >KTC</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC" >KNC</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC" >KPC</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD" >KTD</td>
-          <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel" >Sentinel</td>
-        </tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
       </tr>
 
+      <tr>
+        <td>Pasien Mengalami Cedera ?</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya">Ya</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak">Tidak</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>Hasil Cidera</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC">KTC</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC">KNC</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC">KPC</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD">KTD</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel">Sentinel</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tr>
+  </table>
+
+  <table>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
       <tr>
         <td>No. Laporan</td>
         <td> : </td>
         <td><input name="nolap" id="no_lap" type="text" readonly style="text-align:center;font-weight:bold;font-size:14px"></td>
+        <td><input type="button" id="myBtn" value="Search" style="background-color: #4CAF50;"></td>
       </tr>
 
       <tr>
@@ -209,8 +275,7 @@ td.mid{
                     }
                     ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>No. Laporan unit terkait</td>
@@ -221,48 +286,44 @@ td.mid{
         <tr>
           <td>Tipe Layanan</td>
           <td colspan="2">
-            <input type="radio" name="tipe_layanan" id="rawatinap" value="rawatinap">Rawat Inap
-
-          </td>
+            <input onclick="enable11('rawat_lain')" type="radio" name="tipe_layanan" id="rawatinap" value="Rawat Inap">Rawat Inap          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td colspan="2">
-            <input type="radio" name="tipe_layanan" id="rawatjalan" value="rawatjalan">Rawat Jalan
-          </td>
+            <input onclick="enable11('rawat_lain')" type="radio" name="tipe_layanan" id="rawatjalan" value="Rawat Jalan">Rawat Jalan          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td colspan="2">
-            <input type="radio" name="tipe_layanan" id="rawatlain" value="rawatlain">Lainnya &nbsp;
-            <input type="text" id="rawatlain" name="tipe_layanan" maxlength="50" >
-          </td>
+            <input onclick="enable1('rawat_lain')" type="radio" name="tipe_layanan" id="rawatlain" value="Rawat Lain">Lainnya &nbsp;
+            <input type="text" id="rawat_lain" name="rawat_lain" maxlength="50" >          </td>
         </tr>
           <td>&nbsp;</td>
         <tr>
           <td>Tingkat Cedera</td>
-          <td colspan="2"><input  type="radio" name="tingkat_cidera" id="kematian" value="kematian">Kematian</td>
+          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="kematian" value="kematian">Kematian</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input  type="radio" name="tingkat_cidera" id="berat" value="berat">Cedera Berat</td>
+          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="berat" value="berat">Cedera Berat</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input  type="radio" name="tingkat_cidera" id="sedang" value="sedang">Cedera Sedang</td>
+          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="sedang" value="sedang">Cedera Sedang</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input  type="radio" name="tingkat_cidera" id="ringan" value="ringan">Cedera Ringan</td>
+          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="ringan" value="ringan">Cedera Ringan</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input  type="radio" name="tingkat_cidera" id="tidakada" value="tidakada">Tidak Ada Cedera</td>
+          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="tidakada" value="tidakada">Tidak Ada Cedera</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input  type="radio" name="tingkat_cidera" id="lainnya" value="lain">Lainnya&nbsp;
-            <input  type="text" id="cedera_lain" name="tingkat_cidera" maxlength="50"></td>
+          <td colspan="2"><input onclick="enable2('cedera_lain')" type="radio" name="tingkat_cidera" id="lain" value="lain">Lainnya&nbsp;
+            <input  type="text" id="cedera_lain" name="cedera_lain" maxlength="50"></td>
         </tr>
           <td>&nbsp;</td>
         <tr>
@@ -278,8 +339,7 @@ td.mid{
                   }
                 ?>
               </select>
-            </span>
-          </td>
+            </span></td>
         </tr>
         <tr>
           <td>Jenis insiden</td>
@@ -294,8 +354,7 @@ td.mid{
                 }
                 ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>Tipe insiden</td>
@@ -310,8 +369,7 @@ td.mid{
                   }
                 ?>
               </select>
-            </span>
-          </td>
+            </span></td>
         </tr>
         <tr>
           <td>Sub Tipe insiden</td>
@@ -326,8 +384,7 @@ td.mid{
                   }
                 ?>
               </select>
-            </span>
-          </td>
+            </span>          </td>
         </tr>
         <tr>
           <td>Kronologi Kejadian</td>
@@ -345,19 +402,19 @@ td.mid{
           <td>i. Skor dampak klinis/ severity</td>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_dampak" id="5"  value="5">Katastropil (merah-5)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="5"  value="5">Katastropil (merah-5)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_dampak" id="4"  value="4">Mayor (orange-4)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="4"  value="4">Mayor (orange-4)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_dampak" id="3"  value="3">Moderat (kuning-3)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="3"  value="3">Moderat (kuning-3)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_dampak" id="2"  value="2">Minor (hijau-2)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="2"  value="2">Minor (hijau-2)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_dampak" id="1"  value="1">Tidak Signifikan (biru-1)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="1"  value="1">Tidak Signifikan (biru-1)</td></tr>
         </tr>
         <tr>
           <td height="43">&nbsp;</td>
@@ -365,53 +422,44 @@ td.mid{
           <td>ii. Skor probabilitas/ frekuensi</td>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_prob" id="prob_5"  value="5">Sangat sering terjadi (merah-5)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_5"  value="5">Sangat sering terjadi (merah-5)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_prob" id="prob_4"  value="4">Sering terjadi (orange-4)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_4"  value="4">Sering terjadi (orange-4)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_prob" id="prob_3"  value="3">Mungkin terjadi (kuning-3)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_3"  value="3">Mungkin terjadi (kuning-3)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_prob" id="prob_2"  value="2">Jarang terjadi (hijau-2)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_2"  value="2">Jarang terjadi (hijau-2)</td></tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="skor_prob" id="prob_1"  value="1">Sangat jarang terjadi (biru-1)</td></tr>
+          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_1"  value="1">Sangat jarang terjadi (biru-1)</td></tr>
         </tr>
           <td>&nbsp;</td>
         <tr>
           <td>Hasil matriks grading resiko</td>
           <td> : </td>
-          <td><input type="text" id="hasil_skor" name="hasil_skor" disabled="disabled" maxlength="50" ></td>
+          <td><input type="text" id="hasil_skor" name="hasil_skor" style="text-align:center;font-weight:bold;font-size:14px;color:black" disabled="disabled" maxlength="15" ></td>
         </tr>
         <tr>
           <td height="43">&nbsp;</td>
           <td>&nbsp;</td>
-
-
             <td>
             <button type="submit" name="Submit">Update</button>  
             <button type="reset" name="Reset">Reset</button>
 
-
             </td>
-
         </tr>
       </table>
       </form>
-      <table>
+      <!-- <table>
         <tr>
           <td colspan="2">&nbsp;</td>
           <td colspan="2">&nbsp;</td>
           <td><button id="myBtn">Search</button></td>
         </tr>
-      </table>
-
-
-
-
-        
+      </table> -->
 
           <p>
             <?php include "T_Kejadian_A_Search.php"; ?>
@@ -459,6 +507,114 @@ td.mid{
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
+function enable1(id){
+  var elemen = document.getElementById(id);
+
+    elemen.disabled = false;
+    document.getElementById(id).value;
+
+}
+function enable11(id){
+  var elemen = document.getElementById(id);
+
+    elemen.disabled = true;
+    document.getElementById(id).value = '';
+
+}
+function enable2(id){
+  var elemen = document.getElementById(id);
+  elemen.disabled = false;
+  document.getElementById(id).value;
+
+}
+
+
+function enable22(id){
+  var elemen = document.getElementById(id);
+
+    elemen.disabled = true;
+    document.getElementById(id).value = '';
+
+}
+
+
+   function clik(){
+
+    const rk = $('input[name=skor_dampak]:checked').val();
+    const rp = $('input[name=skor_prob]:checked').val();
+
+    var hg;
+
+    if (rk == 5 && rp == 5) {
+      hg = "Ekstrim";
+    }else if(rk == 5 && rp == 4){
+      hg = "Ekstrim";
+    }else if(rk == 5 && rp == 3){
+      hg = "Ekstrim";
+    }else if(rk == 5 && rp == 2){
+      hg = "Ekstrim";
+    }else if(rk == 5 && rp == 1){
+      hg = "Ekstrim";
+    }else if(rk == 4 && rp == 5){
+      hg = "Ekstrim";
+    }else if(rk == 4 && rp == 4){
+      hg = "Ekstrim";
+    }else if(rk == 4 && rp == 3){
+      hg = "Ekstrim";
+    }else if(rk == 4 && rp == 2){
+      hg = "Tinggi";
+    }else if(rk == 4 && rp == 1){
+      hg = "Tinggi";
+    }else if(rk == 3 && rp == 5){
+      hg = "Tinggi";
+    }else if(rk == 3 && rp == 4){
+      hg = "Tinggi";
+    }else if(rk == 3 && rp == 3){
+      hg = "Tinggi";
+    }else if(rk == 3 && rp == 2){
+      hg = "Moderat";
+    }else if(rk == 3 && rp == 1){
+      hg = "Moderat";
+    }else if(rk == 2 && rp == 5){
+      hg = "Moderat";
+    }else if(rk == 2 && rp == 4){
+      hg = "Moderat";
+    }else if(rk == 2 && rp == 3){
+      hg = "Moderat";
+    }else if(rk == 2 && rp == 2){
+      hg = "Rendah";
+    }else if(rk == 2 && rp == 1){
+      hg = "Rendah";
+    }else if(rk == 1 && rp == 5){
+      hg = "Moderat";
+    }else if(rk == 1 && rp == 4){
+      hg = "Moderat";
+    }else if(rk == 1 && rp == 3){
+      hg = "Rendah";
+    }else if(rk == 1 && rp == 2){
+      hg = "Rendah";
+    }else if(rk == 1 && rp == 1){
+      hg = "Rendah";
+    }
+
+      $("#rkb").val(rk);
+      $("#rpb").val(rp);
+      $("#hasil_skor").val(hg);
+
+    var inputVal = document.getElementById("hasil_skor");
+     if (inputVal.value == "Ekstrim") {
+         inputVal.style.backgroundColor = "red"; //red
+     } else if (inputVal.value == "Tinggi") {
+         inputVal.style.backgroundColor = "yellow";
+     }else if (inputVal.value == "Moderat") {
+          inputVal.style.backgroundColor = "green";
+     }else if (inputVal.value == "Rendah") {
+          inputVal.style.backgroundColor = "#1E90FF";
+     }else if (inputVal.value == "") {
+          inputVal.style.backgroundColor = "";
+     }
+
+}
 
 </script>
 
