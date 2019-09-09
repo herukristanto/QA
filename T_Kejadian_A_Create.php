@@ -11,15 +11,8 @@
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
-
-<link rel="stylesheet" href="css/slider.css">
-
-
 <script src="js/jquery-1.7.2.min.js"></script>
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
 <?php
 include "koneksi.php";
 {
@@ -119,94 +112,18 @@ $tambah = $kode + 1;
 </style>
 </head>
 <body>
-<div id="header_trn"></div>
-<div class="main">
-  <div class="main-inner">
-    <div class="container">
-      <div class="row">
+  <div id="header_trn"></div>
+  <div class="main">
+    <div class="main-inner">
+      <div class="container">
+        <div class="row">
+          <div class="span12 mainPage">
         <div class="span12 mainPage">
-
-        <!-- <div class="wrap-form-out-profile">
-          <div class="box-profile profile border-profile-left">
-            <div class="profile-circle">
-
-
-            </div>
-          </br>
-          </br>
-          </br>
-          <div class="username-profile">
-            <p>No. Laporan</p>
-            <p></p>
-          </div>
-        </div>
-
-        <div class="box-profile profile-info">
-          <div class="info">
-            <p class="title">Create Laporan Kejadian</p>
-          </div>
-          <div >
-
-          </div>
-        </div>
-
-    <div class="box-profile slider-profiles border-profile-right">
-      <div id="btn-slider" class="btn-slide-profile">
-        <div class="grab">
-      </div>
-      <div class="title">
-        <p>Analisa Matriks grading resiko</p>
-      </div>
-    </div>
-
-  <div class="wrapper-perform">
-    <div class="wrap-Performance">
-      <div class="wrap-summary">
-        <div class="top">
-          <div class="name">
-            <p>Skor dampak klinis/ severity</p>
-          </div>
-          <div class="nav-menu">
-            <i class="icon-circle-menu"></i>
-          </div>
-        </div>
-        <div class="data">
-          <p class="num" id="rkb">5</p>
-          <p class="name"></p>
-        </div>
-      </div>
-      <div class="wrap-summary">
-        <div class="top">
-          <div class="name">
-            <p>Skor probabilitas/ frekuensi</p>
-          </div>
-          <div class="nav-menu">
-            <i class="icon-circle-menu"></i>
-          </div>
-        </div>
-        <div class="data">
-          <p class="num" id="rpb">3</p>
-
-        </div>
-      </div>
-      </div>
-      <div class="wrap-Performance hide">
-        <div class="chart">
-          <div class="name">
-            <p>Skor probabilitas/ frekuensi</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
         </br>
         <span><h3>Create Laporan Kejadian</h3></span>
 
 <form  action="T_Kejadian_A_Save.php" method="POST">
-
 
       </br>
 
@@ -318,12 +235,9 @@ $tambah = $kode + 1;
         </tr>
       </tr>
     </table>
-
-    <input type="button" onclick="myFunction()" value="Click Me">
-
-
+    <!-- <input type="button" onclick="myFunction()" value="Click Me"> -->
 <br>
-<div id="myDIV">
+<!-- <div id="myDIV"> -->
     <table>
       <tr>
       <tr>
@@ -484,10 +398,17 @@ $tambah = $kode + 1;
         <tr>
           <td>Kronologi Kejadian</td>
           <td> : </td>
-          <td colspan="2" rowspan="2"><textarea name="kronologi" rows="2" cols="50" id="kronologi"></textarea></td>
+          <td ><textarea name="kronologi" rows="1" id="kronologi" style="
+          overflow: hidden;
+          padding: 0;
+          border-style: solid;
+          border-width: 1px;
+          background-color: white;
+          font-size: 14px;
+          height: 25px; width: 150;"></textarea></td>
         </tr>
           <td height="43">&nbsp;</td>
-          <td>&nbsp;</td>
+
         <tr>
           <td>Analisa Matriks grading resiko</td>
         </tr>
@@ -544,10 +465,10 @@ $tambah = $kode + 1;
             <td><button type="submit" name="Submit">Simpan</button>&nbsp;&nbsp;&nbsp;
             <button type="reset" name="Reset">Reset</button></td>
 
-        </tr>
-      </table>
-</form>
-</div>
+            </tr>
+            </table>
+            </form>
+ </div>
           <p>
             <?php include "T_Kejadian_A_Search.php"; ?>
           </p>
@@ -562,6 +483,7 @@ $tambah = $kode + 1;
   <!-- /main-inner -->
 </div>
 <!-- /main -->
+</div>
 <div class="extra">
   <div class="extra-inner">
     <div class="container">
@@ -583,27 +505,20 @@ $tambah = $kode + 1;
         <div class="span12"> &copy; 2013 <a href="#">Bootstrap Responsive Admin Template</a>. </div>
         <!-- /span12 -->
       </div>
+
       <!-- /row -->
     </div>
     <!-- /container -->
   </div>
   <!-- /footer-inner -->
 </div>
+
 <!-- /footer -->
 <!-- Le javascript
 
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
-
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
 
 function enable1(id){
   var elemen = document.getElementById(id);
@@ -711,14 +626,21 @@ function enable22(id){
 
 }
 
-</script>
+var textarea = document.querySelector('textarea');
 
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" charset="utf-8"></script>
-<script src="assets/main.js" charset="utf-8"></script>
+textarea.addEventListener('keydown', autosize);
+
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+</script>
 
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>

@@ -235,7 +235,15 @@ td.mid{
         <td>No. Laporan</td>
         <td> : </td>
         <td><input name="nolap" id="no_lap" type="text" readonly style="text-align:center;font-weight:bold;font-size:14px"></td>
-        <td><input type="button" id="myBtn" value="Search" style="background-color: #4CAF50;"></td>
+        <!-- <td><input type="button" id="myBtn" value="Search" style=" background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 6px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 8px;"></td> -->
       </tr>
 
       <tr>
@@ -389,7 +397,14 @@ td.mid{
         <tr>
           <td>Kronologi Kejadian</td>
           <td> : </td>
-          <td colspan="2" rowspan="2"><textarea name="kronologis" rows="3" id="kronologis" ></textarea></td>
+          <td><textarea name="kronologis" id="kronologis" rows="1" style="
+          overflow: hidden;
+          padding: 0;
+          border-style: solid;
+          border-width: 1px;
+          background-color: white;
+          font-size: 14px;
+          height: 25px; width: 150;"></textarea></td>
         </tr>
           <td height="43">&nbsp;</td>
           <td>&nbsp;</td>
@@ -446,9 +461,34 @@ td.mid{
           <td height="43">&nbsp;</td>
           <td>&nbsp;</td>
             <td>
-            <button type="submit" name="Submit">Update</button>  
-            <button type="reset" name="Reset">Reset</button>
-
+            <button type="submit" name="Submit" style=" background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 6px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 8px;">Update</button>  
+            <button type="reset" name="Reset" style=" background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 6px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 8px;">Reset</button>
+      &nbsp;
+            <input type="button" id="myBtn" value="Search" style=" background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 6px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 8px;">
             </td>
         </tr>
       </table>
@@ -615,7 +655,19 @@ function enable22(id){
      }
 
 }
+var textarea = document.querySelector('textarea');
 
+textarea.addEventListener('keydown', autosize);
+
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
 </script>
 
 <script src="js/excanvas.min.js"></script>

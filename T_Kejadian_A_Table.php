@@ -18,16 +18,18 @@ if (isset($_GET['katakunci']))
         <tr>
         <td>No. Lap</td>
         <td>Tgl Kejadian</td>
-        <td>Jam Kejadian</td>
         <td>Lokasi</td>
         <td>No. RM</td>
         <td>Unit</td>
+
         <td>Cidera</td>
-        <td>Kronologis</td>
+        <td>Kode Indikator</td>
+        <td>Kode Insident</td>
         <td>Hasil Grading</td>
 
         </tr>";
         while($rs = sqlsrv_fetch_array($sql)){
+          $hg = $rs['hasil_skor'];
 
             echo "
             <tr id='
@@ -61,19 +63,30 @@ if (isset($_GET['katakunci']))
 
             <td width=\"110px\">".$rs['no_lap']."</td>
             <td>".$rs['tgl_kejadian']->format('d/m/Y')."</td>
-            <td>".$rs['jam_kejadian']."</td>
             <td>".$rs['lokasi']."</td>
             <td>".$rs['no_rm']."</td>
             <td>".$rs['kode_u']."</td>
-            <td width=\"60px\">".$rs['tingkat_cidera']."</td>
-            <td>".$rs['kronologis']."</td>
-            "if ($rs['hasil_skor'] == 'Ekstrim') {
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;color:red\">".$rs['hasil_skor']."</td>"
-            }elseif ($rs['hasil_skor'] == 'Moderat') {
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;color:green\">".$rs['hasil_skor']."</td>"
-            }elseif ($rs['hasil_skor'] == 'Tinggi') {
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;color:red\">".$rs['hasil_skor']."</td>"
-            }"
+            <td>".$rs['tingkat_cidera']."</td>
+            <td>".$rs['kode_indikator']."</td>
+            <td>".$rs['kode_insiden']."</td>";
+            if ($hg == 'Ekstrim') {
+              echo
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:red\">".$hg."</td>";
+            } elseif ($hg == 'Moderat') {
+              echo
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:green\">".$hg."</td>";
+            } elseif ($hg == 'Tinggi') {
+              echo
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:yellow\">".$hg."</td>";
+            } elseif ($hg == 'Rendah') {
+              echo
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:#1E90FF\">".$hg."</td>";
+            } elseif ($hg == '') {
+              echo
+              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:none\"></td>";
+            }
+            "
+
             </tr>
             ";
         }

@@ -131,176 +131,116 @@ td.mid{
 <!-- <form  action="T_Kejadian_A_Save.php" method="POST"> -->
   <br>
 
-    <table>
-
-    </table>
-</br>
-  <span class="style1">Display Laporan Kejadian</span><br>
-    <td>&nbsp;</td>
-    <table>
+  <table>
+    <tr>
       <tr>
-        <tr>
-          <tr>
-            <td>Insiden Sudah Terjadi ?</td>
-            <td>:</td>
-            <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_ya" value="Ya" disabled="disabled">
-              Ya</td>
-            <td>&nbsp;</td>
-            <td colspan="2">&nbsp;</td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td colspan="2"><input type="radio" name="kjd_terjadi" id="kjd_tidak" value="Tidak" disabled="disabled">
-              Tidak</td>
-            <td>&nbsp;</td>
-            <td colspan="2">&nbsp;</td>
-          </tr>
-        </tr>
-          <tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-              <td>Apakah Pasien Mengetahui ?</td>
-              <td>:</td>
-              <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_ya" value="Ya" disabled="disabled">
-              Ya</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td colspan="2"><input type="radio" name="pasien_tahu" id="pasien_tidak" value="Tidak" disabled="disabled">
-              Tidak</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-            </tr>
-          </tr>
+        <td>Insiden Sudah Terjadi ?</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="kejadian_terjadi" id="kjd_ya" value="Ya" disabled="disabled">Ya</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="kejadian_terjadi" id="kjd_tidak" value="Tidak" disabled="disabled">Tidak</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
-          <tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-              <td>Pasien Mengalami Cedera ?</td>
-              <td>:</td>
-              <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya" disabled="disabled">
-              Ya</td>
-              <td>&nbsp;</td>
-              <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak" disabled="disabled">
-                Tidak</td>
-                <td>&nbsp;</td>
-                <td colspan="2">&nbsp;</td>
-                </tr>
-              </tr>
-              <tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>Hasil Cidera</td>
-                  <td>: </td>
-                  <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC" disabled>
-                  KTC</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC" disabled>
-                  KNC</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC" disabled>
-                  KPC</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD" disabled>
-                  KTD</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="2">&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
+      <tr>
+        <td>Apakah Pasien Mengetahui ?</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="pasien_mengetahui" id="pasien_ya" value="Ya" disabled="disabled">Ya</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="pasien_mengetahui" id="pasien_tidak" value="Tidak" disabled="disabled">Tidak</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
-                    <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel" disabled>
-                    Sentinel</td>
-                    <td>&nbsp;</td>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
-                    <td colspan="2">&nbsp;</td>
-                    <td>&nbsp;</td>
+      <tr>
+        <td>Pasien Mengalami Cedera ?</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya" disabled="disabled">Ya</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak" disabled="disabled">Tidak</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
-                    <td colspan="2">&nbsp;</td>
-                    <td>&nbsp;</td>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
-                    <td colspan="2">&nbsp;</td>
-                    <td>&nbsp;</td>
+      <tr>
+        <td>Hasil Cidera</td>
+        <td>  </td>
+        <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC" disabled="disabled">KTC</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC" disabled="disabled">KNC</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC" disabled="disabled">KPC</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD" disabled="disabled">KTD</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel" disabled="disabled">Sentinel</td>
+        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tr>
+  </table>
 
-                    <td colspan="2">&nbsp;</td>
-                </tr>
-              </tr>
-
-                
+                <table>
               <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -462,10 +402,10 @@ td.mid{
         <tr>
           <td>Kronologi Kejadian</td>
           <td> : </td>
-          <td colspan="2" rowspan="2"><textarea name="kronologis" rows="3" id="kronologis" disabled="disabled"></textarea></td>
+          <td><textarea name="kronologis" id="kronologis" disabled="disabled" style="resize:none;width:300px;height:20px;"></textarea></td>
         </tr>
           <td height="43">&nbsp;</td>
-          <td>&nbsp;</td>
+          
         <tr>
           <td>Analisa Matriks grading resiko</td>
         </tr>
@@ -513,7 +453,7 @@ td.mid{
         <tr>
           <td>Hasil matriks grading resiko</td>
           <td> : </td>
-          <td><input type="text" id="hasil_skor" name="hasil_skor" maxlength="50" style="text-align:center;font-weight:bold;font-size:14px;color:red" disabled="disabled"></td>
+          <td><input type="text" id="hasil_skor" name="hasil_skor" maxlength="50" style="text-align:center;font-weight:bold;font-size:14px;color:black" disabled="disabled"></td>
         </tr>
         <tr>
           <td height="43">&nbsp;</td>
