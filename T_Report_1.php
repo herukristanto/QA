@@ -1,4 +1,4 @@
-
+<?php error_reporting(0); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +35,7 @@
           $arrind [ $row['kode_u'] ] = $row['kode_u'];
 
         }
+
       }
 
     ?>
@@ -58,9 +59,6 @@
                     <td> : </td>
                     <td>
                       <span class="inputan">
-                        <!-- option -->
-
-                        <!-- option -->
                         <select id="kode_u" name="kode_u"  style="width:auto">
                           <option value="">---------------- P I L I H ----------------</option>
                           <?php
@@ -71,6 +69,37 @@
                         </select>
                     </span></td>
                   </tr>
+
+                    <tr>
+                      <td>Bulan</td>
+                      <td> : </td>
+                      <td>
+
+                        <select name="bulan">
+                        <?php
+                        $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                        for($a=1;$a<=12;$a++){
+                         if($a==date("m"))
+                         {
+                         $pilih="selected";
+                         }
+                         else
+                         {
+                         $pilih="";
+                         }
+                        echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
+                        }
+                        ?>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tahun</td>
+                      <td> : </td>
+                      <td><input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px"></td>
+                      <td>&nbsp;</td>
+                      </tr>
+                  <tr>
                   <tr>
                     <td>&nbsp;</td>
                   </tr>
@@ -83,6 +112,9 @@
                   </tr>
                 </table>
               </div>
+              <div class="row">
+
+              <div>
 </form>
 
 
@@ -198,47 +230,61 @@
     <th>Action</th>
   </tr>
 
+
   <?php
 
   if(isset($_GET['kode_u'])){
   $cari = $_GET['kode_u'];
   $query = "SELECT DISTINCT kode_indikator, Kategori FROM V_Indikator_Kejadian WHERE kode_u= '$cari' ORDER BY kode_indikator ASC";
   $data = sqlsrv_query($conn, $query);
-  {
-    $queryjmlh =   "SELECT COUNT(kode_indikator) FROM V_Indikator_Kejadian WHERE kode_u='$cari'";
-    $sqljmlh  = sqlsrv_query($conn, $queryjmlh);
-    $arr1 = array();
-     while ($jmlh = sqlsrv_fetch_array($sqljmlh)){
-        $arr1 [ $jmlh['kode_indikator'] ] = $jmlh['kode_indikator'];
-     }
-  }
 
-
-
-
-
+  $hslsblm = array();
 
 }
 
 $no = 1;
-while($kode_indi = sqlsrv_fetch_array($data)){
+while($row = sqlsrv_fetch_array($data)){
+  $kode_indi = $row['kode_indikator'];
+  $kategori = $row['Kategori'];
+
+  $queryjml = "SELECT count (kode_indikator) as jml FROM V_Indikator_Kejadian WHERE kode_indikator= '$kode_indi'";
+  $sqldata = sqlsrv_query($conn,$queryjml);
+
+  while( $dataarr = sqlsrv_fetch_array($sqldata)){
+    $jumlah	= $dataarr["jml"];
+    $total = $total + $jumlah;
+
+
+  }
+
 ?>
 
   <tr>
     <td><?php echo $no++; ?></td>
-    <td><?php echo $kode_indi['kode_indikator']; ?> - <?php echo $kode_indi['Kategori']; ?></td>
-    <td><?php echo "test"?></td>
-    <td><?php echo "tes34"?></td>
-    <td><?php echo "test5"?></td>
-    <td><?php echo "test5"?></td>
-    <td><?php echo "test5"?></td>
+    <td><?php echo $kode_indi; ?> - <?php echo $kategori; ?></td>
+    <td><?php echo $jumlah; ?></td>
+    <td><?php ?></td>
+    <td><?php ?></td>
+    <td><?php ?></td>
+    <td><?php ?></td>
     <td>
       <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm">
           Edit
       </button>
     </td>
   </tr>
+
    <?php  } ?>
+   <tr class="" style="background-color: #00BA8B; font-size: 15px; font-weight: bold; color: white;">
+     <td>Total</td>
+     <td></td>
+     <td><?php echo $total; ?></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+   </tr>
 
   </table>
 
@@ -253,23 +299,18 @@ while($kode_indi = sqlsrv_fetch_array($data)){
   <!-- /main-inner -->
 </div>
 <!-- /main -->
-<div class="extra">
-  <div class="extra-inner">
 
-      <div class="row">
-        <p>
-          Rumah Sakit Pantai Indah Kapuk
-        </p>
-      </div>
-    </div>
-    <!-- /container -->
-  </div>
   <!-- /extra-inner -->
 </div>
 <!-- /extra -->
 <div class="footer">
   <div class="footer-inner">
     <div class="container">
+      <div class="row">
+        <p>
+          Rumah Sakit Pantai Indah Kapuk
+        </p>
+      </div>
       <div class="row">
         <div class="span12"> &copy; 2013 <a href="#">Bootstrap Responsive Admin Template</a>. </div>
         <!-- /span12 -->
