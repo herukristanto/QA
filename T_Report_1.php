@@ -125,7 +125,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header" style="background-color: #00BA8B;">
-                <button type="button" class="" data-dismiss="modal" style="background-color: #F08080; float: right;">
+                <button type="button" data-dismiss="modal" style="background-color: #F08080; float: right;">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="labelModalKu" style="color: white;">INPUT INDIKATOR MUTU</h4>
@@ -134,18 +134,30 @@
             <div class="modal-body">
                 <p class="statusMsg"></p>
                 <form role="form">
-                    <div class="form-group">
-                        <label for="masukkanNama">ID</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Indikator"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div>
-                    <div class="form-group">
+                <table>
+                  <tr>
+                    <td><label for="masukkanNama">Indikator</label></td>
+                    <td> : </td>
+                    <td><input type="text" class="form-control" id="kodeindikator" disabled="disabled"
+                    style=" width: 100%;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    box-sizing: border-box;"/></td>
+                  </tr>
+                  <tr>
+                    <td><label for="masukkanNama">Jumlah</label></td>
+                    <td> : </td>
+                    <td><input type="text" class="form-control" id="jumlah" disabled="disabled"
+                    style=" width: 100%;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    box-sizing: border-box;"
+                    /></td>
+                  </tr>
+                </table>
+                    <!-- <div class="form-group">
                         <label for="masukkanNama">Indikator</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Indikator"
+                        <input type="text" class="form-control" id="kodeindikator" disabled="disabled"
                         style=" width: 100%;
                         padding: 14px 20px;
                         margin: 8px 0;
@@ -155,17 +167,17 @@
 
                     <div class="form-group">
                         <label for="masukkanNama">Jumlah</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Jumlah"
+                        <input type="text" class="form-control" id="jumlah" disabled="disabled"
                         style=" width: 100%;
                         padding: 14px 20px;
                         margin: 8px 0;
                         box-sizing: border-box;"
                         />
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label for="masukkanNama">Numerator</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Numerator"
+                        <input type="text" class="form-control" id="numerator" placeholder="Masukkan Numerator"
                         style=" width: 100%;
                         padding: 14px 20px;
                         margin: 8px 0;
@@ -174,7 +186,7 @@
                     </div>
                     <div class="form-group">
                         <label for="masukkanNama">Denominator</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Denominator"
+                        <input type="text" class="form-control" id="denominator" placeholder="Masukkan Denominator"
                         style=" width: 100%;
                         padding: 14px 20px;
                         margin: 8px 0;
@@ -184,7 +196,7 @@
 
                     <div class="form-group">
                         <label for="masukkanNama">Analisa</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Analisa"
+                        <input type="text" class="form-control" id="analisa" placeholder="Masukkan Analisa"
                         style=" width: 100%;
                         padding: 14px 20px;
                         margin: 8px 0;
@@ -194,7 +206,7 @@
 
                     <div class="form-group">
                         <label for="masukkanNama">Tindak Lanjut</label>
-                        <input type="text" class="form-control" id="masukkanNama" placeholder="Masukkan Tindak Lanjut"
+                        <input type="text" class="form-control" id="tindaklanjut" placeholder="Masukkan Tindak Lanjut"
                         style=" width: 100%;
                         padding: 14px 20px;
                         margin: 8px 0;
@@ -205,9 +217,9 @@
                 </form>
             </div>
             <!-- Modal Footer -->
-            <div class="modal-footer">
+            <div class="modal-footer" style="background-color: #00BA8B;">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary submitBtn" onclick="kirimContactForm()">Update</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="kirimContactForm()">Update</button>
             </div>
         </div>
     </div>
@@ -230,45 +242,40 @@
     <th>Action</th>
   </tr>
 
-
   <?php
+    if(isset($_GET['kode_u'])){
+    $cari = $_GET['kode_u'];
+    $query = "SELECT DISTINCT kode_indikator, Kategori FROM V_Indikator_Kejadian WHERE kode_u= '$cari' ORDER BY kode_indikator ASC";
+    $data = sqlsrv_query($conn, $query);
+    $hslsblm = array();
+    }
 
-  if(isset($_GET['kode_u'])){
-  $cari = $_GET['kode_u'];
-  $query = "SELECT DISTINCT kode_indikator, Kategori FROM V_Indikator_Kejadian WHERE kode_u= '$cari' ORDER BY kode_indikator ASC";
-  $data = sqlsrv_query($conn, $query);
+    $no = 1;
+    while($row = sqlsrv_fetch_array($data)){
+      $kode_indi = $row['kode_indikator'];
+      $kategori = $row['Kategori'];
 
-  $hslsblm = array();
+      $queryjml = "SELECT count (kode_indikator) as jml FROM V_Indikator_Kejadian WHERE kode_indikator= '$kode_indi'";
+      $sqldata = sqlsrv_query($conn,$queryjml);
 
-}
+      while( $dataarr = sqlsrv_fetch_array($sqldata)){
+        $jumlah	= $dataarr["jml"];
+        $total = $total + $jumlah;
 
-$no = 1;
-while($row = sqlsrv_fetch_array($data)){
-  $kode_indi = $row['kode_indikator'];
-  $kategori = $row['Kategori'];
-
-  $queryjml = "SELECT count (kode_indikator) as jml FROM V_Indikator_Kejadian WHERE kode_indikator= '$kode_indi'";
-  $sqldata = sqlsrv_query($conn,$queryjml);
-
-  while( $dataarr = sqlsrv_fetch_array($sqldata)){
-    $jumlah	= $dataarr["jml"];
-    $total = $total + $jumlah;
-
-
-  }
+      }
 
 ?>
 
   <tr>
     <td><?php echo $no++; ?></td>
-    <td><?php echo $kode_indi; ?> - <?php echo $kategori; ?></td>
-    <td><?php echo $jumlah; ?></td>
+    <td id="kodeindi"><?php echo $kode_indi; ?> - <?php echo $kategori; ?></td>
+    <td id="jmlh"><?php echo $jumlah; ?></td>
     <td><?php ?></td>
     <td><?php ?></td>
     <td><?php ?></td>
     <td><?php ?></td>
     <td>
-      <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm">
+      <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm" onclick="clik('<?php echo $kode_indi; ?> - <?php echo $kategori; ?>','<?php echo $jumlah; ?>');">
           Edit
       </button>
     </td>
@@ -306,10 +313,10 @@ while($row = sqlsrv_fetch_array($data)){
 <div class="footer">
   <div class="footer-inner">
     <div class="container">
-      <div class="row">
+      <!-- <div class="row">
         <p>
           Rumah Sakit Pantai Indah Kapuk
-        </p>
+        </p> -->
       </div>
       <div class="row">
         <div class="span12"> &copy; 2013 <a href="#">Bootstrap Responsive Admin Template</a>. </div>
@@ -329,6 +336,19 @@ while($row = sqlsrv_fetch_array($data)){
 
 
 <script>
+  function clik(x,y){
+
+    var kodeindi;
+    var jmlh;
+
+    kodeindi = document.getElementById('kodeindi').innerHTML;
+    jmlh = document.getElementById('jmlh').innerHTML;
+
+
+  $("#kodeindikator").val(x);
+  $("#jumlah").val(y);
+}
+
 
 
 </script>
