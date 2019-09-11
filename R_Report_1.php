@@ -51,7 +51,7 @@
       <div class="row">
         <div class="span12 mainPage">
           <div class="w3-container">
-            <form action="T_Report_1.php" method="get">
+            <form action="R_Report_1.php" method="get">
               <div class="">
                 <table>
                   <tr>
@@ -67,49 +67,47 @@
                             }
                           ?>
                         </select>
-                    </span></td>
+                      </span>
+                    </td>
                   </tr>
 
-                    <tr>
-                      <td>Bulan</td>
-                      <td> : </td>
-                      <td>
-
-                        <select name="bulan">
+                  <tr>
+                    <td>Bulan</td>
+                    <td> : </td>
+                    <td>
+                      <select name="bulan">
                         <?php
                         $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
                         for($a=1;$a<=12;$a++){
-                         if($a==date("m"))
-                         {
-                         $pilih="selected";
-                         }
-                         else
-                         {
+                         if($a==date("m")){
+                           $pilih="selected";
+                         } else {
                          $pilih="";
                          }
+
                         echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
                         }
                         ?>
                         </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tahun</td>
-                      <td> : </td>
-                      <td><input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px"></td>
-                      <td>&nbsp;</td>
-                      </tr>
+                    </td>
+                  </tr>
+
                   <tr>
-                  <tr>
+                    <td>Tahun</td>
+                    <td> : </td>
+                    <td><input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px"></td>
                     <td>&nbsp;</td>
                   </tr>
-                </br>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td><button type="submit" class="btn btn-success" name="submit">Show</button></td>
 
-                  </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                    </tr>
+                    </br>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td><button type="submit" class="btn btn-success">Show</button></td>
+                    </tr>
                 </table>
               </div>
               <div class="row">
@@ -125,13 +123,13 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header" style="background-color: #00BA8B;">
-                <button type="button" data-dismiss="modal" style="background-color: #F08080; float: right;">
+                <button type="button" data-dismiss="modal" class="btn btn-success" style="">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="labelModalKu" style="color: white;">INPUT INDIKATOR MUTU</h4>
+                <h4 class="modal-title" id="labelModalKu" style="color: white;  float: right;">LIST INDIKATOR MUTU</h4>
             </div>
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body" id="myForm">
                 <p class="statusMsg"></p>
                 <form role="form">
                 <table>
@@ -219,7 +217,7 @@
             <!-- Modal Footer -->
             <div class="modal-footer" style="background-color: #00BA8B;">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success btn-lg" onclick="kirimContactForm()">Update</button>
+                <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick="add()">Save</button>
             </div>
         </div>
     </div>
@@ -228,7 +226,7 @@
           <div>
             <br>
           </div>
-          <h3>INDIKATOR MUTU</h3>
+          <h3>LIST INDIKATOR MUTU</h3>
 
   <table class="w3-table-all" id="indikator_tbl">
   <tr class="" style="background-color: #00BA8B; color: white;">
@@ -295,6 +293,7 @@
 
   </table>
 
+
   </div>
 </div>
         <!-- /span12 -->
@@ -335,6 +334,7 @@
 
 
 
+
 <script>
   function clik(x,y){
 
@@ -348,6 +348,41 @@
   $("#kodeindikator").val(x);
   $("#jumlah").val(y);
 }
+
+function add(){
+  var kodeindi;
+  var jmlh;
+  var numtor;
+  var dentor;
+  var analis;
+  var tndklnjut;
+
+  kodeindi           = document.getElementById('kodeindikator').value;
+  jmlh   = document.getElementById('jumlah').value;
+  numtor        = document.getElementById('numerator').value;
+  dentor            = document.getElementById('denominator').value;
+  analis  = document.getElementById('analisa').value;
+  tndklnjut   = document.getElementById('tindaklanjut').value;
+
+
+  if (kodeindi) {
+    window.location.href = "R_Report_Save.php?r1=" + kodeindi +
+    "&r2=" + jmlh +
+    "&r3=" + numtor +
+    "&r4=" + dentor +
+    "&r5=" + analis +
+    "&r6=" + tndklnjut;
+
+    } else {
+      alert("Kolom tidak boleh kosong");
+    }
+}
+
+
+//
+// function add(){
+//   document.getElementById("myForm").style.display = "none";
+// }
 
 
 
