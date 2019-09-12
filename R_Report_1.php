@@ -71,34 +71,7 @@
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>Bulan</td>
-                    <td> : </td>
-                    <td>
-                      <select name="bulan">
-                        <?php
-                        $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-                        for($a=1;$a<=12;$a++){
-                         if($a==date("m")){
-                           $pilih="selected";
-                         } else {
-                         $pilih="";
-                         }
-
-                        echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
-                        }
-                        ?>
-                        </select>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Tahun</td>
-                    <td> : </td>
-                    <td><input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px"></td>
-                    <td>&nbsp;</td>
-                  </tr>
-
+                  
                     <tr>
                       <td>&nbsp;</td>
                     </tr>

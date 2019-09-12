@@ -53,8 +53,34 @@
           <div>
 						<div class="">
 							<a href="R_Report_1.php"><button href="R_Report_1.php" class="btn btn-success" >Back Indikator</button></a>
-
 						</div>
+            <br>
+            <div class="">
+              <table>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+              <label for="">Bulan</label>
+              <select name="bulan">
+                <?php
+                $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                for($a=1;$a<=12;$a++){
+                 if($a==date("m")){
+                   $pilih="selected";
+                 } else {
+                 $pilih="";
+                 }
+
+                echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
+                }
+                ?>
+                </select>
+                &nbsp;
+                <label for="">Tahun</label>
+                <input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px">
+
+            </div>
             <br>
           </div>
           <h3>INDIKATOR MUTU</h3>
@@ -62,6 +88,8 @@
 					  <table class="w3-table-all" id="indikator_tbl">
 					  <tr class="" style="background-color: #00BA8B; color: white;">
 					    <th>No</th>
+              <th>Tanggal</th>
+              <th>Jam</th>
 					    <th>Indikator</th>
 					    <th>Jumlah</th>
 					    <th>Numerator</th>
@@ -82,10 +110,14 @@
 								$dentor = $row['Denominator'];
 								$analis = $row['Analisa'];
 								$tndklanjt = $row['Tindak_Lanjut'];
+                $tgl = $row['Tgl']->format('d/m/Y');;
+                $jam = $row['Tgl']->format('H:i:s');;
 					  ?>
 
 					  <tr>
-					    <td><?php echo $no++; ?></td>
+              <td><?php echo $no++; ?></td>
+              <td><?php echo $tgl; ?></td>
+					    <td><?php echo $jam; ?></td>
 					    <td><?php echo $kodeindi; ?></td>
 					    <td><?php echo $jmlh; ?></td>
 					    <td><?php echo $numtor; ?></td>
