@@ -72,8 +72,6 @@
             <!-- <h3>List Indikator Mutu</h3> -->
             <div>
 
-<input type="button" id="myBtn" value="Search" class="btn brn-success">
-
               <div id="tabel_range"></div>
 
             </div>

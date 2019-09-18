@@ -1,6 +1,7 @@
 
 
 <?php
+error_reporting(0);
 include "koneksi.php";
  $unit    = $_POST['kode_u'];
  $data    = "";
@@ -32,7 +33,8 @@ include "koneksi.php";
        $data1       = sqlsrv_query($conn, $query1);
        while($row1  = sqlsrv_fetch_array($data1)){
           $jumlh = $row1['jml'];
-          $total 	= $total +$jumlh;
+
+          $total 	= $total + $jumlh;
 
        echo "
       <tr>
@@ -51,8 +53,7 @@ include "koneksi.php";
       </tabel>
       ";
 
-
-}}}
+    }}}
 echo "
 <tr>
 <td class='center'></td>
