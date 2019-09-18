@@ -39,9 +39,6 @@
       }
 
     ?>
-
-
-
 </head>
 <body>
 <div id="header_rpt"></div>
@@ -51,224 +48,37 @@
       <div class="row">
         <div class="span12 mainPage">
           <div class="w3-container">
-            <form action="R_Report_1.php" method="get">
-              <div class="">
-                <table>
-                  <tr>
-                    <td>Unit</td>
-                    <td> : </td>
-                    <td>
-                      <span class="inputan">
-                        <select id="kode_u" name="kode_u"  style="width:auto">
-                          <option value="">---------------- P I L I H ----------------</option>
-                          <?php
-                            foreach ($arrind as $Kode=>$Kode) {
-                              echo "<option value='$Kode'>$Kode</option>";
-                            }
-                          ?>
-                        </select>
-                      </span>
-                    </td>
-                  </tr>
+            <form name="frmrange" method="post">
+            <table style="margin-top:10px;">
+              <tr>
+                <td>Unit</td>
+                <td> : </td>
+                <td>
+                  <span class="inputan">
+                    <select id="kode_u" name="kode_u"  style="width:auto">
+                      <option value="">---------------- P I L I H ----------------</option>
+                      <?php
+                        foreach ($arrind as $Kode=>$Kode) {
+                          echo "<option value='$Kode'>$Kode</option>";
+                        }
+                      ?>
+                    </select>
+                </span></td>
+                <!-- <td><input type="text" id="katakunci" name="katakunci"></td> -->
+                <!-- <td><button type="button" class="btn btn-success" id="saringtabel">Show</button></td> -->
+              </tr>
+            </table>
+          </form>
+            <!-- <h3>List Indikator Mutu</h3> -->
+            <div>
 
-                  
-                    <tr>
-                      <td>&nbsp;</td>
-                    </tr>
-                    </br>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td><button type="submit" class="btn btn-success">Show</button></td>
-                    </tr>
-                </table>
-              </div>
-              <div class="row">
+<input type="button" id="myBtn" value="Search" class="btn brn-success">
 
-              <div>
-</form>
+              <div id="tabel_range"></div>
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="modalForm" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header" style="background-color: #00BA8B;">
-                <button type="button" data-dismiss="modal" class="btn btn-success" style="">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="labelModalKu" style="color: white;  float: right;">LIST INDIKATOR MUTU</h4>
             </div>
-            <!-- Modal Body -->
-            <div class="modal-body" id="myForm">
-                <p class="statusMsg"></p>
-                <form role="form">
-                <table>
-                  <tr>
-                    <td><label for="masukkanNama">Indikator</label></td>
-                    <td> : </td>
-                    <td><input type="text" class="form-control" id="kodeindikator" disabled="disabled"
-                    style=" width: 100%;
-                    padding: 14px 20px;
-                    margin: 8px 0;
-                    box-sizing: border-box;"/></td>
-                  </tr>
-                  <tr>
-                    <td><label for="masukkanNama">Jumlah</label></td>
-                    <td> : </td>
-                    <td><input type="text" class="form-control" id="jumlah" disabled="disabled"
-                    style=" width: 100%;
-                    padding: 14px 20px;
-                    margin: 8px 0;
-                    box-sizing: border-box;"
-                    /></td>
-                  </tr>
-                </table>
-                    <!-- <div class="form-group">
-                        <label for="masukkanNama">Indikator</label>
-                        <input type="text" class="form-control" id="kodeindikator" disabled="disabled"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div>
 
-                    <div class="form-group">
-                        <label for="masukkanNama">Jumlah</label>
-                        <input type="text" class="form-control" id="jumlah" disabled="disabled"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div> -->
-
-                    <div class="form-group">
-                        <label for="masukkanNama">Numerator</label>
-                        <input type="text" class="form-control" id="numerator" placeholder="Masukkan Numerator"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="masukkanNama">Denominator</label>
-                        <input type="text" class="form-control" id="denominator" placeholder="Masukkan Denominator"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="masukkanNama">Analisa</label>
-                        <input type="text" class="form-control" id="analisa" placeholder="Masukkan Analisa"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="masukkanNama">Tindak Lanjut</label>
-                        <input type="text" class="form-control" id="tindaklanjut" placeholder="Masukkan Tindak Lanjut"
-                        style=" width: 100%;
-                        padding: 14px 20px;
-                        margin: 8px 0;
-                        box-sizing: border-box;"
-                        />
-                    </div>
-
-                </form>
-            </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer" style="background-color: #00BA8B;">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick="add()">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-          <div>
-            <br>
           </div>
-          <h3>LIST INDIKATOR MUTU</h3>
-
-  <table class="w3-table-all" id="indikator_tbl">
-  <tr class="" style="background-color: #00BA8B; color: white;">
-    <th>No</th>
-    <th>Indikator</th>
-    <th>Jumlah</th>
-    <th>Numerator</th>
-    <th>Denominator</th>
-    <th>Analisa</th>
-    <th>Tindak Lanjut</th>
-    <th>Action</th>
-  </tr>
-
-  <?php
-    if(isset($_GET['kode_u'])){
-    $cari = $_GET['kode_u'];
-    $query = "SELECT DISTINCT kode_indikator, Kategori FROM V_Indikator_Kejadian WHERE kode_u= '$cari' ORDER BY kode_indikator ASC";
-    $data = sqlsrv_query($conn, $query);
-    $hslsblm = array();
-    }
-
-    $no = 1;
-    while($row = sqlsrv_fetch_array($data)){
-      $kode_indi = $row['kode_indikator'];
-      $kategori = $row['Kategori'];
-
-      $queryjml = "SELECT count (kode_indikator) as jml FROM V_Indikator_Kejadian WHERE kode_indikator= '$kode_indi'";
-      $sqldata = sqlsrv_query($conn,$queryjml);
-
-      while( $dataarr = sqlsrv_fetch_array($sqldata)){
-        $jumlah	= $dataarr["jml"];
-        $total = $total + $jumlah;
-
-      }
-
-?>
-
-  <tr>
-    <td><?php echo $no++; ?></td>
-    <td id="kodeindi"><?php echo $kode_indi; ?> - <?php echo $kategori; ?></td>
-    <td id="jmlh"><?php echo $jumlah; ?></td>
-    <td><?php ?></td>
-    <td><?php ?></td>
-    <td><?php ?></td>
-    <td><?php ?></td>
-    <td>
-      <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm" onclick="clik('<?php echo $kode_indi; ?> - <?php echo $kategori; ?>','<?php echo $jumlah; ?>');">
-          Edit
-      </button>
-    </td>
-  </tr>
-
-   <?php  } ?>
-   <tr class="" style="background-color: #00BA8B; font-size: 15px; font-weight: bold; color: white;">
-     <td>Total</td>
-     <td></td>
-     <td><?php echo $total; ?></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-   </tr>
-
-  </table>
-
-
-  </div>
-</div>
         <!-- /span12 -->
       </div>
       <!-- /row -->
@@ -307,65 +117,30 @@
 
 
 
-
 <script>
-  function clik(x,y){
+ $('select[id=kode_u]').change(function(){
+  R_Data_vindikej();
+ });
 
-    var kodeindi;
-    var jmlh;
-
-    kodeindi = document.getElementById('kodeindi').innerHTML;
-    jmlh = document.getElementById('jmlh').innerHTML;
-
-
-  $("#kodeindikator").val(x);
-  $("#jumlah").val(y);
-}
-
-function add(){
-  var kodeindi;
-  var jmlh;
-  var numtor;
-  var dentor;
-  var analis;
-  var tndklnjut;
-
-  kodeindi           = document.getElementById('kodeindikator').value;
-  jmlh   = document.getElementById('jumlah').value;
-  numtor        = document.getElementById('numerator').value;
-  dentor            = document.getElementById('denominator').value;
-  analis  = document.getElementById('analisa').value;
-  tndklnjut   = document.getElementById('tindaklanjut').value;
-
-
-  if (kodeindi) {
-    window.location.href = "R_Report_Save.php?r1=" + kodeindi +
-    "&r2=" + jmlh +
-    "&r3=" + numtor +
-    "&r4=" + dentor +
-    "&r5=" + analis +
-    "&r6=" + tndklnjut;
-
-    } else {
-      alert("Kolom tidak boleh kosong");
-    }
-}
-
-
-//
-// function add(){
-//   document.getElementById("myForm").style.display = "none";
-// }
-
-
+ function R_Data_vindikej(){
+  var a = $('#kode_u').val();
+  $.ajax({
+   type: 'POST',
+   url: "R_Data_vindikej.php",
+   data: "kode_u="+a,
+   success: function(info) {
+    $("#tabel_range").html(info);   }
+  });
+  return false;
+ }
 
 </script>
+
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/Script.js"></script>
 <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
-
 <script src="js/base.js"></script>
 
 </body>

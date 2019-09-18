@@ -83,7 +83,7 @@
             </div>
             <br>
           </div>
-          <h3>INDIKATOR MUTU</h3>
+          <!-- <h3>INDIKATOR MUTU</h3> -->
 
 					  <table class="w3-table-all" id="indikator_tbl">
 					  <tr class="" style="background-color: #00BA8B; color: white;">
