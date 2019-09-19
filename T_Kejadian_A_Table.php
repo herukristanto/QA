@@ -282,8 +282,6 @@ if (isset($_GET['katakunci']))
               inputVal.style.backgroundColor = "";
          }
 
-
-
             modal.style.display = "none";
 
 

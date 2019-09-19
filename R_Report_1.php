@@ -17,8 +17,6 @@
 <script src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="libs/jquery.min.js"></script>
 
-
-
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -63,18 +61,16 @@
                         }
                       ?>
                     </select>
-                </span></td>
-                <!-- <td><input type="text" id="katakunci" name="katakunci"></td> -->
-                <!-- <td><button type="button" class="btn btn-success" id="saringtabel">Show</button></td> -->
+                  </span>
+                </td>
               </tr>
             </table>
-          </form>
-            <!-- <h3>List Indikator Mutu</h3> -->
+            </form>
+
             <div>
-
               <div id="tabel_range"></div>
-
             </div>
+               <?php include "T_Kejadian_A_Search.php"; ?>
 
           </div>
         <!-- /span12 -->
@@ -133,6 +129,8 @@
  }
 
 </script>
+
+
 
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
