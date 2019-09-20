@@ -1,12 +1,19 @@
+
 <?php
 error_reporting(0);
 include "koneksi.php";
  $unit    = $_POST['kode_u'];
- $data    = "";
+ $bulan    = $_POST['bulan'];
+ $tahun    = $_POST['tahun'];
+
+
  if(!empty($unit)){
-   $query   = "SELECT DISTINCT kode_indikator, Kategori FROM V_Indikator_Kejadian WHERE kode_u= '$unit' ORDER BY kode_indikator ASC";
+   // if(!empty($bulan)){
+   //   if(!empty($tahun)){
+   $query   = "SELECT DISTINCT kode_indikator, Kategori FROM V_Indikator_Kejadian WHERE kode_u= '$unit'  ORDER BY kode_indikator ASC"; //OR month(tgl_input)='$bulan' OR year(tgl_input)='$tahun'
    $data    = sqlsrv_query($conn, $query);
    $no=1;
+
 
      echo "
      <table class='table table-striped table-bordered table-hover'>
@@ -43,8 +50,8 @@ include "koneksi.php";
               <td class='center'></td>
               <td class='center'></td>
               <td class='center'></td>
-              <td class='center'>
-                <a id='myBtn' class='btn btn-success'><i class='fa fa-plus'></i> Add</a>
+              <td class='center' id='myBtn'>
+                <a id='myBtn'class='btn btn-success'><i class='fa fa-plus'></i> Add</a>
               </td>
             </tr>
             </tbody>
@@ -52,6 +59,8 @@ include "koneksi.php";
           }
         }
       }
+  //   }
+  // }
       echo "
         <tr>
           <td class='center'></td>
@@ -64,6 +73,7 @@ include "koneksi.php";
           <td class='center'></td>
         </tr>";
 
-        include "R_Data_Show.php";
    ?>
+
    <script src="js/jquery-1.7.2.min.js"></script>
+   

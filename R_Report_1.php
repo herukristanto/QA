@@ -64,13 +64,38 @@
                   </span>
                 </td>
               </tr>
+              <tr>
+                <td>Bulan</td>
+                <td> : </td>
+                <td>
+                  <span class="inputan">
+                    <select id="bulan" name="bln"  style="width:auto">
+                      <option selected="selected">Bulan</option>
+                      <?php
+                      $bulan=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+                      $jmlh_bln=count($bulan);
+                      for($c=0; $c<$jmlh_bln; $c+=1){
+                        echo "<option value=$bulan[$c]>$bulan[$c]</option>";
+                      }
+                      ?>
+                    </select>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td>Tahun</td>
+                <td> : </td>
+                <td>
+                  <input type="text" name="" value="" style="width:50px; height:25px;">
+                </td>
+              </tr>
+              
             </table>
             </form>
 
             <div>
               <div id="tabel_range"></div>
             </div>
-               <?php include "T_Kejadian_A_Search.php"; ?>
 
           </div>
         <!-- /span12 -->
@@ -115,9 +140,14 @@
  $('select[id=kode_u]').change(function(){
   R_Data_vindikej();
  });
+ // $('select[id=bulan]').change(function(){
+ //  R_Data_vindikej();
+ // });
 
  function R_Data_vindikej(){
   var a = $('#kode_u').val();
+  var b = $('#bulan').val();
+  var c = $('#tahun').val();
   $.ajax({
    type: 'POST',
    url: "R_Data_vindikej.php",
@@ -129,8 +159,22 @@
  }
 
 </script>
+<!-- <script>
 
+ $("#bln").on("change", function(){
 
+  // ambil nilai
+  var lama = $("#benih option:selected").attr("lama");
+  var berat = $("#benih option:selected").attr("berat");
+  var harga = $("#benih option:selected").attr("harga");
+
+  // pindahkan nilai ke input
+  $("#lama-tanam").val(lama);
+  $("#berat").val(berat);
+  $("#harga").val(harga);
+
+});
+</script> -->
 
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
