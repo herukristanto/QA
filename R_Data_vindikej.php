@@ -34,6 +34,7 @@ include "koneksi.php";
 
        while($row     = sqlsrv_fetch_array($data)){
          $kodeindi = $row['kode_indikator'];
+         $kategori = $row['Kategori'];
          $query1      = "SELECT COUNT(kode_indikator) as jml FROM V_Indikator_Kejadian WHERE kode_indikator= '$kodeindi'";
          $data1       = sqlsrv_query($conn, $query1);
 
@@ -44,14 +45,16 @@ include "koneksi.php";
             echo "
             <tr>
               <td>".$no++."</td>
-              <td class='center'>".$kodeindi."-".$row['Kategori']."</td>
+              <td class='center' >".$kodeindi."-".$kategori."</td>
               <td class='center'>$jumlh</td>
               <td class='center'></td>
               <td class='center'></td>
               <td class='center'></td>
               <td class='center'></td>
               <td class='center' id='myBtn'>
-                <a id='myBtn'class='btn btn-success'><i class='fa fa-plus'></i> Add</a>
+
+                <button type='button' class='btn btn-success' data-toggle='modal'
+                 onClick='datapost(\"$kodeindi - $kategori\", \"$jumlh\")' data-target='#myModal'>Add</button>
               </td>
             </tr>
             </tbody>
@@ -59,8 +62,7 @@ include "koneksi.php";
           }
         }
       }
-  //   }
-  // }
+
       echo "
         <tr>
           <td class='center'></td>
@@ -75,5 +77,42 @@ include "koneksi.php";
 
    ?>
 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Input Indikator Mutu</h4>
+        </div>
+        <div class="modal-body">
+          <label for="">Indikaor</label>
+          <input type="text" id="kodeindi"  name="" value="" style="height: 26px;">
+          <label for="">Jumlah</label>
+          <input type="text" name="" id="jumlah" value="" style="height: 26px;">
+          <label for="">Numerator</label>
+          <input type="text" name="" value="" style="height: 26px;">
+          <label for="">Denominator</label>
+          <input type="text" name="" value="" style="height: 26px;">
+          <label for="">Analisa</label>
+          <input type="text" name="" value="" style="height: 26px;">
+          <label for="">Tindak Lanjut</label>
+          <input type="text" name="" value="" style="height: 26px;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+   <script>
+      function datapost(indikate, jumlah){
+        document.getElementById('kodeindi').value=indikate;
+        document.getElementById('jumlah').value=jumlah;
+      }
+   </script>
    <script src="js/jquery-1.7.2.min.js"></script>
-   
