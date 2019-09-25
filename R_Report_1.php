@@ -64,7 +64,7 @@
                   </span>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>Bulan</td>
                 <td> : </td>
                 <td>
@@ -88,8 +88,8 @@
                 <td>
                   <input type="text" name="" value="" style="width:50px; height:25px;">
                 </td>
-              </tr>
-              
+              </tr> -->
+
             </table>
             </form>
 
@@ -140,9 +140,6 @@
  $('select[id=kode_u]').change(function(){
   R_Data_vindikej();
  });
- // $('select[id=bulan]').change(function(){
- //  R_Data_vindikej();
- // });
 
  function R_Data_vindikej(){
   var a = $('#kode_u').val();
@@ -159,22 +156,6 @@
  }
 
 </script>
-<!-- <script>
-
- $("#bln").on("change", function(){
-
-  // ambil nilai
-  var lama = $("#benih option:selected").attr("lama");
-  var berat = $("#benih option:selected").attr("berat");
-  var harga = $("#benih option:selected").attr("harga");
-
-  // pindahkan nilai ke input
-  $("#lama-tanam").val(lama);
-  $("#berat").val(berat);
-  $("#harga").val(harga);
-
-});
-</script> -->
 
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
