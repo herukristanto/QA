@@ -47,9 +47,9 @@ include "koneksi.php";
             <tr>
               <td>".$no++."</td>
               <td class='center' >".$kodeindi." - ".$kategori."</td>
-              <td class='center'>$jumlh</td>
-              <td class='center'>$numerator</td>
-              <td class='center'>$denominator</td>
+              <td class='center' style='text-align: center;'>$jumlh</td>
+              <td class='center' style='text-align: center;'>$numerator</td>
+              <td class='center' style='text-align: center;'>$denominator</td>
               <td class='center'></td>
               <td class='center'></td>
               <td class='center' id='myBtn'>
@@ -68,7 +68,7 @@ include "koneksi.php";
         <tr>
           <td class='center'></td>
           <td class='center' style=font-weight:bold;;font-size:14px;>Total</td>
-          <td class='center' style=font-weight:bold;;font-size:14px;>$total</td>
+          <td class='center' style='font-weight:bold;;text-align:center;;font-size:14px;'>$total</td>
           <td class='center'></td>
           <td class='center'></td>
           <td class='center'></td>
@@ -98,13 +98,12 @@ include "koneksi.php";
           <label for="">Denominator</label>
           <input type="text" name="" id="denominator" value="" style="height: 26px;">
           <label for="">Analisa</label>
-          <input type="text" name="" value="" style="height: 26px;">
+          <input type="text" name="" id="analisa" value="" style="height: 26px;">
           <label for="">Tindak Lanjut</label>
-          <input type="text" name="" value="" style="height: 26px;">
+          <input type="text" name="" id="tindaklanjut" value="" style="height: 26px;">
         </div>
         <div class="modal-footer">
-          <button type="button" id="btn" class="btn btn-success" data-dismiss="modal">Save</button>
-          <button type="button" onclick="numerator()" name="button">cek</button>
+          <button type="button" id="btn" onclick="clik()" class="btn btn-success" data-dismiss="modal">Save</button>
         </div>
       </div>
     </div>
@@ -131,6 +130,26 @@ include "koneksi.php";
         }else if (deno == "") {
           elemen2.disabled = true;
         }
+
+      }
+
+      function clik(){
+        var kodeindikator = document.getElementById('kodeindi').value;
+        var jumlah = document.getElementById('jumlah').value;
+        var numerator = document.getElementById('numerator').value;
+        var denominator = document.getElementById('denominator').value;
+        var analisa = document.getElementById('analisa').value;
+        var tindaklanjut = document.getElementById('tindaklanjut').value;
+        if (kodeindikator) {
+            window.location.href = "R_Data_Save.php?r1=" + kodeindikator +
+            "&r2=" + jumlah +
+            "&r3=" + numerator +
+            "&r4=" + denominator +
+            "&r5=" + analisa +
+            "&r6=" + tindaklanjut;
+          // } else {
+          //   alert("Kolom 'No. Laporan' tidak boleh kosong");
+          // }
 
       }
 

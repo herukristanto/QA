@@ -49,6 +49,10 @@
       <div class="row">
         <div class="span12 mainPage">
           <div class="w3-container">
+            <div class="alert alert-success fade in">
+        			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        			Pesan Alert Sukses
+        		</div>
 
           <div>
 						<div class="">
