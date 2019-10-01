@@ -49,11 +49,20 @@
       <div class="row">
         <div class="span12 mainPage">
           <div class="w3-container">
-            <div class="alert alert-success fade in">
-        			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        			Pesan Alert Sukses
-        		</div>
-
+            <?php if(isset($_GET["success"])) {?>
+              <div class="alert alert-success" role="alert">
+                Data Berhasil Disimpan
+                <button type="button" style="none" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            	<?php } ?>
+            	<?php if(isset($_GET["failed"])) {?>
+            		<div class="alert alert-danger alert-dismissible" role="alert">
+            		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            		  Proses simpan <strong>gagal</strong>!. Data Gagal Disimpan.
+            		</div>
+            	<?php } ?>
           <div>
 						<div class="">
 							<a href="R_Report_1.php"><button href="R_Report_1.php" class="btn btn-success" >Back Indikator</button></a>

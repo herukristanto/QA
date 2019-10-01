@@ -27,21 +27,13 @@ $date_time 	= date("Y-m-d H:i:s");
 
 				$result1 = sqlsrv_query($conn,$sql);
 
-				if ( $result1 ) {
-						$something = "Submission successful.";
-						echo
-						"
-						<script>
-						window.location.href='R_Report_indikator.php';
-						</script>";
-				}else {
-						 $something = "Submission unsuccessful.";
-						 die( print_r( sqlsrv_errors(), true));
+				if($result1){
+					$something = "Submission successful.";
+					header("location:R_Report_indikator.php?success");
+				}else{
+					header("location:R_Report_indikator.php?failed");
 				}
-				$output=$something;
-				/* Free statement and connection resources. */
-				sqlsrv_free_stmt( $result1);
-				sqlsrv_close( $conn);
+
     }
 
 ?>
