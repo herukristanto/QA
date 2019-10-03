@@ -98,9 +98,9 @@ include "koneksi.php";
           <label for="">Denominator</label>
           <input type="text" name="" id="denominator" value="" style="height: 26px;">
           <label for="">Analisa</label>
-          <input type="text" name="" id="analisa" value="" style="height: 26px;">
+          <input type="text" name="" id="analisa" value="" style="height: 26px; width: 100%;">
           <label for="">Tindak Lanjut</label>
-          <input type="text" name="" id="tindaklanjut" value="" style="height: 26px;">
+          <input type="text" name="" id="tindaklanjut" value="" style="height: 26px; width: 100%;">
         </div>
         <div class="modal-footer">
           <button type="button" id="btn" onclick="clik()" class="btn btn-success" data-dismiss="modal">Save</button>
@@ -147,14 +147,10 @@ include "koneksi.php";
             "&r4=" + denominator +
             "&r5=" + analisa +
             "&r6=" + tindaklanjut;
-          // } else {
-          //   alert("Kolom 'No. Laporan' tidak boleh kosong");
-          // }
-
+        
       }
     }
 
    </script>
 
-   <!-- test -->
    <script src="js/jquery-1.7.2.min.js"></script>

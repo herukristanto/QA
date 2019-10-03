@@ -64,52 +64,58 @@
             		</div>
             	<?php } ?>
           <div>
-						<div class="">
-							<a href="R_Report_1.php"><button href="R_Report_1.php" class="btn btn-success" >Back Indikator</button></a>
-						</div>
+
             <br>
             <div class="">
               <table>
                 <tr>
-                  <td></td>
+                  <td><label for=""> Pilih Bulan</label></td>
+                  <td>
+                    <select name="bulan">
+                      <?php
+                      $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                      for($a=1;$a<=12;$a++){
+                       if($a==date("m")){
+                         $pilih="selected";
+                       } else {
+                       $pilih="";
+                       }
+
+                      echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
+                      }
+                      ?>
+                      </select>
+                  </td>
+                  <!-- <td><label for="">Tahun</label></td> -->
+                  <td><input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px"></td>
+                  <td>
+                    <button type="button" name="button" class="btn btn-primary">
+                      <i class="icon-search"></i>
+                      Search</button>
+                  </td>
                 </tr>
               </table>
-              <label for="">Bulan</label>
-              <select name="bulan">
-                <?php
-                $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-                for($a=1;$a<=12;$a++){
-                 if($a==date("m")){
-                   $pilih="selected";
-                 } else {
-                 $pilih="";
-                 }
-
-                echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
-                }
-                ?>
-                </select>
-                &nbsp;
-                <label for="">Tahun</label>
-                <input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px">
 
             </div>
             <br>
           </div>
           <!-- <h3>INDIKATOR MUTU</h3> -->
 
-					  <table class="w3-table-all" id="indikator_tbl">
-					  <tr class="" style="background-color: #00BA8B; color: white;">
-					    <th>No</th>
-              <th>Tanggal</th>
-              <th>Jam</th>
-					    <th>Indikator</th>
-					    <th>Jumlah</th>
-					    <th>Numerator</th>
-					    <th>Denominator</th>
-					    <th>Analisa</th>
-					    <th>Tindak Lanjut</th>
-					  </tr>
+					  <table class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                 <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Jam</th>
+                 <th>Indikator</th>
+                 <th>Jumlah</th>
+                 <th>Numerator</th>
+                 <th>Denominator</th>
+                 <th>Analisa</th>
+                 <th>Tindak Lanjut</th>
+               </tr>
+              </thead>
+
 
 					  <?php
 					    $query = "SELECT * FROM T_Kejadian ORDER BY Indikator ASC";
@@ -127,17 +133,19 @@
                 $jam = $row['Tgl']->format('H:i:s');;
 					  ?>
 
-					  <tr>
-              <td><?php echo $no++; ?></td>
-              <td><?php echo $tgl; ?></td>
-					    <td><?php echo $jam; ?></td>
-					    <td><?php echo $kodeindi; ?></td>
-					    <td><?php echo $jmlh; ?></td>
-					    <td><?php echo $numtor; ?></td>
-					    <td><?php echo $dentor; ?></td>
-					    <td><?php echo $analis; ?></td>
-					    <td><?php echo $tndklanjt; ?></td>
-					  </tr>
+<tbody>
+  <tr>
+    <td class="center" style="text-align: center;"><?php echo $no++; ?></td>
+    <td class="center" style="text-align: center;"><?php echo $tgl; ?></td>
+    <td class="center" style="text-align: center;"><?php echo $jam; ?></td>
+    <td><?php echo $kodeindi; ?></td>
+    <td class="center" style="text-align: center;"><?php echo $jmlh; ?></td>
+    <td class="center" style="text-align: center;"><?php echo $numtor; ?></td>
+    <td class="center" style="text-align: center;"><?php echo $dentor; ?></td>
+    <td><?php echo $analis; ?></td>
+    <td><?php echo $tndklanjt; ?></td>
+  </tr>
+</tbody>
 
 					   <?php  } ?>
 
@@ -178,11 +186,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 
 
-
-<script>
-
-
-</script>
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.js"></script>
