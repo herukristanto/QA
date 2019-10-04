@@ -71,7 +71,7 @@
                 <tr>
                   <td><label for=""> Pilih Bulan</label></td>
                   <td>
-                    <select name="bulan">
+                    <select name="bulan" id="bulan">
                       <?php
                       $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
                       for($a=1;$a<=12;$a++){
@@ -87,9 +87,24 @@
                       </select>
                   </td>
                   <!-- <td><label for="">Tahun</label></td> -->
-                  <td><input type="text" id="tahun" name="tahun" maxlength="4" style="height :auto; width : 50px"></td>
                   <td>
-                    <button type="button" name="button" class="btn btn-primary">
+                    <div id="tahun">
+
+            <select name="tahun">
+                <option value="">Pilih</option>
+                <?php
+                $query = "SELECT YEAR(Tgl) AS tahun FROM T_Kejadian GROUP BY YEAR(Tgl)"; // Tampilkan tahun sesuai di tabel transaksi
+                $sql = sqlsrv_query($conn, $query); // Eksekusi/Jalankan query dari variabel $query
+                while($data = sqlsrv_fetch_array($sql)){ // Ambil semua data dari hasil eksekusi $sql
+                    echo '<option value="'.$data['tahun'].'">'.$data['tahun'].'</option>';
+                }
+                ?>
+            </select>
+
+        </div>
+                  </td>
+                  <td>
+                    <button type="button" name="button" onclick="click1()" class="btn btn-primary">
                       <i class="icon-search"></i>
                       Search</button>
                   </td>
@@ -100,6 +115,11 @@
             <br>
           </div>
           <!-- <h3>INDIKATOR MUTU</h3> -->
+
+          <div>
+            <div id="tabel_range"></div>
+          </div>
+
 
 					  <table class="table table-striped table-bordered table-hover">
               <thead>
@@ -185,7 +205,25 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
+<script>
+  function click1(){
+  var bulan   = $('#bulan').val();
+	var tahun = $('#tahun').val();
 
+	$.ajax({
+		//Alamat url harap disesuaikan dengan lokasi script pada komputer anda
+		url	     : 'R_Data_Show.php',
+		type     : 'POST',
+		dataType : 'html',
+		data     : 'bulan='+bulan+'&tahun='+tahun,
+    success: function(info) {
+     $("#tabel_range").html(info);   }
+   });
+   return false;
+  }
+
+
+</script>
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.js"></script>

@@ -147,7 +147,7 @@ include "koneksi.php";
             "&r4=" + denominator +
             "&r5=" + analisa +
             "&r6=" + tindaklanjut;
-        
+
       }
     }
 
