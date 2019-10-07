@@ -8,10 +8,10 @@ if (isset($_POST['filter'])) {
   $bulan    = $_POST['bulan'];
   $tahun    = $_POST['tahun'];
 
- echo "$bulan";
- echo "$tahun";
+ // echo "$bulan";
+ // echo "$tahun";
 
-   if (isset($bulan) OR isset($tahun)) {
+   if (isset($bulan) AND isset($tahun)) {
     $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun ORDER BY Indikator ASC";
    }
 
