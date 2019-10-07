@@ -70,8 +70,10 @@
               <table>
                 <tr>
                   <td><label for=""> Pilih Bulan</label></td>
+
                   <td>
                     <select name="bulan" id="bulan">
+                      <option value="">Pilih</option>
                       <?php
                       $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
                       for($a=1;$a<=12;$a++){
@@ -88,9 +90,9 @@
                   </td>
                   <!-- <td><label for="">Tahun</label></td> -->
                   <td>
-                    <div id="tahun">
+                    <div>
 
-            <select name="tahun">
+            <select name="tahun" id="tahun">
                 <option value="">Pilih</option>
                 <?php
                 $query = "SELECT YEAR(Tgl) AS tahun FROM T_Kejadian GROUP BY YEAR(Tgl)"; // Tampilkan tahun sesuai di tabel transaksi
@@ -104,7 +106,7 @@
         </div>
                   </td>
                   <td>
-                    <button type="button" name="button" onclick="click1()" class="btn btn-primary">
+                    <button type="button" name="button" id="filter" onclick="click1()" class="btn btn-success">
                       <i class="icon-search"></i>
                       Search</button>
                   </td>
@@ -115,62 +117,13 @@
             <br>
           </div>
           <!-- <h3>INDIKATOR MUTU</h3> -->
-
+          <!-- <a target="_blank" href="R_Report_indikator.php">EXPORT KE EXCEL</a> -->
           <div>
             <div id="tabel_range"></div>
+            <div>
+              <button>Export</button>
+            </div>
           </div>
-
-
-					  <table class="table table-striped table-bordered table-hover">
-              <thead>
-                <tr>
-                 <th>No</th>
-                  <th>Tanggal</th>
-                  <th>Jam</th>
-                 <th>Indikator</th>
-                 <th>Jumlah</th>
-                 <th>Numerator</th>
-                 <th>Denominator</th>
-                 <th>Analisa</th>
-                 <th>Tindak Lanjut</th>
-               </tr>
-              </thead>
-
-
-					  <?php
-					    $query = "SELECT * FROM T_Kejadian ORDER BY Indikator ASC";
-					    $data = sqlsrv_query($conn, $query);
-
-					    $no = 1;
-					    while($row = sqlsrv_fetch_array($data)){
-					      $kodeindi = $row['Indikator'];
-					      $jmlh = $row['Jml'];
-								$numtor = $row['Numerator'];
-								$dentor = $row['Denominator'];
-								$analis = $row['Analisa'];
-								$tndklanjt = $row['Tindak_Lanjut'];
-                $tgl = $row['Tgl']->format('d/m/Y');;
-                $jam = $row['Tgl']->format('H:i:s');;
-					  ?>
-
-<tbody>
-  <tr>
-    <td class="center" style="text-align: center;"><?php echo $no++; ?></td>
-    <td class="center" style="text-align: center;"><?php echo $tgl; ?></td>
-    <td class="center" style="text-align: center;"><?php echo $jam; ?></td>
-    <td><?php echo $kodeindi; ?></td>
-    <td class="center" style="text-align: center;"><?php echo $jmlh; ?></td>
-    <td class="center" style="text-align: center;"><?php echo $numtor; ?></td>
-    <td class="center" style="text-align: center;"><?php echo $dentor; ?></td>
-    <td><?php echo $analis; ?></td>
-    <td><?php echo $tndklanjt; ?></td>
-  </tr>
-</tbody>
-
-					   <?php  } ?>
-
-					  </table>
-
 				  </div>
 				</div>
       </div>
@@ -209,18 +162,21 @@
   function click1(){
   var bulan   = $('#bulan').val();
 	var tahun = $('#tahun').val();
+  var filter = $('#filter').val();
 
 	$.ajax({
 		//Alamat url harap disesuaikan dengan lokasi script pada komputer anda
 		url	     : 'R_Data_Show.php',
 		type     : 'POST',
 		dataType : 'html',
-		data     : 'bulan='+bulan+'&tahun='+tahun,
+		data     : 'bulan='+bulan+'&tahun='+tahun+'&filter='+filter,
     success: function(info) {
      $("#tabel_range").html(info);   }
    });
    return false;
   }
+
+
 
 
 </script>
@@ -231,6 +187,9 @@
 <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
 
 <script src="js/base.js"></script>
+
+
+
 
 </body>
 </html>

@@ -28,6 +28,7 @@ $date_time 	= date("Y-m-d H:i:s");
 				$result1 = sqlsrv_query($conn,$sql);
 
 				if($result1){
+					
 					$something = "Submission successful.";
 					header("location:R_Report_indikator.php?success");
 				}else{
