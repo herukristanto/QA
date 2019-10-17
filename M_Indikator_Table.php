@@ -5,7 +5,7 @@ if (isset($_GET['katakunci']))
     $katakunci = $_GET['katakunci'];
     $query = "SELECT * FROM M_Indikator WHERE Kode like '%". $katakunci ."%'
 												OR Kategori like '%". $katakunci ."%'
-												OR Target like '%". $katakunci ."%'
+												OR Target like '%". $katakunci ."%'                                        
 												OR Departemen like '%". $katakunci ."%'
 												OR Unit like '%". $katakunci ."%'
 												OR Group_indikator like '%". $katakunci . "%'
@@ -14,7 +14,7 @@ if (isset($_GET['katakunci']))
                                                 OR Numerator like '%". $katakunci ."%'
                                                 OR Denominator like '%". $katakunci ."%'
 												OR Status like '%". $katakunci ."%' ORDER BY Kode ASC";
-
+												
     $sql = sqlsrv_query($conn,$query);
     if ($sql){
         echo "
@@ -37,11 +37,11 @@ if (isset($_GET['katakunci']))
             <tr id='".$rs['Kode']."|".$rs['Kategori']."|".$rs['Target']."|".$rs['Tolak_ukur']."|".$rs['Departemen']."|".$rs['Unit']."|".$rs['Group_indikator']."|".$rs['Numerator']."|".$rs['Denominator']."|".$rs['Lap_Kej']."|".$rs['Status']."' >
             <td>".$rs['Kode']."</td>
             <td>".$rs['Kategori']."</td>
-			      <td>".$rs['Target']."</td>
+			<td>".$rs['Target']."</td>
             <td>".$rs['Tolak_ukur']."</td>
             <td>".$rs['Departemen']."</td>
-			      <td>".$rs['Unit']."</td>
-			         <td>".$rs['Group_indikator']."</td>
+			<td>".$rs['Unit']."</td>
+			<td>".$rs['Group_indikator']."</td>
             <td>".$rs['Numerator']."</td>
             <td>".$rs['Denominator']."</td>
             <td>".$rs['Lap_Kej']."</td>
@@ -64,11 +64,11 @@ if (isset($_GET['katakunci']))
         var aspek 			= res[1];
         var standar         = res[2];
         var tolakukur       = res[3];
-		    var departemen		= res[4];
+		var departemen		= res[4];
         var unit_kerja		= res[5];
-		    var stat_group	    = res[6];
-        var numerator       = res[7];
-        var denominator     = res[8];
+		var stat_group	    = res[6];
+        var statnum         = res[7];
+        var statden         = res[8];
         var statlap         = res[9];
         var statindikator   = res[10];
 
@@ -79,8 +79,24 @@ if (isset($_GET['katakunci']))
 		$("#unit").val(unit_kerja);
 		$("#stat_group").val(stat_group);
         $("#tolakukur").val(tolakukur);
-        $("#numerator").val(numerator);
-        $("#denominator").val(denominator);
+        // $("#statnum").val(statnum);
+        // $("#statden").val(statden);
+
+        if (statnum=="X"){
+            radiobtn = document.getElementById("Ya");
+            radiobtn.checked = true;
+        } else if(statnum==""){
+            radiobtn = document.getElementById("Tidak");
+            radiobtn.checked = true;
+        }
+
+        if (statden=="X"){
+            radiobtn = document.getElementById("Ya");
+            radiobtn.checked = true;
+        } else if(statden==""){
+            radiobtn = document.getElementById("Tidak");
+            radiobtn.checked = true;
+        }
 
         if (stat_group=="IAK"){
             radiobtn = document.getElementById("IAK");
@@ -110,7 +126,7 @@ if (isset($_GET['katakunci']))
         }
 
 		change1();
-
+		
         modal.style.display = "none";
     })
 </script>

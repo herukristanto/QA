@@ -10,7 +10,7 @@ include "koneksi.php";
  if(!empty($unit)){
    // if(!empty($bulan)){
    //   if(!empty($tahun)){
-   $query   = "SELECT DISTINCT kode_indikator, Kategori, Numerator, Denominator FROM V_Indikator_Kejadian WHERE kode_u= '$unit'  ORDER BY kode_indikator ASC"; //OR month(tgl_input)='$bulan' OR year(tgl_input)='$tahun'
+   $query   = "SELECT DISTINCT kode_indikator, Kategori, Numerator, Denominator FROM V_Indikator_Kejadian WHERE kode_u= '$unit' ORDER BY kode_indikator ASC"; //OR month(tgl_input)='$bulan' OR year(tgl_input)='$tahun'
    $data    = sqlsrv_query($conn, $query);
    $no=1;
 
@@ -21,11 +21,11 @@ include "koneksi.php";
        <th>No</th>
        <th>Indikator</th>
        <th>Jumlah</th>
-       <th>Numerator</th>
-       <th>Denominator</th>
+       <th style='text-align: center;'>Numerator</th>
+       <th style='text-align: center;'>Denominator</th>
        <th>Analisa</th>
        <th>Tindak Lanjut</th>
-       <th>Action</th>
+       <th style='text-align: center;'>Action</th>
        </tr>
        </thead>
 
@@ -52,7 +52,7 @@ include "koneksi.php";
               <td class='center' style='text-align: center;'>$denominator</td>
               <td class='center'></td>
               <td class='center'></td>
-              <td class='center' id='myBtn'>
+              <td class='center' id='myBtn' style='text-align: center;'>
 
                 <button type='button' class='btn btn-success' data-toggle='modal'
                  onClick='datapost(\"$kodeindi - $kategori\", \"$jumlh\", \"$numerator\", \"$denominator\")' data-target='#myModal'>Add</button>
@@ -98,9 +98,9 @@ include "koneksi.php";
           <label for="">Denominator</label>
           <input type="text" name="" id="denominator" value="" style="height: 26px;">
           <label for="">Analisa</label>
-          <input type="text" name="" id="analisa" value="" style="height: 26px; width: 100%;">
+          <textarea type="text" name="" id="analisa" value="" style="height: 26px; width: 100%;"></textarea>
           <label for="">Tindak Lanjut</label>
-          <input type="text" name="" id="tindaklanjut" value="" style="height: 26px; width: 100%;">
+          <textarea type="text" name="" id="tindaklanjut" value="" style="height: 26px; width: 100%;"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" id="btn" onclick="clik()" class="btn btn-success" data-dismiss="modal">Save</button>
@@ -149,6 +149,21 @@ include "koneksi.php";
             "&r6=" + tindaklanjut;
 
       }
+    }
+
+    var textarea1 = document.getElementById('analisa');
+    var textarea2 = document.getElementById('tindaklanjut');
+
+    textarea1.addEventListener('keydown', autosize);
+    textarea2.addEventListener('keydown', autosize);
+    function autosize(){
+      var el = this;
+      setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:0';
+        // for box-sizing other than "content-box" use:
+        // el.style.cssText = '-moz-box-sizing:content-box';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+      },0);
     }
 
    </script>

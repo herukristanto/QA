@@ -2,23 +2,25 @@
 include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
-$kode		= $_GET['kode'];
-$aspek		= $_GET['aspek'];
-$standar	= $_GET['standar'];
-$tolakukur	= $_GET['tolakukur'];
-$dept		= $_GET['departemen'];
-$unit_kerja	= $_GET['unit'];
+$kode			= $_GET['kode'];
+$aspek			= $_GET['aspek'];
+$standar		= $_GET['standar'];
+$tolakukur		= $_GET['tolakukur'];
+$dept			= $_GET['departemen'];
+$unit_kerja		= $_GET['unit'];
 
 $statlap		= $_GET['statlap'];
 $stat_group		= $_GET['stat_group'];
-$numerator		= $_GET['numerator'];
-$denominator	= $_GET['denominator'];
+$statnum		= $_GET['statnum'];
+$statden		= $_GET['statden'];
+// $numerator		= $_GET['numerator'];
+// $denominator	= $_GET['denominator'];
 $statindikator	= $_GET['statindikator'];
 $simpan			= $_GET['simpan'];
 
 
 if ($simpan == "ubah"){
-	$sql = "Update M_Indikator set Kategori = '".$aspek."', Target = '".$standar."' , Tolak_ukur = '".$tolakukur."'  , Departemen = '".$dept."', Unit = '".$unit_kerja."' , Group_indikator = '".$stat_group."' , Status = '".$statindikator."' , Lap_Kej = '".$statlap."', Numerator = '".$numerator."', Denominator = '".$denominator."' where Kode = '".$kode."'";
+	$sql = "Update M_Indikator set Kategori = '".$aspek."', Target = '".$standar."' , Tolak_ukur = '".$tolakukur."'  , Departemen = '".$dept."', Unit = '".$unit_kerja."' , Group_indikator = '".$stat_group."' , Status = '".$statindikator."' , Lap_Kej = '".$statlap."', Numerator = '".$statnum."', Denominator = '".$statden."' where Kode = '".$kode."'";
 	
 	$sql_execute = sqlsrv_query($conn,$sql);
 
@@ -36,8 +38,7 @@ if ($simpan == "ubah"){
 
 } elseif ($simpan == "baru") {
 
-		$query3 = "INSERT INTO M_Indikator VALUES('".$kode."','".$aspek."','".$standar."','".$dept."','".$unit_kerja."',
-		'".$stat_group."','".$statindikator."','".$statlap."','".$tolakukur."','".$numerator."','".$denominator."')";
+		$query3 = "INSERT INTO M_Indikator VALUES('".$kode."','".$standar."','".$dept."','".$unit_kerja."','".$stat_group."','".$statindikator."','".$statlap."','".$tolakukur."','".$statnum."','".$statden."','".$aspek."')";
 
 		echo $query3;
 

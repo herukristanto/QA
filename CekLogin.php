@@ -31,7 +31,7 @@ if (empty($username) || empty($password)){
 	if($hasil > 0) {	// Apabila username dan password di temukan
 		session_start();
 		$_SESSION["username"] = $user;
-		header('location:index_main.html');
+		header('location:main.php');
 	}
 	else {
 		echo "

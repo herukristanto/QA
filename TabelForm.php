@@ -30,7 +30,7 @@ if (isset($_GET['katakunci']))
     // $katakunci = $_GET['katakunci'];
     $katakunci = str_replace("%20", " ", $_GET['katakunci']);
     
-    $query = "SELECT * FROM M_Form WHERE Form_Id LIKE '%".$katakunci."%'";
+    $query = "SELECT * FROM M_Form WHERE Form_Id LIKE '%".$katakunci."%' ORDER BY Form_Id ASC";
     $params = array();
     $options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
     $sql = sqlsrv_query( $conn, $query , $params, $options );

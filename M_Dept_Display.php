@@ -36,7 +36,7 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-
+					
 					<br>
 					<span class="style1">Display Departemen</span><br>
 					<table>
@@ -118,7 +118,7 @@ td.mid{
 		var kd_dept;
 		var desk_dept;
 		var statdept;
-
+		
 		kd_dept = document.getElementById('kd_dept').value;
 		desk_dept = document.getElementById('desk_dept').value;
 

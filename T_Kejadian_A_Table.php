@@ -21,10 +21,9 @@ if (isset($_GET['katakunci']))
         <td>Lokasi</td>
         <td>No. RM</td>
         <td>Unit</td>
-
         <td>Cidera</td>
         <td>Kode Indikator</td>
-        <td>Kode Insident</td>
+        <td>Kode Insiden</td>
         <td>Hasil Grading</td>
 
         </tr>";
@@ -71,19 +70,19 @@ if (isset($_GET['katakunci']))
             <td>".$rs['kode_insiden']."</td>";
             if ($hg == 'Ekstrim') {
               echo
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:red\">".$hg."</td>";
+              "<td style=\"text-align:center;width:90px;font-weight:bold;color:white;font-size:14px;background-color:red\">".$hg."</td>";
             } elseif ($hg == 'Moderat') {
               echo
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:green\">".$hg."</td>";
+              "<td style=\"text-align:center;width:90px;font-weight:bold;color:white;font-size:14px;background-color:green\">".$hg."</td>";
             } elseif ($hg == 'Tinggi') {
               echo
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:yellow\">".$hg."</td>";
+              "<td style=\"text-align:center;width:90px;font-weight:bold;color:red;font-size:14px;background-color:yellow\">".$hg."</td>";
             } elseif ($hg == 'Rendah') {
               echo
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:#1E90FF\">".$hg."</td>";
+              "<td style=\"text-align:center;width:90px;font-weight:bold;color:white;font-size:14px;background-color:#1E90FF\">".$hg."</td>";
             } elseif ($hg == '') {
               echo
-              "<td style=\"text-align:center;width:90px;font-weight:bold;font-size:14px;background-color:none\"></td>";
+              "<td style=\"text-align:center;width:90px;font-weight:bold;color:white;font-size:14px;background-color:none\"></td>";
             }
             "
 
@@ -133,11 +132,11 @@ if (isset($_GET['katakunci']))
         $("#jam_kejadian").val(jam_kejadian);
         $("#lokasi").val(lokasi);
         $("#no_rm").val(no_rm);
-        $("#kode_u").val(kode_u);
+        $("#unit_kerja").val(kode_u);
         $("#no_lap_1").val(no_lap_1);
         $("#tipe_layanan").val(tipe_layanan);
         $("#tingkat_cidera").val(tingkat_cidera);
-        $("#kode_indikator").val(kode_indikator);
+        $("#indikator").val(kode_indikator);
         $("#kode_insiden").val(kode_insiden);
         $("#tipe_insiden").val(tipe_insiden);
         $("#kode_sub").val(kode_sub);
@@ -202,7 +201,7 @@ if (isset($_GET['katakunci']))
         }else if(tipe_layanan=="Rawat Lain"){
             radiobtn = document.getElementById("rawatlain");
             radiobtn.checked = true;
-              elemen.disabled = false;
+            // elemen.disabled = false;
         }
 
         var elemen1 = document.getElementById("cedera_lain")
@@ -230,9 +229,10 @@ if (isset($_GET['katakunci']))
         }else if(tingkat_cidera=="lain"){
             radiobtn = document.getElementById("lain");
             radiobtn.checked = true;
-            if (radiobtn.checked == true) {
-              elemen.disabled = false;
-            }
+            // elemen1.disabled = true;
+            // if (radiobtn.checked == true) {
+            //   elemen.disabled = false;
+            // }
         }
 
         if (skor_dampak=="5"){
@@ -281,6 +281,8 @@ if (isset($_GET['katakunci']))
          }else if (inputVal.value == "") {
               inputVal.style.backgroundColor = "";
          }
+
+
 
             modal.style.display = "none";
 

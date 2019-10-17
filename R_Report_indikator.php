@@ -13,11 +13,20 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<!-- test report exel -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script> -->
+<!-- test report exel -->
 <script src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="libs/jquery.min.js"></script>
 
-
+<script>
+function ExportToExcel(testTable){
+     var htmltable= document.getElementById('TableDetail');
+     var html = htmltable.outerHTML;
+     window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+  }
+</script>
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -65,34 +74,57 @@
             	<?php } ?>
           <div>
 
+
+
             <br>
             <div class="">
               <table>
                 <tr>
-                  <td><label for=""> Pilih Bulan</label></td>
-
+                  <td>Pilih Unit</td>
+                  <td> : </td>
                   <td>
-                    <select name="bulan" id="bulan">
-                      <option value="">Pilih</option>
-                      <?php
-                      $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-                      for($a=1;$a<=12;$a++){
-                       if($a==date("m")){
-                         $pilih="selected";
-                       } else {
-                       $pilih="";
-                       }
-
-                      echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
-                      }
-                      ?>
+                    <span class="inputan">
+                      <select id="kode_u" name="kode_u"  style="width:auto">
+                        <option value="">---------------- P I L I H ----------------</option>
+                        <?php
+                          foreach ($arrind as $Kode=>$Kode) {
+                            echo "<option value='$Kode'>$Kode</option>";
+                          }
+                        ?>
                       </select>
+                    </span>
                   </td>
-                  <!-- <td><label for="">Tahun</label></td> -->
+                </tr>
+                <tr>
+                  <td><label for=""> Pilih Bulan</label></td>
+                  <td> : </td>
+                  <td>
+
+                    <select name="bulan" id="bulan" class="key" >
+                         <option selected="selected"></option>
+                            <?php
+                   $bulan=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+                   for($c=0; $c<12; $c++)
+                   {
+                     $bln = $c + 1;
+                     if($bln<=9)
+                     {
+                       echo"<option value='0$bln'>$bulan[$c]</option>";
+                     }
+                     else
+                     {
+                       echo"<option value='$bln'>$bulan[$c]</option>";
+                     }
+                   }
+                 ?>
+                     </select>
+
+                  </td>
+
                   <td>
                     <div>
 
-            <select name="tahun" id="tahun">
+            <select name="tahun" id="tahun" style="width:auto">
                 <option value="">Pilih</option>
                 <?php
                 $query = "SELECT YEAR(Tgl) AS tahun FROM T_Kejadian GROUP BY YEAR(Tgl)"; // Tampilkan tahun sesuai di tabel transaksi
@@ -110,19 +142,25 @@
                       <i class="icon-search"></i>
                       Search</button>
                   </td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>
+
+                    <button type="button" name="button" id="exportpage" onclick="ExportToExcel();"  class="btn btn-success">
+                      <i class="icon-download"></i>
+                      Export</button>
+                  </td>
                 </tr>
               </table>
 
             </div>
             <br>
           </div>
-          <!-- <h3>INDIKATOR MUTU</h3> -->
-          <!-- <a target="_blank" href="R_Report_indikator.php">EXPORT KE EXCEL</a> -->
+
           <div>
             <div id="tabel_range"></div>
-            <div>
-              <button>Export</button>
-            </div>
           </div>
 				  </div>
 				</div>
@@ -167,9 +205,9 @@
 	$.ajax({
 		//Alamat url harap disesuaikan dengan lokasi script pada komputer anda
 		url	     : 'R_Data_Show.php',
-		type     : 'POST',
+		type     : 'GET',
 		dataType : 'html',
-		data     : 'bulan='+bulan+'&tahun='+tahun+'&filter='+filter,
+		data     : 'bulan='+bulan+'&tahun='+tahun+'&unit='+unit+'&filter='+filter,
     success: function(info) {
      $("#tabel_range").html(info);   }
    });
@@ -180,6 +218,19 @@
 
 
 </script>
+
+<script type="text/javascript">
+	function validasi() {
+		var nama = document.getElementById("nama").value;
+		var email = document.getElementById("email").value;
+		var alamat = document.getElementById("alamat").value;
+		if (nama != "" && email!="" && alamat !="") {
+			return true;
+		}else{
+			alert('Anda harus mengisi data dengan lengkap !');
+		}
+	}
+</script>
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.js"></script>
@@ -187,9 +238,6 @@
 <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
 
 <script src="js/base.js"></script>
-
-
-
 
 </body>
 </html>

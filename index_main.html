@@ -1,12 +1,3 @@
-<?php
-include "koneksi.php";
-
-session_set_cookie_params(0);
-error_reporting(0);
-session_start();
-
-$user = $_SESSION[username];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +19,8 @@ $user = $_SESSION[username];
     <![endif]-->
 </head>
 <body>
+
+<?php include "header.php"; ?>
 
 <div id="header"></div>
 

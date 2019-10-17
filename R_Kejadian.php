@@ -102,7 +102,7 @@ td{
   <!-- /main-inner -->
 </div>
 <!-- /main -->
-<div class="extra">
+<!-- <div class="extra">
   <div class="extra-inner">
     <div class="container">
       <div class="row">
@@ -111,10 +111,8 @@ td{
         </p>
       </div>
     </div>
-    <!-- /container -->
   </div>
-  <!-- /extra-inner -->
-</div>
+</div> -->
 <!-- /extra -->
 <div class="footer">
   <div class="footer-inner">

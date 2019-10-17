@@ -3,7 +3,7 @@ include "koneksi.php";
 if (isset($_GET['katakunci']))
 {
     $katakunci = $_GET['katakunci'];
-    $query = "SELECT * FROM M_Tipe_Insiden WHERE Kode_tipe like '%". $katakunci ."%' OR Kode like '%". $katakunci ."%' OR Tipe_insiden like '%". $katakunci ."%' OR Mark like '%". $katakunci ."%'";
+    $query = "SELECT * FROM M_Tipe_Insiden WHERE Kode_tipe like '%". $katakunci ."%' OR Kode like '%". $katakunci ."%' OR Tipe_insiden like '%". $katakunci ."%' OR Mark like '%". $katakunci ."%' ORDER BY Kode_tipe ASC";
     $sql = sqlsrv_query($conn,$query);
     if ($sql){
         echo "

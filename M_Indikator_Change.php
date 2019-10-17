@@ -99,12 +99,26 @@
 			            <tr>
 			              <td>Numerator</td>
 			              <td> : </td>
-			              <td><input name="numerator" type="text" id="numerator"></td>
+			              <td colspan="2"><input type="radio" name="statnum" id="Ya" checked>
+			              Ya</td>
+			            </tr>
+			            <tr>
+			              <td height="24">&nbsp;</td>
+			              <td>&nbsp;</td>
+			              <td colspan="2"><input type="radio" name="statnum" id="Tidak">
+			              Tidak</td>
 			            </tr>
 			            <tr>
 			              <td>Denominator</td>
 			              <td>:</td>
-			              <td><input name="denominator" type="text" id="denominator"></td>
+			              <td colspan="2"><input type="radio" name="statden" id="Ya" checked>
+			              Ya</td>
+			            </tr>
+			            <tr>
+			              <td height="24">&nbsp;</td>
+			              <td>&nbsp;</td>
+			              <td colspan="2"><input type="radio" name="statden" id="Tidak">
+			              Tidak</td>
 			            </tr>
 							<tr>
 								<td>Departemen</td>
@@ -232,8 +246,8 @@
     	var tolakukur;
     	var departemen;
 		var unit;
-    	var numerator;
-    	var denominator;
+    	// var numerator;
+    	// var denominator;
 
 	
 	    kode		= document.getElementById('kode').value;
@@ -248,9 +262,9 @@
 
 		unit_kerja	= document.getElementById('unitkerja').value;
 
-	    numerator 	= document.getElementById('numerator').value;
+	    // numerator 	= document.getElementById('numerator').value;
 
-	    denominator = document.getElementById('denominator').value;
+	    // denominator = document.getElementById('denominator').value;
 		
 
 	    var cekradiobuttonlap = document.getElementById('Ya');
@@ -258,6 +272,20 @@
 	      statlap = "X";
 	    }else{
 	      statlap = "";
+	    }
+
+	    var cekradiobuttonnum = document.getElementById('Ya');
+	    if (cekradiobuttonnum.checked){
+	      statnum = "X";
+	    }else{
+	      statnum = "";
+	    }
+
+	    var cekradiobuttonden = document.getElementById('Ya');
+	    if (cekradiobuttonden.checked){
+	      statden = "X";
+	    }else{
+	      statden = "";
 	    }
 
 	    var cekradiobuttontipe = document.getElementById('IAK');
@@ -285,7 +313,7 @@
 		 
 		
 	    if (aspek) {
-	      window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&tolakukur=' + tolakukur + '&departemen=' + departemen + '&unit=' + unit_kerja + '&statindikator=' + statindikator + '&statlap=' + statlap + '&stat_group=' + stat_group + '&numerator=' + numerator + '&denominator=' + denominator + '&simpan=' + simpan;
+	      window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&tolakukur=' + tolakukur + '&departemen=' + departemen + '&unit=' + unit_kerja + '&statindikator=' + statindikator + '&statlap=' + statlap + '&stat_group=' + stat_group + '&statnum=' + statnum + '&statden=' + statden + '&simpan=' + simpan;
 	    } else {
 	      alert("Kolom 'Aspek' harus diisi..");
 	    }

@@ -2,7 +2,7 @@
 include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
-		$no_lap              = $_GET['a1'];
+	$no_lap              = $_GET['a1'];
 
     $no_invest           = $_GET['rm1'];
     $penyebab_langsung   = $_GET['rm2'];
@@ -41,6 +41,10 @@ date_default_timezone_set("Asia/Bangkok");
 
 
 				$result1 = sqlsrv_query($conn,$tsql1);
+
+				$update_no_lap = "UPDATE T_Kejadian_a SET flag='X' WHERE no_lap = '".$no_lap."'";
+
+				$result = sqlsrv_query( $conn, $update_no_lap);
 
 				if ( $result1 ) {
 						$something = "Submission successful.";

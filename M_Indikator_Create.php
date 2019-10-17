@@ -1,5 +1,19 @@
 <?php
+session_set_cookie_params(0);
+error_reporting(0);
+session_start();
+if (empty($_SESSION[username]) AND empty($_SESSION[password])){
+  echo "<br>";
+  echo "<br>";
+  echo "<br>";
+  echo "<center><H3>Mohon Login Terlebih Dahulu</H3><br>";
+  echo "<a href=index.html><b>LOGIN</b></a></center>";
+  exit;
+}
+
 include "koneksi.php";
+
+
 
 #ambil data
 $query = "SELECT * FROM M_Departemen where Status = 'X' ";
@@ -219,12 +233,24 @@ document.form2.image();
             <tr>
               <td>Numerator</td>
               <td> : </td>
-              <td><input name="numerator" type="text" id="numerator"></td>
+              <td colspan="2"><input type="radio" name="statnum" id="Ya" checked>Ya</td>
+            </tr>
+            <tr>
+              <td height="24">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2"><input type="radio" name="statnum" id="Tidak">
+              Tidak</td>
             </tr>
             <tr>
               <td>Denominator</td>
               <td>:</td>
-              <td><input name="denominator" type="text" id="denominator"></td>
+              <td colspan="2"><input type="radio" name="statden" id="Ya" checked>Ya</td>
+            </tr>
+            <tr>
+              <td height="24">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2"><input type="radio" name="statden" id="Tidak">
+              Tidak</td>
             </tr>
             <tr>
               <td>Departemen</td>
@@ -318,8 +344,8 @@ document.form2.image();
     var tolakukur;
     var departemen;
 	  var unit_kerja;
-    var numerator;
-    var denominator;
+    // var numerator;
+    // var denominator;
 
 	
     kode		= document.getElementById('kode').value;
@@ -334,9 +360,9 @@ document.form2.image();
 
 	  unit_kerja	= document.getElementById('unit_kerja').value;
 
-    numerator = document.getElementById('numerator').value;
+    // numerator = document.getElementById('numerator').value;
 
-    denominator = document.getElementById('denominator').value;
+    // denominator = document.getElementById('denominator').value;
 	
 
     var cekradiobuttonlap = document.getElementById('Ya');
@@ -344,6 +370,20 @@ document.form2.image();
       statlap = "X";
     }else{
       statlap = "";
+    }
+
+    var cekradiobuttonnum = document.getElementById('Ya');
+    if (cekradiobuttonnum.checked){
+      statnum = "X";
+    }else{
+      statnum = "";
+    }
+
+    var cekradiobuttonden = document.getElementById('Ya');
+    if (cekradiobuttonden.checked){
+      statden = "X";
+    }else{
+      statden = "";
     }
 
     var cekradiobuttontipe = document.getElementById('IAK');
@@ -371,7 +411,7 @@ document.form2.image();
 	 
 	
     if (aspek) {
-      window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&tolakukur=' + tolakukur + '&departemen=' + departemen + '&unit=' + unit_kerja + '&statindikator=' + statindikator + '&statlap=' + statlap + '&stat_group=' + stat_group + '&numerator=' + numerator + '&denominator=' + denominator + '&simpan=' + simpan;
+      window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&tolakukur=' + tolakukur + '&departemen=' + departemen + '&unit=' + unit_kerja + '&statindikator=' + statindikator + '&statlap=' + statlap + '&stat_group=' + stat_group + '&statnum=' + statnum + '&statden=' + statden + '&simpan=' + simpan;
     } else {
       alert("Kolom 'Aspek' harus diisi..");
     }

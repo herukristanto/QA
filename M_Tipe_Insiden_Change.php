@@ -63,11 +63,11 @@ td.mid{
 			              <td>Kode Insiden</td>
 			              <td>:</td>
 			              <td colspan="2"><span class="inputan">
-			            <select id="kd_insiden" name="kd_insiden" style="text-align:center;font-weight:bold;font-size:15px"  />
+			            <select id="kd_insiden" name="kd_insiden" style="text-align:center;font-weight:bold;width: auto;"  />
 			              <option value=""></option>
 			              <?php
-			      foreach ($arrind as $Kode=>$Kode) {
-			        echo "<option value='$Kode'>$Kode</option>";
+			      foreach ($arrind as $Kode=>$Insiden) {
+			        echo "<option value='$Kode'>$Kode - $Insiden</option>";
 			      }
 			      ?>
 			            </select>
@@ -144,9 +144,9 @@ td.mid{
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
 	function savetipeinsiden(){
-	    var kd_tipe;
-	    var kd_insiden;
-	    var tipe_insiden;
+	  var kd_tipe;
+	  var kd_insiden;
+	  var tipe_insiden;
 
     kd_tipe       = document.getElementById('kd_tipe').value;
     kd_insiden    = document.getElementById('kd_insiden').value;

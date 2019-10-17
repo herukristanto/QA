@@ -1,3 +1,65 @@
+<?php
+  include "koneksi.php";
+  session_start();
+
+  //Cek variabel user dan pass
+  if (empty($_SESSION["username"])){
+    echo "
+    <script>
+      alert('Silahkan Login Terlebih Dahulu');
+      window.location.href = 'index.html';
+    </script>
+    ";
+  }else{
+    $page = basename($_SERVER['PHP_SELF']);
+    $quer = "select count(*) as hasil from M_Authorization where User_ID = '".$_SESSION["username"]."' and Form_ID = '".$page."'";
+    $sql_execute = sqlsrv_query($conn,$quer);
+    $rs = sqlsrv_fetch_array($sql_execute, SQLSRV_FETCH_ASSOC);
+    if($rs["hasil"] == 0)
+    {
+      echo '<script>
+      alert("Anda tidak berhak membuka halaman ini");
+      window.location="main.php";
+      </script>';
+    }
+  }
+
+  $username = $_SESSION["username"];
+
+?>
+
+<?php
+include "koneksi.php";
+
+#ambil data
+$query = "SELECT * FROM M_Unit WHERE Status ='X' ";
+$sql = sqlsrv_query($conn, $query);
+$arrunit = array();
+while ($row = sqlsrv_fetch_array($sql)) {
+  $arrunit [ $row['Deskripsi'] ] = $row['Deskripsi'];
+}      
+
+
+#action get indikator
+if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
+  $kode_unit = $_GET['Deskripsi'];
+  
+#ambil data indikator
+  $query = "SELECT * FROM V_Unit_Indikator WHERE Deskripsi= '$kode_unit' AND status_indikator='X'";
+  $sql = sqlsrv_query($conn, $query);
+  $arrind = array();
+  while ($row = sqlsrv_fetch_array($sql)) {
+    array_push($arrind, $row);
+  }
+  echo json_encode($arrind);
+  exit;
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,23 +80,14 @@
     <![endif]-->
 <?php
 include "koneksi.php";
-{
-  #ambil data semua unit
-    $query = "SELECT * FROM M_Unit WHERE Status = 'X'";
-    $sql   = sqlsrv_query($conn, $query);
-    $arrunit = array();
-    while ($row = sqlsrv_fetch_array($sql)) {
-      $arrunit [ $row['Deskripsi'] ] = $row['Kode'];
-    }
-  }
 
 {
   #ambil data semua indikator
-    $query = "SELECT * FROM M_Unit WHERE Status = 'X'";
+    $query = "SELECT * FROM M_Indikator WHERE Status = 'X' ORDER BY Kode ASC";
     $sql   = sqlsrv_query($conn, $query);
-    $arrind = array();
+    $arrind_display = array();
     while ($row = sqlsrv_fetch_array($sql)) {
-      $arrind [ $row['DeptUnit'] ] = $row['Kode'];
+      $arrind_display [ $row['Kode'] ] = $row['Kategori'];
     }
   }
 
@@ -120,6 +173,27 @@ td.mid{
 	font-weight: bold;
 }
 </style>
+
+<script type="text/javascript" src="libs/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function()
+      {
+      
+        $('#unit_kerja').change(function()
+        { 
+          $.getJSON('test.php',{action:'getUnker', Deskripsi:$(this).val()}, function(json)
+          { 
+            $('#indikator').html('');
+            $.each(json, function(index, row) 
+            {
+              $('#indikator').append('<option value="'+row.Kode+' - '+row.Kategori+'">'+row.Kode+' - '+row.Kategori+'</option>');
+              
+            });
+          });
+        });
+      });
+    </script>
+
 </head>
 <body>
 <div id="header_trn"></div>
@@ -279,16 +353,17 @@ td.mid{
           <td>Unit terkait</td>
           <td> : </td>
           <td colspan="2">
-            <span class="inputan" id="ini">
-              <select id="kode_u" name="kode_u" disabled="disabled" style="width:auto">
+            <span class="inputan">
+              <select id="unit_kerja" name="unit_kerja" style="width:auto" disabled="disabled">
                 <option value="">---------------- P I L I H ----------------</option>
                   <?php
-                    foreach ($arrunit as $Kode=>$Kode) {
+                    foreach ($arrunit as $Unit=>$Kode) {
                       echo "<option value='$Kode'>$Kode</option>";
                     }
                     ?>
               </select>
-            </span>          </td>
+            </span>
+          </td>
         </tr>
         <tr>
           <td>No. Laporan unit terkait</td>
@@ -331,28 +406,27 @@ td.mid{
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input disabled="disabled" type="radio" name="tingkat_cidera" id="tidakada" value="tidakada">Tidak Ada Cedera</td>
+          <td colspan="2"><input disabled="disabled" type="radio" name="tingkat_cidera" id="tidak ada" value="tidak ada">Tidak Ada Cedera</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td colspan="2"><input disabled="disabled" type="radio" name="tingkat_cidera" id="lain" value="lain">Lainnya&nbsp;
-            <input disabled="disabled" type="text" id="cedera_lain" name="cedera_lain" maxlength="50"></td>
+            <input type="text" id="cedera_lain" name="cedera_lain" maxlength="50" disabled="disabled"></td>
         </tr>
           <td>&nbsp;</td>
         <tr>
           <td>Indikator terkait</td>
           <td> : </td>
           <td colspan="2">
-            <span class="inputan">
-              <select id="kode_indikator" name="kode_indikator" disabled="disabled" style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                <?php
-                  foreach ($arrind as $Kode=>$Kode) {
-                    echo "<option value='$Kode'>$Kode</option>";
-                  }
-                ?>
-              </select>
-            </span>          </td>
+            <select id="indikator" name="indikator" onChange="();" disabled="disabled">
+          <option value="">---------------- P I L I H ----------------</option>
+                  <?php
+                    foreach ($arrind_display as $Kode=>$Kategori) {
+                      echo "<option value='$Kode'>$Kode - $Kategori</option>";
+                    }
+                    ?>
+          </select>
+          </td>
         </tr>
         <tr>
           <td>Jenis insiden</td>

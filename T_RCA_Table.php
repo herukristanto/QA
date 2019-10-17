@@ -40,8 +40,10 @@ if (isset($_GET['katakunci']))
             "|".$rs['Tgl_start']->format('d/m/Y').
             "|".$rs['Tgl_end']->format('d/m/Y').
             "|".$rs['Masalah'].
-            "|".$rs['Saran']."
-
+            "|".$rs['Saran'].
+            "|".$rs['kebijakan_info'].
+            "|".$rs['bukti_info'].
+            "|".$rs['infolain_info']."
             ' >
 
             <td>".$rs['No_RCA']."</td>
@@ -85,6 +87,9 @@ if (isset($_GET['katakunci']))
         var Tgl_end             = res[19];
         var Masalah             = res[20];
         var Saran               = res[21];
+        var kebijakan_info      = res[22];
+        var bukti_info          = res[23];
+        var infolain_info       = res[24];
 
 
         $("#no_rca").val(No_RCA);
@@ -109,6 +114,9 @@ if (isset($_GET['katakunci']))
         $("#TglAna2").val(Tgl_end);
         $("#masalah_utama").val(Masalah);
         $("#saran_rekomendasi").val(Saran);
+        $("#kebijakan_text").val(kebijakan_info);
+        $("#bukti_text").val(bukti_info);
+        $("#informasi_text").val(infolain_info);
 
         if (Obs_lap == "X") {
           checkbtn = document.getElementById("laporan_kejadian");

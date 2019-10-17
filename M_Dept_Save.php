@@ -20,7 +20,7 @@ if ($simpan == "ubah"){
 	alert('Departemen ".$hasil['Kode']." - ".$hasil['Deskripsi']." Berhasil Diubah');
 	window.location.href='M_Dept_Change.php';
 	</script>";
-
+	
 } elseif ($simpan == "baru") {
 	$sql = "select * from M_Departemen where Kode = '".$kd_dept."'";
 	$sql_execute = sqlsrv_query($conn, $sql, array(), array( "Scrollable" => 'static' ));
@@ -45,7 +45,7 @@ if ($simpan == "ubah"){
 		alert('Data sudah tercatat pada sistem sebelumnya.');
 		window.location.href='M_Dept_Create.php';
 		</script>";
-
+		
 	}
 }
 ?>

@@ -139,15 +139,6 @@ td.mid{
               <td></td>
             </tr>
 
-           <!--  <script>
-               function getskor(){
-                    var hasil_skor=document.getElementById("hasil_skor").value;
-                    if var hasil_skor = "Tinggi";
-                      var penyebab_langsung = document.getElementById('penyebab_langsung');
-                      penyebab_langsung.disabled = true;
-                    }
-            </script> -->
-
             <tr>
               <td>a. Formulir investigasi sederhana</td>
               <td height="42">&nbsp;</td>
@@ -296,20 +287,27 @@ td.mid{
               Berkas RM + Hasil pemeriksaan</td>
             </tr>
             <tr>
-              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="kebijakan_prosedur" id="kebijakan_prosedur" >
-              Kebijakan dan prosedur yang berhubungan (sebutkan nomor dan judul) :&nbsp;<input type="text" id="kebijakan_info" name="kebijakan_info" maxlength="50"></td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="enable1('kebijakan_text')" name="kebijakan_prosedur" id="kebijakan_prosedur" >
+              Kebijakan dan prosedur yang berhubungan (sebutkan nomor dan judul) : </td>
+              <td colspan="2" rowspan="2"><input type="text" id="kebijakan_text" name="kebijakan_text" maxlength="50" disabled="true"></td>
+            </tr>
+            <tr>
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="daftarstaf" id="daftarstaf" >
               Daftar Staf</td>
             </tr>
             <tr>
-              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="buktifisik" id="buktifisik" >
-              Bukti Fisik, berupa :&nbsp;<input type="text" id="bukti_info" name="bukti_info" maxlength="50"></td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="enable2('bukti_text')" name="buktifisik" id="buktifisik" >
+              Bukti Fisik, berupa : </td>
+              <td colspan="2" rowspan="2"><input type="text" id="bukti_text" name="bukti_text" maxlength="50" disabled="true"></td>
             </tr>
             <tr>
-              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="informasi_lain" id="informasi_lain" >
-              Informasi lain yang mempengaruhi insiden :&nbsp;<input type="text" id="infolain_info" name="infolain_info" maxlength="50"></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="enable3('informasi_text')" name="informasi_lain" id="informasi_lain" >
+              Informasi lain yang mempengaruhi insiden, berupa : </td>
+              <td colspan="2" rowspan="2"><input type="text" id="informasi_text" name="informasi_text" maxlength="50" disabled="true"></td>
             </tr>
             <tr>
               <td height="42">&nbsp;</td>
@@ -494,6 +492,36 @@ td.mid{
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
+
+  function enable1(id){
+  var elemen = document.getElementById(id);
+  if (kebijakan_prosedur.checked==true){
+    elemen.disabled = false;
+  }else{
+    elemen.disabled = true;
+    }
+  }
+
+  function enable2(id){
+  var elemen = document.getElementById(id);
+  if (buktifisik.checked==true){
+    elemen.disabled = false;
+  }else{
+    elemen.disabled = true;
+    }
+  }
+
+  function enable3(id){
+  var elemen = document.getElementById(id);
+  if (informasi_lain.checked==true){
+    elemen.disabled = false;
+  }else{
+    elemen.disabled = true;
+    }
+  }
+
+
+
   function saveinvest(){
     var no_lap;
     var Tgl_kejadian;
@@ -519,9 +547,12 @@ td.mid{
     var laporan_kejadian;
     var berkas_RM;
     var kebijakan_prosedur;
+    var kebijakan_text;
     var daftarstaf;
     var buktifisik;
+    var bukti_text;
     var informasi_lain;
+    var informasi_text;
     var TglWaw;
     var jam_waw;
     var hasil_waw;
@@ -532,9 +563,6 @@ td.mid{
     var TglAna2;
     var masalah_utama;
     var saran_rekomendasi;
-    var kebijakan_info;
-    var bukti_info;
-    var infolain_info;
     // a value
     no_lap              = document.getElementById('no_lap').value;
     Tgl_kejadian        = document.getElementById('TglTjd').value;
@@ -556,6 +584,9 @@ td.mid{
     TglObs              = document.getElementById('TglObs').value;
     jam_obs             = document.getElementById('jam_obs').value;
     hasil_obs           = document.getElementById('hasil_obs').value;
+    kebijakan_text      = document.getElementById('kebijakan_text').value;
+    bukti_text          = document.getElementById('bukti_text').value;
+    informasi_text      = document.getElementById('informasi_text').value;
     //checkbox
     laporan_kejadian    = document.getElementById('laporan_kejadian').checked;
     berkas_RM           = document.getElementById('berkas_RM').checked;
@@ -563,7 +594,6 @@ td.mid{
     daftarstaf          = document.getElementById('daftarstaf').checked;
     buktifisik          = document.getElementById('buktifisik').checked;
     informasi_lain      = document.getElementById('informasi_lain').checked;
-    kebijakan_info      = document.getElementById('kebijakan_info').checked;
     //checkbox
     TglWaw              = document.getElementById('TglWaw').value;
     jam_waw             = document.getElementById('jam_waw').value;
@@ -638,7 +668,10 @@ td.mid{
         "&te18=" + TglAna1 +
         "&te19=" + TglAna2 +
         "&te20=" + masalah_utama +
-        "&te21=" + saran_rekomendasi;
+        "&te21=" + saran_rekomendasi +
+        "&te22=" + kebijakan_text +
+        "&te23=" + bukti_text +
+        "&te24=" + informasi_text;
       }
     } else {
       alert("Kolom 'No. Laporan' tidak boleh kosong");

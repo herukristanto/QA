@@ -3,16 +3,16 @@ include "koneksi.php";
 if (isset($_GET['katakunci']))
 {
     $katakunci = $_GET['katakunci'];
-    $query = "SELECT * FROM T_Kejadian_a WHERE no_lap like '%". $katakunci ."%' OR kode_u like '%". $katakunci ."%' OR tgl_kejadian like '%". $katakunci ."%' OR hasil_skor like '%". $katakunci ."%' ORDER BY no_lap ASC" ;
+    $query = "SELECT * FROM T_Kejadian_a WHERE flag IS NULL AND (no_lap like '%". $katakunci ."%' OR kode_u like '%". $katakunci ."%' OR tgl_kejadian like '%". $katakunci ."%' OR hasil_skor like '%". $katakunci ."%' ) ORDER BY no_lap ASC" ;
     $sql = sqlsrv_query($conn,$query);
     if ($sql){
         echo "
         <table id=\"TableDetail\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\">
         <tr style=\"font-weight:bold\">
-        <td>No. Laporan</td>
-        <td>Kode Unit</td>
-        <td>Tanggal Kejadian</td>
-        <td>Matriks Grading</td>
+        <td width=\"170px\" style=\"text-align:center;font-weight:bold;font-size:17px\">No. Laporan</td>
+        <td width=\"200px\" style=\"text-align:center;font-weight:bold;font-size:17px\">Kode Unit</td>
+        <td width=\"200px\" style=\"text-align:center;font-weight:bold;font-size:17px\">Tanggal Kejadian</td>
+        <td width=\"250px\" style=\"text-align:center;font-weight:bold;font-size:17px\">Matriks Grading</td>
         </tr>";
 
         while($rs = sqlsrv_fetch_array($sql)){
@@ -21,10 +21,10 @@ if (isset($_GET['katakunci']))
 
             echo "
             <tr id='".$rs['no_lap']."|".$rs['kode_u']."|".$TglTjd."|".$rs['hasil_skor']."' >
-            <td width=\"120px\">".$rs['no_lap']."</td>
-            <td width=\"200px\">".$rs['kode_u']."</td>
-            <td align='center'>".$TglTjd."</td>
-            <td align=\"center\" width=\"120px\">".$rs['hasil_skor']."</td>
+            <td width=\"170px\" style=\"text-align:center;font-weight:bold;font-size:15px\">".$rs['no_lap']."</td>
+            <td width=\"200px\" style=\"text-align:left;font-weight:bold;font-size:15px\">".$rs['kode_u']."</td>
+            <td align='center' style='text-align:center;font-weight:bold;font-size:15px'>".$TglTjd."</td>
+            <td width=\"250px\" style=\"text-align:center;font-weight:bold;font-size:15px\">".$rs['hasil_skor']."</td>
             </tr>
             ";
         }

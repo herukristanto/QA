@@ -2,7 +2,7 @@
 include "koneksi.php";
 {
   #ambil insiden
-    $query  = "SELECT * FROM M_Insiden WHERE Mark = 'X'";
+    $query  = "SELECT * FROM M_Insiden WHERE Mark = 'X' ORDER BY Kode ASC ";
     $sql    = sqlsrv_query($conn, $query);
     $arrind = array();
     while ($row = sqlsrv_fetch_array($sql)) {
@@ -13,7 +13,7 @@ include "koneksi.php";
 
 {
   #ambil tipe insiden
-    $query  = "SELECT * FROM M_Tipe_Insiden WHERE Mark = 'X'";
+    $query  = "SELECT * FROM M_Tipe_Insiden WHERE Mark = 'X' ORDER BY Kode_tipe ASC ";
     $sql    = sqlsrv_query($conn, $query);
     $arrtipe = array();
     while ($row = sqlsrv_fetch_array($sql)) {
@@ -65,7 +65,7 @@ td.mid{
 					<span class="style1">Change Sub Tipe Insiden</span><br>
 					<table>
 			            <tr>
-			              <td>Kode Sub</td>
+			              <td>Kode Sub Tipe</td>
 			              <td> : </td>
 			              <td><input name="Kd_sub" type="text" id="Kd_sub" maxlength="15" disabled="disabled" size="8" readonly="readonly"
 			        style="text-align:center;font-weight:bold;font-size:16px" /></td>
@@ -74,12 +74,12 @@ td.mid{
 			              <td>Kode Tipe Insiden</td>
 			              <td>:</td>
 			              <td colspan="2"><span class="inputan">
-			            <select id="Kd_tipe" name="Kd_tipe" style="text-align:center;font-weight:bold;font-size:15px"/>
+			            <select id="Kd_tipe" name="Kd_tipe" style="text-align:center;font-weight:bold;width: auto;"/>
 			              <option value="" ></option>
 			              <?php
-			      foreach ($arrtipe as $Kode=>$Kode) {
-			        echo "<option value='$Kode'>$Kode</option>";
-			      }
+			      foreach ($arrtipe as $Kode_tipe=>$Tipe_insiden) {
+              echo "<option value='$Kode_tipe'>$Kode_tipe - $Tipe_insiden</option>";
+            }
 			      ?>
 			            </select>
 			          </span></td>
@@ -91,12 +91,12 @@ td.mid{
 			              <td>Kode Insiden</td>
 			              <td>:</td>
 			              <td colspan="2"><span class="inputan">
-			            <select id="Kd_insiden" name="Kd_insiden" style="text-align:center;font-weight:bold;font-size:15px"/>
+			            <select id="Kd_insiden" name="Kd_insiden" style="text-align:center;font-weight:bold;width: auto;"/>
 			              <option value="" ></option>
 			              <?php
-			      foreach ($arrind as $Kode=>$Kode) {
-			        echo "<option value='$Kode'>$Kode</option>";
-			      }
+			      foreach ($arrind as $Kode=>$Insiden) {
+              echo "<option value='$Kode'>$Kode - $Insiden</option>";
+            }
 			      ?>
 			            </select>
 			          </span></td>
@@ -104,7 +104,7 @@ td.mid{
 			            <tr>
 			              <td>Sub Tipe Insiden</td>
 			              <td> : </td>
-			              <td><input type="text" id="Sub_tipe_insiden" name="Sub_tipe_insiden" maxlength="255" style="text-align:left;font-weight:bold;font-size:15px"></td>
+			              <td><input type="text" id="Sub_tipe_insiden" name="Sub_tipe_insiden" maxlength="255" style="text-align:left;font-weight:bold;width: auto"></td>
 			            </tr>
 			            <tr>
 			              <td>Status</td>

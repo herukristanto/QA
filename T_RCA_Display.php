@@ -172,6 +172,9 @@ td.mid{
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="kebijakan_prosedur" id="kebijakan_prosedur" disabled="disabled">
               Kebijakan dan prosedur yang berhubungan (sebutkan nomor dan judul) :</td>
+              <td colspan="2" rowspan="2"><input type="text" id="kebijakan_text" name="kebijakan_text" maxlength="50" disabled="disabled"></td>
+            </tr>
+            <tr>
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="daftarstaf" id="daftarstaf" disabled="disabled">
@@ -179,11 +182,15 @@ td.mid{
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="buktifisik" id="buktifisik" disabled="disabled">
-              Bukti Fisik</td>
+              Bukti Fisik, berupa :</td>
+              <td colspan="2" rowspan="2"><input type="text" id="bukti_text" name="bukti_text" maxlength="50" disabled="disabled"></td>
+            </tr>
+            <tr>
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="informasi_lain" id="informasi_lain" disabled="disabled">
-              Informasi lain yang mempengaruhi insiden</td>
+              Informasi lain yang mempengaruhi insiden, berupa :</td>
+              <td colspan="2" rowspan="2"><input type="text" id="informasi_text" name="informasi_text" maxlength="50" disabled="disabled"></td>
             </tr>
             <tr>
               <td height="42">&nbsp;</td>

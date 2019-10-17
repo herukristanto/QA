@@ -1,3 +1,62 @@
+<?php
+  include "koneksi.php";
+  session_start();
+
+  //Cek variabel user dan pass
+  if (empty($_SESSION["username"])){
+    echo "
+    <script>
+      alert('Silahkan Login Terlebih Dahulu');
+      window.location.href = 'index.html';
+    </script>
+    ";
+  }else{
+    $page = basename($_SERVER['PHP_SELF']);
+    $quer = "select count(*) as hasil from M_Authorization where User_ID = '".$_SESSION["username"]."' and Form_ID = '".$page."'";
+    $sql_execute = sqlsrv_query($conn,$quer);
+    $rs = sqlsrv_fetch_array($sql_execute, SQLSRV_FETCH_ASSOC);
+    if($rs["hasil"] == 0)
+    {
+      echo '<script>
+      alert("Anda tidak berhak membuka halaman ini");
+      window.location="main.php";
+      </script>';
+    }
+  }
+
+  $username = $_SESSION["username"];
+
+?>
+
+<?php
+include "koneksi.php";
+
+#ambil data
+$query = "SELECT * FROM M_Unit WHERE Status ='X' ";
+$sql = sqlsrv_query($conn, $query);
+$arrunit = array();
+while ($row = sqlsrv_fetch_array($sql)) {
+  $arrunit [ $row['Deskripsi'] ] = $row['Deskripsi'];
+}
+
+
+#action get indikator
+if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
+  $kode_unit = $_GET['Deskripsi'];
+
+#ambil data indikator
+  $query = "SELECT * FROM V_Unit_Indikator WHERE Deskripsi= '$kode_unit' AND status_indikator='X'";
+  $sql = sqlsrv_query($conn, $query);
+  $arrind = array();
+  while ($row = sqlsrv_fetch_array($sql)) {
+    array_push($arrind, $row);
+  }
+  echo json_encode($arrind);
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,29 +70,13 @@
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="css/slider.css"> -->
 <script src="js/jquery-1.7.2.min.js"></script>
+
+
 
 <?php
 include "koneksi.php";
-{
-  #ambil data semua unit
-    $query = "SELECT * FROM M_Unit WHERE Status = 'X'";
-    $sql   = sqlsrv_query($conn, $query);
-    $arrunit = array();
-    while ($row = sqlsrv_fetch_array($sql)) {
-      $arrunit [ $row['Deskripsi'] ] = $row['Kode'];
-    }
-  }
-
-{
-  #ambil data semua indikator
-    $query = "SELECT * FROM M_Unit WHERE Status = 'X'";
-    $sql   = sqlsrv_query($conn, $query);
-    $arrind = array();
-    while ($row = sqlsrv_fetch_array($sql)) {
-      $arrind [ $row['DeptUnit'] ] = $row['Kode'];
-    }
-  }
 
 {
   #ambil data semua insiden
@@ -105,25 +148,50 @@ $tambah = $kode + 1;
 
 ?>
 
-<style>
+<script type="text/javascript" src="libs/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function()
+      {
 
+        $('#unit_kerja').change(function()
+        {
+          $.getJSON('test.php',{action:'getUnker', Deskripsi:$(this).val()}, function(json)
+          {
+            $('#indikator').html('');
+            $.each(json, function(index, row)
+            {
+              $('#indikator').append('<option value="'+row.Kode+' - '+row.Kategori+'">'+row.Kode+' - '+row.Kategori+'</option>');
 
+            });
+          });
+        });
+      });
+    </script>
 
-</style>
+<script type="text/javascript">
+    function Angkasaja(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+    return false;
+    return true;
+    }
+</script>
+
+    <script type="text/javascript" src="libs/jquery.min.js"></script>
+
 </head>
-<body>
-  <div id="header_trn"></div>
-  <div class="main">
-    <div class="main-inner">
-      <div class="container">
-        <div class="row">
-          <div class="span12 mainPage">
+<body onload="init();">
+<div id="header_trn"></div>
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
         <div class="span12 mainPage">
-
         </br>
         <span><h3>Create Laporan Kejadian</h3></span>
 
 <form  action="T_Kejadian_A_Save.php" method="POST">
+
 
       </br>
 
@@ -235,7 +303,8 @@ $tambah = $kode + 1;
         </tr>
       </tr>
     </table>
-    <!-- <input type="button" onclick="myFunction()" value="Click Me"> -->
+
+
 <br>
 <!-- <div id="myDIV"> -->
     <table>
@@ -267,17 +336,17 @@ $tambah = $kode + 1;
         <tr>
           <td>No. Rekam Medis</td>
           <td> : </td>
-          <td><input type="text" id="no_rm" name="no_rm" maxlength="50"></td>
+          <td><input type="text" id="no_rm" name="no_rm" maxlength="50" onkeypress="return Angkasaja(event)"/></td>
         </tr>
         <tr>
           <td>Unit terkait</td>
           <td> : </td>
           <td colspan="2">
             <span class="inputan">
-              <select id="unit" name="unit" style="width:auto">
+              <select id="unit_kerja" name="unit_kerja" style="width:auto">
                 <option value="">---------------- P I L I H ----------------</option>
                   <?php
-                    foreach ($arrunit as $Kode=>$Kode) {
+                    foreach ($arrunit as $Unit=>$Kode) {
                       echo "<option value='$Kode'>$Kode</option>";
                     }
                     ?>
@@ -323,7 +392,7 @@ $tambah = $kode + 1;
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2"><input type="radio" name="radiocedera" onclick="enable22('cedera_lain')" id="tidakada" value="tidakada">Tidak Ada Cedera</td>
+          <td colspan="2"><input type="radio" name="radiocedera" onclick="enable22('cedera_lain')" id="tidak ada" value="tidak ada">Tidak Ada Cedera</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -335,16 +404,9 @@ $tambah = $kode + 1;
           <td>Indikator terkait</td>
           <td> : </td>
           <td colspan="2">
-            <span class="inputan">
-              <select id="indikator" name="indikator" style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                <?php
-                  foreach ($arrind as $Kode=>$Kode) {
-                    echo "<option value='$Kode'>$Kode</option>";
-                  }
-                ?>
-              </select>
-            </span>
+            <select id="indikator" name="indikator" onChange="();">
+          <option value="">---------------- P I L I H ----------------</option>
+          </select>
           </td>
         </tr>
         <tr>
@@ -458,6 +520,12 @@ $tambah = $kode + 1;
           <td> : </td>
           <td><input type="text" id="hg" maxlength="50" disabled="disabled" style="text-align:center;font-weight:bolder;font-size:14px;color:black"></td>
         </tr>
+        <tr hidden="hidden">
+          <td>Created By</td>
+          <td> : </td>
+          <td><input type="text" id="username" name="user"
+            value="<?php echo $username; ?>" maxlength="50" style="text-align:center;font-weight:bolder;font-size:14px;color:black"></td>
+        </tr>
         <tr>
           <td height="43">&nbsp;</td>
           <td>&nbsp;</td>
@@ -465,10 +533,10 @@ $tambah = $kode + 1;
             <td><button type="submit" name="Submit">Simpan</button>&nbsp;&nbsp;&nbsp;
             <button type="reset" name="Reset">Reset</button></td>
 
-            </tr>
-            </table>
-            </form>
- </div>
+        </tr>
+      </table>
+</form>
+<!-- </div> -->
           <p>
             <?php include "T_Kejadian_A_Search.php"; ?>
           </p>
@@ -483,7 +551,6 @@ $tambah = $kode + 1;
   <!-- /main-inner -->
 </div>
 <!-- /main -->
-</div>
 <div class="extra">
   <div class="extra-inner">
     <div class="container">
@@ -505,14 +572,12 @@ $tambah = $kode + 1;
         <div class="span12"> &copy; 2013 <a href="#">Bootstrap Responsive Admin Template</a>. </div>
         <!-- /span12 -->
       </div>
-
       <!-- /row -->
     </div>
     <!-- /container -->
   </div>
   <!-- /footer-inner -->
 </div>
-
 <!-- /footer -->
 <!-- Le javascript
 
@@ -520,12 +585,15 @@ $tambah = $kode + 1;
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
 
+
+
 function enable1(id){
   var elemen = document.getElementById(id);
 
     elemen.disabled = false;
 
 }
+
 function enable11(id){
   var elemen = document.getElementById(id);
 

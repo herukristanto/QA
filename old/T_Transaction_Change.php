@@ -190,7 +190,7 @@ document.form2.image();
           		if(isset($app['App_Date']))
           			{echo $app['App_Date']->format('d/m/Y');}
           		else
-          			{echo date('d/m/Y');} ?>" maxlength="10" style="text-align:center;font-weight:bold;font-size:15px"/></td>
+          			{echo date('d/m/Y');} ?>" maxlength="10" disabled="disabled" style="text-align:center;font-weight:bold;font-size:15px"/></td>
             </tr>
 			
             <tr>

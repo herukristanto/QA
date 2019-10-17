@@ -23,7 +23,7 @@ include "koneksi.php";
 		while ($row = sqlsrv_fetch_array($sql)) {
 			$arrind [ $row['Kode'] ] = $row['Kode'];
 		}
-	}
+	}	
 
 {
 	#ambil data semua
@@ -33,8 +33,8 @@ include "koneksi.php";
 		while ($row = sqlsrv_fetch_array($sql)) {
 			$arrunit [ $row['Kode'] ] = $row['Kode'];
 		}
-	}
-
+	}				
+	
 {
 	#ambil data semua
 		$query = "SELECT * FROM M_Group";
@@ -43,7 +43,7 @@ include "koneksi.php";
 		while ($row = sqlsrv_fetch_array($sql)) {
 			$arrgroup [ $row['Kode'] ] = $row['Kode'];
 		}
-	}
+	}					
 ?>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -57,7 +57,7 @@ td.mid{
   padding-left: 0px;
   text-align: center;
 }
-.style1 {
+.style1 {	
 	font-size: 17px;
 	font-weight: bold;
 }
@@ -71,7 +71,7 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-
+					
 					<br>
 					<span class="style1">Display Indikator </span><br>
 					<table>
@@ -140,12 +140,24 @@ td.mid{
 			            <tr>
 			              <td>Numerator</td>
 			              <td> : </td>
-			              <td><input name="numerator" type="text" id="numerator" disabled="disabled"></td>
+			              <td colspan="2"><input type="radio" name="statnum" id="Ya" checked disabled="disabled">Ya</td>
+			            </tr>
+			            <tr>
+			              <td height="24">&nbsp;</td>
+			              <td>&nbsp;</td>
+			              <td colspan="2"><input type="radio" name="statnum" id="Tidak" disabled="disabled">
+			              Tidak</td>
 			            </tr>
 			            <tr>
 			              <td>Denominator</td>
 			              <td>:</td>
-			              <td><input name="denominator" type="text" id="denominator" disabled="disabled"></td>
+			              <td colspan="2"><input type="radio" name="statden" id="Ya" checked disabled="disabled">Ya</td>
+			            </tr>
+			            <tr>
+			              <td height="24">&nbsp;</td>
+			              <td>&nbsp;</td>
+			              <td colspan="2"><input type="radio" name="statden" id="Tidak" disabled="disabled">
+			              Tidak</td>
 			            </tr>
 						<tr>
 						  <td>Departemen</td>
@@ -164,8 +176,7 @@ td.mid{
 										}
 										?>
 									</select>
-						  </span>
-						</td>
+						  </span></td>
 					  </tr>
 						<tr>
 						  <td>Unit</td>
@@ -246,7 +257,7 @@ td.mid{
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
-
+	
 	function change1() {
 			var depart = document.getElementById('departemen').value;
 			$("#ini").empty();
@@ -262,7 +273,7 @@ td.mid{
 				document.getElementById('unitkerja').value = unit;
 				document.getElementById('unit').value="";
 				//disable
-				document.getElementById('unitkerja').disabled = true;
+				document.getElementById('unitkerja').disabled = true;  
 				change3();
 			}
 		}
@@ -275,7 +286,7 @@ td.mid{
 				$("#itu").load('cariunitkerja_indi_2.php?namaunit=' + namaunit);
 			}
 		}
-
+		
 		function change4() {
 			var group = document.getElementById('group').value;
 			if (group!=null) {
@@ -285,7 +296,7 @@ td.mid{
 				document.getElementById('namagroup').disabled = true;
 			}
 		}
-
+	
 	//function saveindikator(){
 //    var kode;
 //    var aspek;
@@ -293,7 +304,7 @@ td.mid{
 //    var departemen;
 //	var unit_kerja;
 //	var group_unit;
-//
+//	
 //    kode 		= document.getElementById('kode').value;
 //    aspek 		= document.getElementById('aspek').value;
 //	standar 	= document.getElementById('standar').value;
@@ -338,6 +349,6 @@ td.mid{
 <script src="js/Script.js"></script>
 <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
 
-<script src="js/base.js"></script>
+<script src="js/base.js"></script>		
 </body>
 </html>

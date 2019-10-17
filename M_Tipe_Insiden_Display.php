@@ -63,11 +63,11 @@ td.mid{
 			              <td>Kode Insiden</td>
 			              <td>:</td>
 			              <td colspan="2"><span class="inputan">
-			            <select id="kd_insiden" name="kd_insiden" style="text-align:center;font-weight:bold;font-size:15px" disabled="disabled" />
+			            <select id="kd_insiden" name="kd_insiden" style="text-align:center;font-weight:bold;width: auto;" disabled="disabled" />
 			              <option value=""></option>
 			              <?php
-			      foreach ($arrind as $Kode=>$Kode) {
-			        echo "<option value='$Kode'>$Kode</option>";
+			      foreach ($arrind as $Kode=>$Insiden) {
+			        echo "<option value='$Kode'>$Kode - $Insiden</option>";
 			      }
 			      ?>
 			            </select>

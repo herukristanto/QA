@@ -6,11 +6,14 @@ $sub_tipe_insiden	= $_GET['Sub_tipe_insiden'];
 $status_sub		 	= $_GET['Status_sub'];
 $simpan 			= $_GET['simpan'];
 
+$tipe 				= substr($kd_tipe,0,10);
+$insiden 			= substr($kd_insiden,0,10)
+
 include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
 if ($simpan == "ubah"){
-	$sql = "update M_Sub_Tipe_Insiden set Kode_tipe = '".$kd_tipe."', Kode = '".$kd_insiden."', Sub_tipe = '".$sub_tipe_insiden."' , Mark = '".$status_sub."' where Kode_sub = '".$kd_sub."'";
+	$sql = "update M_Sub_Tipe_Insiden set Kode_tipe = '".$tipe."', Kode = '".$insiden."', Sub_tipe = '".$sub_tipe_insiden."' , Mark = '".$status_sub."' where Kode_sub = '".$kd_sub."'";
 	$sql_execute = sqlsrv_query($conn,$sql);
 
 	$sql = "select * from M_Sub_Tipe_Insiden where Kode_sub = '".$kd_sub."'";
@@ -29,7 +32,7 @@ if ($simpan == "ubah"){
 	$hitungbaris = sqlsrv_num_rows($sql_execute);
 
 	if ($hitungbaris == 0) {
-		$sql = "insert into M_Sub_Tipe_Insiden values('".$kd_sub."','".$kd_tipe."','".$kd_insiden."','".$sub_tipe_insiden."','".$status_sub."')";
+		$sql = "insert into M_Sub_Tipe_Insiden values('".$kd_sub."','".$tipe."','".$insiden."','".$sub_tipe_insiden."','".$status_sub."')";
 		$sql_execute = sqlsrv_query($conn,$sql);
 
 		$sql = "select * from M_Sub_Tipe_Insiden where Kode_sub = '".$kd_sub."'";

@@ -3,33 +3,42 @@
 
 error_reporting(0);
 include "koneksi.php";
-if (isset($_POST['filter'])) {
 
-  $bulan    = $_POST['bulan'];
-  $tahun    = $_POST['tahun'];
+
+if (isset($_GET['filter'])) {
+
+  $bulan    = $_GET['bulan'];
+  $tahun    = $_GET['tahun'];
 
  // echo "$bulan";
  // echo "$tahun";
 
-   if (isset($bulan) AND isset($tahun)) {
-    $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun ORDER BY Indikator ASC";
-   }
+  if (isset($bulan) AND isset($tahun)) {
+    $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun ORDER BY Indikator, Tgl ASC";
+  }
+  // elseif (isset($bulan)) {
+  //   $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan ORDER BY Indikator ASC";
+  // }elseif (isset($tahun)) {
+  //   $query = "SELECT * FROM T_Kejadian WHERE year(Tgl)= $tahun ORDER BY Indikator ASC";
+  // }else {
+  //   $query = "SELECT * FROM T_Kejadian ORDER BY Indikator ASC";
+  // }
 
    $data    = sqlsrv_query($conn, $query);
    $no=1;
 
    echo "
 
-      <table class='table table-striped table-bordered table-hover'>
+      <table id=\"TableDetail\" class='table table-striped table-bordered table-hover'>
         <thead>
         <tr>
        <th>No</th>
-          <th>Tanggal</th>
-          <th>Jam</th>
          <th>Indikator</th>
+         <th>Tanggal</th>
          <th>Jumlah</th>
          <th>Numerator</th>
          <th>Denominator</th>
+         <th>Hasil</th>
          <th>Analisa</th>
          <th>Tindak Lanjut</th>
        </tr>
@@ -42,6 +51,8 @@ if (isset($_POST['filter'])) {
           $jmlh = $row['Jml'];
           $numtor = $row['Numerator'];
           $dentor = $row['Denominator'];
+          $bagi = $numtor / $dentor;
+          $hasil = round($bagi, 2);
           $analis = $row['Analisa'];
           $tndklanjt = $row['Tindak_Lanjut'];
           $tgl = $row['Tgl']->format('d/m/Y');
@@ -50,12 +61,12 @@ if (isset($_POST['filter'])) {
              echo "
              <tr>
                <td>".$no++."</td>
+               <td>$kodeindi</td>
                <td class='center' >$tgl</td>
-               <td class='center' style='text-align: center;'>$jam</td>
-               <td class='center' style='text-align: center;'>$kodeindi</td>
                <td class='center' style='text-align: center;'>$jmlh</td>
                <td class='center' style='text-align: center;'>$numtor</td>
-               <td class='center'>$dentor</td>
+               <td class='center' style='text-align: center;'>$dentor</td>
+               <td class='center' style='text-align: center;'>$hasil</td>
                <td class='center'>$analis</td>
                <td class='center'>$tndklanjt</td>
 
@@ -68,7 +79,6 @@ if (isset($_POST['filter'])) {
     ?>
 
    <script>
-
    </script>
 
    <script src="js/jquery-1.7.2.min.js"></script>

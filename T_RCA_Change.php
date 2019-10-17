@@ -167,9 +167,12 @@ td.mid{
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="berkas_RM" id="berkas_RM" >
               Berkas RM + Hasil pemeriksaan</td>
             </tr>
-            <tr>
+             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="kebijakan_prosedur" id="kebijakan_prosedur" >
-              Kebijakan dan prosedur yang berhubungan (sebutkan nomor dan judul) :</td>
+              Kebijakan dan prosedur yang berhubungan (sebutkan nomor dan judul) : </td>
+              <td colspan="2" rowspan="2"><input type="text" id="kebijakan_text" name="kebijakan_text" maxlength="50"></td>
+            </tr>
+            <tr>
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="daftarstaf" id="daftarstaf" >
@@ -177,11 +180,15 @@ td.mid{
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="buktifisik" id="buktifisik" >
-              Bukti Fisik</td>
+              Bukti Fisik, berupa : </td>
+              <td colspan="2" rowspan="2"><input type="text" id="bukti_text" name="bukti_text" maxlength="50"></td>
+            </tr>
+            <tr>
             </tr>
             <tr>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="informasi_lain" id="informasi_lain" >
-              Informasi lain yang mempengaruhi insiden</td>
+              Informasi lain yang mempengaruhi insiden, berupa : </td>
+              <td colspan="2" rowspan="2"><input type="text" id="informasi_text" name="informasi_text" maxlength="50"></td>
             </tr>
             <tr>
               <td height="42">&nbsp;</td>
@@ -365,9 +372,12 @@ function update_rca(){
   var laporan_kejadian;
   var berkas_RM;
   var kebijakan_prosedur;
+  var kebijakan_text;
   var daftarstaf;
   var buktifisik;
+  var bukti_text;
   var informasi_lain;
+  var informasi_text;
   var TglWaw;
   var jam_waw;
   var hasil_waw;
@@ -386,6 +396,9 @@ function update_rca(){
   TglObs              = document.getElementById('TglObs').value;
   jam_obs             = document.getElementById('jam_obs').value;
   hasil_obs           = document.getElementById('hasil_obs').value;
+  kebijakan_text      = document.getElementById('kebijakan_text').value;
+  bukti_text          = document.getElementById('bukti_text').value;
+  informasi_text      = document.getElementById('informasi_text').value;
   //checkbox
   laporan_kejadian    = document.getElementById('laporan_kejadian').checked;
   berkas_RM           = document.getElementById('berkas_RM').checked;
@@ -463,7 +476,10 @@ function update_rca(){
       "&te18=" + TglAna1 +
       "&te19=" + TglAna2 +
       "&te20=" + masalah_utama +
-      "&te21=" + saran_rekomendasi;
+      "&te21=" + saran_rekomendasi +
+      "&te22=" + kebijakan_text +
+      "&te23=" + bukti_text +
+      "&te24=" + informasi_text;
     } else {
       alert("Kolom 'No. Laporan' tidak boleh kosong");
     }

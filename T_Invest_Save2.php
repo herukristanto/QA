@@ -2,10 +2,10 @@
 include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
-		$no_lap              = $_GET['a1'];
+	$no_lap              = $_GET['a1'];
 
     $no_rca              = $_GET['te1'];
-    $kronologis			 		 = $_GET['te2'];
+    $kronologis			 = $_GET['te2'];
     $TglObs              = $_GET['te3'];
     $jam_obs             = $_GET['te4'];
     $hasil_obs           = $_GET['te5'];
@@ -25,6 +25,9 @@ date_default_timezone_set("Asia/Bangkok");
     $TglAna2             = $_GET['te19'];
     $masalah_utama       = $_GET['te20'];
     $saran_rekomendasi   = $_GET['te21'];
+    $kebijakan_text		 = $_GET['te22'];
+    $bukti_text			 = $_GET['te23'];
+    $informasi_text		 = $_GET['te24'];
 
 
 	#get date time current
@@ -62,12 +65,19 @@ date_default_timezone_set("Asia/Bangkok");
 																								'".$masalah_utama."',
 																								'".$saran_rekomendasi."',
 																								'".$tgl."',
-																								'".$jam."'
+																								'".$jam."',
+																								'".$kebijakan_text."',
+																								'".$bukti_text."',
+																								'".$informasi_text."'
 																							)";
 
 
 
 				$result1 = sqlsrv_query($conn,$tsql2);
+
+				$update_no_lap = "UPDATE T_Kejadian_a SET flag='X' WHERE no_lap = '".$no_lap."'";
+
+				$result = sqlsrv_query( $conn, $update_no_lap);
 
 
 
@@ -76,7 +86,7 @@ date_default_timezone_set("Asia/Bangkok");
 						echo
 						"
 						<script>
-						alert('Data Dengan No. Laporan : ".$no_invest."  Berhasil Ditambah');
+						alert('Data Dengan No. Laporan : ".$no_lap."  Berhasil Ditambah');
 						window.location.href='T_Invest_Create.php';
 						</script>";
 				}else {

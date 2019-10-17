@@ -3,9 +3,9 @@ include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 if ($no_lap = $_GET['a1']) {
 
-		$no_lap              = $_GET['a1'];
+	$no_lap              = $_GET['a1'];
     $no_rca              = $_GET['te1'];
-    $kronologis			 		 = $_GET['te2'];
+    $kronologis			 = $_GET['te2'];
     $TglObs              = $_GET['te3'];
     $jam_obs             = $_GET['te4'];
     $hasil_obs           = $_GET['te5'];
@@ -25,10 +25,11 @@ if ($no_lap = $_GET['a1']) {
     $TglAna2             = $_GET['te19'];
     $masalah_utama       = $_GET['te20'];
     $saran_rekomendasi   = $_GET['te21'];
-
+    $kebijakan_text		 = $_GET['te22'];
+    $bukti_text			 = $_GET['te23'];
+    $informasi_text		 = $_GET['te24'];
 
 	#get date time current
-
 	$tgl 			= date("Y-m-d");
 	$jam			= date("H:i:s");
 
@@ -40,28 +41,31 @@ if ($no_lap = $_GET['a1']) {
 
 	$sql = "UPDATE T_RCA SET No_lap='".$no_lap."',
 															Kronologis='".$kronologis."',
-															Obs_tanggal		=	'".$tgl_obs."',
-															Obs_jam				=	'".$jam_obs."',
-															Obs_hasil			=	'".$hasil_obs."',
-															Obs_lap				=	'".$laporan_kejadian."',
-															Doc_berkas		=	'".$berkas_RM."',
-															Doc_kebijakan	=	'".$kebijakan_prosedur."',
-															Doc_staf			=	'".$daftarstaf."',
-															Doc_fisik			=	'".$buktifisik."',
-															Doc_infor			=	'".$informasi_lain."',
-															Wwcr_tgl			=	'".$tgl_waw."',
-															Wwcr_jam			=	'".$jam_waw."',
-															Wwcr_hasil		=	'".$hasil_waw."',
-															keterangan		=	'".$peta_informasi."',
-															Iden_mslh			=	'".$masalah."',
-															Analisis			=	'".$analisis."',
-															Tgl_start			=	'".$tgl_ana1."',
-															Tgl_end				=	'".$tgl_ana2."',
-															Masalah				=	'".$masalah_utama."',
-															Saran					=	'".$saran_rekomendasi."',
-															Tanggal_input	=	'".$tgl."',
-															Jam_input			=	'".$jam."'
-															WHERE No_RCA = '".$no_rca."'";
+															Obs_tanggal			= '".$tgl_obs."',
+															Obs_jam				= '".$jam_obs."',
+															Obs_hasil			= '".$hasil_obs."',
+															Obs_lap				= '".$laporan_kejadian."',
+															Doc_berkas			= '".$berkas_RM."',
+															Doc_kebijakan		= '".$kebijakan_prosedur."',
+															Doc_staf			= '".$daftarstaf."',
+															Doc_fisik			= '".$buktifisik."',
+															Doc_infor			= '".$informasi_lain."',
+															Wwcr_tgl			= '".$tgl_waw."',
+															Wwcr_jam			= '".$jam_waw."',
+															Wwcr_hasil			= '".$hasil_waw."',
+															keterangan			= '".$peta_informasi."',
+															Iden_mslh			= '".$masalah."',
+															Analisis			= '".$analisis."',
+															Tgl_start			= '".$tgl_ana1."',
+															Tgl_end				= '".$tgl_ana2."',
+															Masalah				= '".$masalah_utama."',
+															Saran				= '".$saran_rekomendasi."',
+															Tanggal_input		= '".$tgl."',
+															Jam_input			= '".$jam."',
+															kebijakan_info 		= '".$kebijakan_text."',
+															bukti_info 			= '".$bukti_text."',
+															infolain_info 		= '".$informasi_text."'
+															WHERE No_RCA 		= '".$no_rca."'";
 
 
 															$result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
