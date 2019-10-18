@@ -200,6 +200,7 @@ function ExportToExcel(testTable){
   function click1(){
   var bulan   = $('#bulan').val();
 	var tahun = $('#tahun').val();
+  var unit   = $('#kode_u').val();
   var filter = $('#filter').val();
 
 	$.ajax({

@@ -9,12 +9,13 @@ if (isset($_GET['filter'])) {
 
   $bulan    = $_GET['bulan'];
   $tahun    = $_GET['tahun'];
+  $unit    = $_GET['unit'];
 
  // echo "$bulan";
  // echo "$tahun";
 
   if (isset($bulan) AND isset($tahun)) {
-    $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun ORDER BY Indikator, Tgl ASC";
+    $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun AND kode_u = $unit ORDER BY Indikator, Tgl ASC";
   }
   // elseif (isset($bulan)) {
   //   $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan ORDER BY Indikator ASC";
