@@ -198,11 +198,11 @@ function ExportToExcel(testTable){
 
 <script>
   function click1(){
-  var bulan   = $('#bulan').val();
-	var tahun = $('#tahun').val();
-  var unit   = $('#kode_u').val();
-  var filter = $('#filter').val();
-
+  var bulan     = $('#bulan').val();
+	var tahun     = $('#tahun').val();
+  var unit      = $('#kode_u').val();
+  var filter    = $('#filter').val();
+  
 	$.ajax({
 		//Alamat url harap disesuaikan dengan lokasi script pada komputer anda
 		url	     : 'R_Data_Show.php',

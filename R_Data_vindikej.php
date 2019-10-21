@@ -3,79 +3,144 @@
 error_reporting(0);
 include "koneksi.php";
  $unit    = $_POST['kode_u'];
- $bulan    = $_POST['bulan'];
- $tahun    = $_POST['tahun'];
+ $tahun   = $_POST['tahun'];
+
+
+
 
 
  if(!empty($unit)){
-   // if(!empty($bulan)){
-   //   if(!empty($tahun)){
-   $query   = "SELECT DISTINCT kode_indikator, Kategori, Numerator, Denominator FROM V_Indikator_Kejadian WHERE kode_u= '$unit' ORDER BY kode_indikator ASC"; //OR month(tgl_input)='$bulan' OR year(tgl_input)='$tahun'
-   $data    = sqlsrv_query($conn, $query);
-   $no=1;
 
-     echo "
-     <table class='table table-striped table-bordered table-hover'>
-       <thead>
-       <tr>
-       <th>No</th>
-       <th>Indikator</th>
-       <th>Jumlah</th>
-       <th style='text-align: center;'>Numerator</th>
-       <th style='text-align: center;'>Denominator</th>
-       <th>Analisa</th>
-       <th>Tindak Lanjut</th>
-       <th style='text-align: center;'>Action</th>
-       </tr>
-       </thead>
 
-       <tbody>";
+$query = "SELECT * FROM M_Indikator WHERE Unit = '".$unit."' ORDER BY Kode ASC";
+  $sql = sqlsrv_query($conn,$query);
+if  ($sql){
+echo "
+    <table id=\"TableDetail\" class='table table-striped table-bordered table-hover'>
+    <p></p>
+    </caption>
+      <tr>
+      <thead>
+    <th>No</th>
+    <th>Indikator</th>
+    <th hidden >JAN</th>
+    <th hidden >FEB</th>
+    <th hidden >MAR</th>
+    <th hidden >APR</th>
+    <th hidden >MAY</th>
+    <th hidden >JUN</th>
+    <th hidden >JUL</th>
+    <th hidden >AUG</th>
+    <th hidden >SEP</th>
+    <th hidden >OCT</th>
+    <th hidden >NOV</th>
+    <th hidden >DEC</th>
+    <th style='text-align: center;'><b>Jumlah</b></th>
+    <th style='text-align: center;'><b>Numerator</b></th>
+    <th style='text-align: center;'><b>Denominator</b></th>
+    <th><b>Analisa</b></th>
+    <th><b>Tindak Lanjut</b></th>
+    <th style='text-align: center;'><b>Action</b></th>
+    </thead>
+    <tbody>
+</tr>";
+$no=1;
+    $arrKode = array();
+    $arrDesk = array();
+    $arrnume = array();
+    $hsl = array();
+    $total = array("0","0","0","0","0","0","0","0","0","0","0","0","0","0");
+    while($rs = sqlsrv_fetch_array($sql)){
+      $arrDesk[$no] = $rs['Kategori'];
+      $arrKode[$no] = $rs['Kode'];
+      $arrnume[$no] = $rs['Numerator'];
+      $arrdenom[$no] = $rs['Denominator'];
 
-       while($row     = sqlsrv_fetch_array($data)){
-         $kodeindi    = $row['kode_indikator'];
-         $kategori    = $row['Kategori'];
-         $numerator   = $row['Numerator'];
-         $denominator = $row['Denominator'];
-         $query1      = "SELECT COUNT(kode_indikator) as jml FROM V_Indikator_Kejadian WHERE kode_indikator= '$kodeindi'";
-         $data1       = sqlsrv_query($conn, $query1);
+      $no++;
+    }
+      $arrlength = count( $arrKode );
+      for($x=1;$x<=$arrlength;$x++)
+       {  $sttl = 0;
+        for($bln=1;$bln<=12;$bln++)
+        {
 
-         while($row1  = sqlsrv_fetch_array($data1)){
-           $jumlh = $row1['jml'];
-           $total 	= $total + $jumlh;
+        $kate = $arrDesk[$x];
+        $que = "SELECT count (*) as jml FROM V_Indikator_Kejadian WHERE kode_u = '".$unit."' AND Kategori = '".$kate."' AND MONTH(tgl_input) = '".$bln."' AND YEAR(tgl_input) = '".$tahun."'";
 
-            echo "
-            <tr>
-              <td>".$no++."</td>
-              <td class='center' >".$kodeindi." - ".$kategori."</td>
-              <td class='center' style='text-align: center;'>$jumlh</td>
-              <td class='center' style='text-align: center;'>$numerator</td>
-              <td class='center' style='text-align: center;'>$denominator</td>
-              <td class='center'></td>
-              <td class='center'></td>
-              <td class='center' id='myBtn' style='text-align: center;'>
+        $sql1 = sqlsrv_query($conn,$que);
 
-                <button type='button' class='btn btn-success' data-toggle='modal'
-                 onClick='datapost(\"$kodeindi - $kategori\", \"$jumlh\", \"$numerator\", \"$denominator\")' data-target='#myModal'>Add</button>
-              </td>
-            </tr>
-            </tbody>
-            </tabel>";
-          }
+        while($rs1 = sqlsrv_fetch_array($sql1)){
+          $hsl[$bln] = $rs1["jml"];
+          $sttl = $sttl + $hsl[$bln];
+          $total[$bln] = $total[$bln] + $hsl[$bln];
+
         }
-      }
 
-      echo "
+
+        }
+        $total[13] = $total[13] + $sttl ;
+        $indikator = $arrKode[$x]. ' - '.$arrDesk[$x];
+        $numerator = $arrnume[$x];
+        $denominator = $arrdenom[$x];
+       echo "
         <tr>
-          <td class='center'></td>
-          <td class='center' style=font-weight:bold;;font-size:14px;>Total</td>
-          <td class='center' style='font-weight:bold;;text-align:center;;font-size:14px;'>$total</td>
-          <td class='center'></td>
-          <td class='center'></td>
-          <td class='center'></td>
-          <td class='center'></td>
-          <td class='center'></td>
+        <td align=\"center\">$x</td>
+        <td align=\"left\">$indikator</td>
+        <td hidden align=\"center\">$hsl[1]</td>
+        <td hidden align=\"center\">$hsl[2]</td>
+        <td hidden align=\"center\">$hsl[3]</td>
+        <td hidden align=\"center\">$hsl[4]</td>
+        <td hidden align=\"center\">$hsl[5]</td>
+        <td hidden align=\"center\">$hsl[6]</td>
+        <td hidden align=\"center\">$hsl[7]</td>
+        <td hidden align=\"center\">$hsl[8]</td>
+        <td hidden align=\"center\">$hsl[9]</td>
+        <td hidden align=\"center\">$hsl[10]</td>
+        <td hidden align=\"center\">$hsl[11]</td>
+        <td hidden align=\"center\">$hsl[12]</td>
+        <td style='text-align: center;'><b>$sttl</b></td>
+        <td style='text-align: center;'><b>$numerator</b></td>
+        <td style='text-align: center;'><b>$denominator</b></td>
+        <td class='center'></td>
+        <td class='center'></td>
+        <td style='text-align: center;'>
+          <button type='button' class='btn btn-success' data-toggle='modal'
+           onClick='datapost(\"$indikator\", \"$sttl\", \"$numerator\", \"$denominator\")' data-target='#myModal'>Add</button>
+        </td>
+
         </tr>";
 
+
+       }
+       echo "
+    <tr>
+    <td class='center'></td>
+      <td>Total</td>
+      <td hidden align=\"center\"><b>$total[1]</b></td>
+      <td hidden align=\"center\"><b>$total[2]</b></td>
+      <td hidden align=\"center\"><b>$total[3]</b></td>
+      <td hidden align=\"center\"><b>$total[4]</b></td>
+      <td hidden align=\"center\"><b>$total[5]</b></td>
+      <td hidden align=\"center\"><b>$total[6]</b></td>
+      <td hidden align=\"center\"><b>$total[7]</b></td>
+      <td hidden align=\"center\"><b>$total[8]</b></td>
+      <td hidden align=\"center\"><b>$total[9]</b></td>
+      <td hidden align=\"center\"><b>$total[10]</b></td>
+      <td hidden align=\"center\"><b>$total[11]</b></td>
+      <td hidden align=\"center\"><b>$total[12]</b></td>
+      <td class='center' style='text-align: center;'><b>$total[13]</b></td>
+      <td class='center'></td>
+      <td class='center'></td>
+      <td class='center'></td>
+      <td class='center'></td>
+      <td class='center'></td>
+    </tr>
+    </tbody>";
+      echo"</table>";
+
+
+  }
+}
    ?>
 
   <!-- Modal -->

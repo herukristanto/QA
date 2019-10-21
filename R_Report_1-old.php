@@ -26,11 +26,11 @@
 
     {
       #ambil data semua indikator
-        $query = "SELECT * FROM V_Indikator_Kejadian WHERE status = 'X' ";
+        $query = "SELECT * FROM M_Indikator WHERE status = 'X' ";
         $sql  = sqlsrv_query($conn, $query);
         $arrind = array();
         while ($row = sqlsrv_fetch_array($sql)) {
-          $arrind [ $row['kode_u'] ] = $row['kode_u'];
+          $arrind [ $row['Unit'] ] = $row['Unit'];
 
         }
 
@@ -53,7 +53,7 @@
                 <td> : </td>
                 <td>
                   <span class="inputan">
-                    <select id="kode_u" name="kode_u"  style="width:auto">
+                    <select id="unit" name="unit"  style="width:auto">
                       <option value="">---------------- P I L I H ----------------</option>
                       <?php
                         foreach ($arrind as $Kode=>$Kode) {
@@ -63,22 +63,6 @@
                     </select>
                   </span>
                 </td>
-              </tr>
-              <tr>
-                <td>Tahun</td>
-                <td> : </td>
-                <td>
-                <select name="tahun" id="tahun" style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                <?php
-                $query = "SELECT YEAR(tgl_input) AS tahun FROM T_Kejadian_a GROUP BY YEAR(tgl_input)"; // Tampilkan tahun sesuai di tabel transaksi
-                $sql = sqlsrv_query($conn, $query); // Eksekusi/Jalankan query dari variabel $query
-                while($data = sqlsrv_fetch_array($sql)){ // Ambil semua data dari hasil eksekusi $sql
-                    echo '<option value="'.$data['tahun'].'">'.$data['tahun'].'</option>';
-                }
-                ?>
-                </select>
-              </td>
               </tr>
 
             </table>
@@ -128,18 +112,18 @@
 
 
 <script>
- $('select[id=tahun]').change(function(){
+ $('select[id=unit]').change(function(){
   R_Data_vindikej();
  });
 
  function R_Data_vindikej(){
-  var a = $('#kode_u').val();
-  // var b = $('#bulan').val();
+  var a = $('#unit').val();
+  var b = $('#bulan').val();
   var c = $('#tahun').val();
   $.ajax({
    type: 'POST',
    url: "R_Data_vindikej.php",
-   data: 'kode_u='+a+'&tahun='+c,
+   data: "unit="+a,
    success: function(info) {
     $("#tabel_range").html(info);   }
   });

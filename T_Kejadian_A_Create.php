@@ -190,6 +190,8 @@ $tambah = $kode + 1;
 
 
           <!-- mulai -->
+          <!-- <form class="" action="T_Kejadian_A_Save.php" method="post"> -->
+
 
           <div class="span12">
 	      		<div class="widget ">
@@ -204,7 +206,7 @@ $tambah = $kode + 1;
 
 							<div class="tab-content">
 								<div class="tab-pane active" id="formcontrols">
-								<form id="edit-profile" class="form-horizontal">
+								<form id="edit-profile" action="T_Kejadian_A_Save.php" method="post" class="form-horizontal">
 									<fieldset>
 
                     <div class="control-group">
@@ -276,7 +278,7 @@ $tambah = $kode + 1;
 										<div class="control-group">
 											<label class="control-label" for="nolap">No. Laporan</label>
 											<div class="controls">
-												<input type="text" class="span2 disabled" name="nolap" id="nolap" value="<?php echo $id; ?>" disabled="" style="text-align:center;font-weight:bold;font-size:14px">
+												<input type="text" class="span2 disabled" name="nolap" id="nolap" value="<?php echo $id; ?>" readonly="true" style="text-align:center;font-weight:bold;font-size:14px">
 											</div> <!-- /controls -->
 										</div> <!-- /control-group -->
 
@@ -360,7 +362,7 @@ $tambah = $kode + 1;
                     <div class="controls">
                       <label class="radio inline">
                         <input type="radio" onclick="enable1('tipe_lain')" name="radiolayanan" id="rawatlain" value="Rawat Lain"> Lainnya
-                        <input type="text" class="span3" id="tipe_lain" disabled="true" name="tipe_lain">
+                        <input type="text" class="span3" name="tipe_lain" id="tipe_lain" value="" disabled="disabled">
                       </label>
                   </div>	<!-- /controls -->
                     </div> <!-- /control-group -->
@@ -397,7 +399,7 @@ $tambah = $kode + 1;
                     <div class="controls">
                       <label class="radio inline">
                         <input type="radio" onclick="enable2('cedera_lain')" name="radiocedera" id="lain" value="lain"> Lainnya
-                        <input type="text" class="span3" id="cedera_lain" name="cedera_lain" disabled="true">
+                        <input type="text" class="span3" id="cedera_lain" name="cedera_lain" value="" disabled="disabled">
                       </label>
                   </div>	<!-- /controls -->
                     </div> <!-- /control-group -->
@@ -549,22 +551,25 @@ $tambah = $kode + 1;
 
 
                     <div hidden="hidden" class="control-group">
-											<label class="control-label" for="lastname">Created By</label>
+											<!-- <label class="control-label" for="lastname">Created By</label> -->
 											<div class="controls">
-												<input <input type="text" id="username" name="user"
-                          value="<?php echo $username; ?>" maxlength="50" style="text-align:center;font-weight:bolder;font-size:14px;color:black">
+												<input type="text" id="username" name="user"
+                          value="<?php echo $username; ?>">
 											</div> <!-- /controls -->
 										</div> <!-- /control-group -->
 
 
                     <div class="form-actions">
-  											<button type="submit" class="btn btn-success">Simpan</button>
+  											<button type="submit" name="submit"  class="btn btn-success">Simpan</button>
   											<button class="btn" type="reset" name="Reset">Reset</button>
   										</div>
 
+
+                    </form>
                   </div>
 
                   </div>
+
 
 								</div>
 
@@ -595,7 +600,7 @@ $tambah = $kode + 1;
   		<div class="container">
 
   			<div class="row">
-        
+
                       <div class="span6">
                           <h4>Rumah Sakit Pantai Indah Kapuk</h4>
                         </div> <!-- /row -->

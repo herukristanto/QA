@@ -4,7 +4,7 @@ include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
 	 // Check If form submitted, insert form data into users table.
-	 if(isset($_POST['Submit'])) {
+	 // if(isset($_POST['Submit'])) {
 		 $nolap					= $_POST['nolap'];
 		 $TglTjd				= $_POST['TglTjd'];
 		 $jam_kejadian	= $_POST['jam_kejadian'];
@@ -25,7 +25,7 @@ date_default_timezone_set("Asia/Bangkok");
 		 $cedera_lain		= $_POST['cedera_lain'];
 		 $created_by		= $_POST['user'];
 
-		 echo $created_by;
+		 // echo $created_by;
 
 		 $kd_indikator			= substr($indikator,0,7);
 
@@ -125,24 +125,24 @@ date_default_timezone_set("Asia/Bangkok");
 
 					$result = sqlsrv_query( $conn, $tsql);
 
-					if ( $result )
-					{
-					    $something = "Submission successful.";
-							echo
-							"
-					 		<script>
-					 		alert('Data Dengan No. Laporan : ".$nolap."  Berhasil Ditambah');
-					 		window.location.href='T_Kejadian_A_Create.php';
-					 		</script>";
-					}
-					else
-					{
-					     $something = "Submission unsuccessful.";
-					     die( print_r( sqlsrv_errors(), true));
-					}
-					$output=$something;
-					/* Free statement and connection resources. */
-					sqlsrv_free_stmt( $result);
-					sqlsrv_close( $conn);
-				}
+					// if ( $result )
+					// {
+					//     $something = "Submission successful.";
+					// 		echo
+					// 		"
+					//  		<script>
+					//  		alert('Data Dengan No. Laporan : ".$nolap."  Berhasil Ditambah');
+					//  		window.location.href='T_Kejadian_A_Create.php';
+					//  		</script>";
+					// }
+					// else
+					// {
+					//      $something = "Submission unsuccessful.";
+					//      die( print_r( sqlsrv_errors(), true));
+					// }
+					// $output=$something;
+					// /* Free statement and connection resources. */
+					// sqlsrv_free_stmt( $result);
+					// sqlsrv_close( $conn);
+
 				?>

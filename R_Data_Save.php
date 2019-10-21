@@ -12,7 +12,9 @@ if ($kodeindi = $_GET['r1']) {
 
 	#get date time current
 
-$date_time 	= date("Y-m-d H:i:s");
+	$date_time 	= date("Y-m-d H:i:s");
+
+	$indikator =   LEFT( $kodeindi , 7);
 
 	$sql = "INSERT INTO T_Kejadian VALUES('".$analisa."',
 																								'".$tdklanjut."',
@@ -28,7 +30,7 @@ $date_time 	= date("Y-m-d H:i:s");
 				$result1 = sqlsrv_query($conn,$sql);
 
 				if($result1){
-					
+
 					$something = "Submission successful.";
 					header("location:R_Report_indikator.php?success");
 				}else{
