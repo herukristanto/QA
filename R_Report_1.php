@@ -26,11 +26,11 @@
 
     {
       #ambil data semua indikator
-        $query = "SELECT * FROM V_Indikator_Kejadian WHERE status = 'X' ";
+        $query = "SELECT * FROM M_Indikator WHERE status = 'X' ";
         $sql  = sqlsrv_query($conn, $query);
         $arrind = array();
         while ($row = sqlsrv_fetch_array($sql)) {
-          $arrind [ $row['kode_u'] ] = $row['kode_u'];
+          $arrind [ $row['Unit'] ] = $row['Unit'];
 
         }
 
@@ -71,7 +71,7 @@
                 <select name="tahun" id="tahun" style="width:auto">
                 <option value="">---------------- P I L I H ----------------</option>
                 <?php
-                $query = "SELECT YEAR(tgl_input) AS tahun FROM T_Kejadian_a GROUP BY YEAR(tgl_input)"; // Tampilkan tahun sesuai di tabel transaksi
+                $query = "SELECT YEAR(create_at) AS tahun FROM M_Indikator GROUP BY YEAR(create_at)"; // Tampilkan tahun sesuai di tabel transaksi
                 $sql = sqlsrv_query($conn, $query); // Eksekusi/Jalankan query dari variabel $query
                 while($data = sqlsrv_fetch_array($sql)){ // Ambil semua data dari hasil eksekusi $sql
                     echo '<option value="'.$data['tahun'].'">'.$data['tahun'].'</option>';

@@ -12,7 +12,7 @@ include "koneksi.php";
  if(!empty($unit)){
 
 
-$query = "SELECT * FROM M_Indikator WHERE Unit = '".$unit."' ORDER BY Kode ASC";
+$query = "SELECT * FROM M_Indikator WHERE Unit = '".$unit."' AND YEAR(create_at) = '".$tahun."' AND Status = 'X' ORDER BY Kode ASC";
   $sql = sqlsrv_query($conn,$query);
 if  ($sql){
 echo "
@@ -155,7 +155,7 @@ $no=1;
         </div>
         <div class="modal-body">
           <label for="">Indikaor</label>
-          <input type="text" id="kodeindi"  name="" value="" readonly style="height: 26px;">
+          <input type="text" id="kodeindi"  name="" value="" readonly style="height: 26px; width: 100%;">
           <label for="">Jumlah</label>
           <input type="text" name="" id="jumlah" value="" readonly style="height: 26px;">
           <label for="">Numerator</label>

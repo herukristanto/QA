@@ -69,13 +69,13 @@
 					  <tr>
 			              <td>Laporan Kejadian</td>
 			              <td>:</td>
-			              <td colspan="2"><input type="radio" name="statlap" id="Ya" checked>
+			              <td colspan="2"><input type="radio" name="statlap" id="Ya_lap" checked>
 			              Ya</td>
 			            </tr>
 			            <tr>
 			              <td height="24">&nbsp;</td>
 			              <td>&nbsp;</td>
-			              <td colspan="2"><input type="radio" name="statlap" id="Tidak">
+			              <td colspan="2"><input type="radio" name="statlap" id="Tidak_lap">
 			              Tidak</td>
 			            </tr>
 			            <tr>
@@ -99,25 +99,25 @@
 			            <tr>
 			              <td>Numerator</td>
 			              <td> : </td>
-			              <td colspan="2"><input type="radio" name="statnum" id="Ya" checked>
+			              <td colspan="2"><input type="radio" name="statnum" id="Ya_num" checked>
 			              Ya</td>
 			            </tr>
 			            <tr>
 			              <td height="24">&nbsp;</td>
 			              <td>&nbsp;</td>
-			              <td colspan="2"><input type="radio" name="statnum" id="Tidak">
+			              <td colspan="2"><input type="radio" name="statnum" id="Tidak_num">
 			              Tidak</td>
 			            </tr>
 			            <tr>
 			              <td>Denominator</td>
 			              <td>:</td>
-			              <td colspan="2"><input type="radio" name="statden" id="Ya" checked>
+			              <td colspan="2"><input type="radio" name="statden" id="Ya_den" checked>
 			              Ya</td>
 			            </tr>
 			            <tr>
 			              <td height="24">&nbsp;</td>
 			              <td>&nbsp;</td>
-			              <td colspan="2"><input type="radio" name="statden" id="Tidak">
+			              <td colspan="2"><input type="radio" name="statden" id="Tidak_den">
 			              Tidak</td>
 			            </tr>
 							<tr>
@@ -228,7 +228,7 @@
 				$("#itu").load('cariunitkerja_indi_2.php?namaunit=' + namaunit);
 			}
 		}
-		
+
 		function change4() {
 			var group = document.getElementById('group').value;
 			if (group!=null) {
@@ -236,8 +236,8 @@
 				document.getElementById('group').value="";
 			}
 		}
-		
-		
+
+
 
 	function saveindikator(){
     	var kode;
@@ -249,39 +249,39 @@
     	// var numerator;
     	// var denominator;
 
-	
+
 	    kode		= document.getElementById('kode').value;
 
 	    aspek		= document.getElementById('aspek').value;
 
-		standar		= document.getElementById('standar').value;
+			standar		= document.getElementById('standar').value;
 
 	    tolakukur 	= document.getElementById('tolakukur').value;
 
 	    departemen	= document.getElementById('departemen').value;
 
-		unit_kerja	= document.getElementById('unitkerja').value;
+			unit_kerja	= document.getElementById('unitkerja').value;
 
 	    // numerator 	= document.getElementById('numerator').value;
 
 	    // denominator = document.getElementById('denominator').value;
-		
 
-	    var cekradiobuttonlap = document.getElementById('Ya');
+
+	    var cekradiobuttonlap = document.getElementById('Ya_lap');
 	    if (cekradiobuttonlap.checked){
 	      statlap = "X";
 	    }else{
 	      statlap = "";
 	    }
 
-	    var cekradiobuttonnum = document.getElementById('Ya');
+	    var cekradiobuttonnum = document.getElementById('Ya_num');
 	    if (cekradiobuttonnum.checked){
 	      statnum = "X";
 	    }else{
 	      statnum = "";
 	    }
 
-	    var cekradiobuttonden = document.getElementById('Ya');
+	    var cekradiobuttonden = document.getElementById('Ya_den');
 	    if (cekradiobuttonden.checked){
 	      statden = "X";
 	    }else{
@@ -299,7 +299,7 @@
 	    }else if(document.getElementById('ISKP').checked) {
 	      stat_group = "ISKP";
 	    }
-		
+
 	    var cekradiobutton = document.getElementById('aktif');
 	    if (cekradiobutton.checked){
 	      statindikator = "X";
@@ -310,8 +310,8 @@
 	    var simpan;
 	    simpan = "ubah";
 
-		 
-		
+
+
 	    if (aspek) {
 	      window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&tolakukur=' + tolakukur + '&departemen=' + departemen + '&unit=' + unit_kerja + '&statindikator=' + statindikator + '&statlap=' + statlap + '&stat_group=' + stat_group + '&statnum=' + statnum + '&statden=' + statden + '&simpan=' + simpan;
 	    } else {
@@ -325,7 +325,7 @@
  //    var departemen;
 	// var unit_kerja;
 	// var group_unit;
-	
+
  //    kode		= document.getElementById('kode').value;
 	// //alert(id);
  //    aspek		= document.getElementById('aspek').value;
@@ -338,8 +338,8 @@
 	// //alert(unit_kerja);
 	// group_unit	= document.getElementById('namagroup').value;
 	// //alert(group_unit);
-	
-	
+
+
 
  //    var cekradiobutton = document.getElementById('aktif');
  //    if (cekradiobutton.checked){
@@ -352,7 +352,7 @@
  //    simpan = "ubah";
 
 	// //alert(aspek);
-	
+
  //    if (aspek) {
  //      window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&departemen=' + departemen + '&unit_kerja=' + unit_kerja + '&group_unit=' + group_unit + '&statindikator=' + statindikator + '&simpan=' + simpan;
  //    } else {
@@ -371,7 +371,7 @@
     radiobtn.checked = true;
     radiobtn = document.getElementById("nonaktif");
     radiobtn.checked = false;
-  }	
+  }
 	</script>
 </body>
 </html>

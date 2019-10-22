@@ -21,12 +21,12 @@ $sql = sqlsrv_query($conn, $query);
 $arrdept = array();
 while ($row = sqlsrv_fetch_array($sql)) {
 	$arrdept [ $row['Deskripsi'] ] = $row['Kode'];
-	
-}	
+
+}
 #action get unitkerja
 if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
 	$kode_dept = $_GET['kode_dept'];
-	
+
 #ambil data unitkerja
 	$query = "Select * from V_UnitKerja where kode_dept= '$kode_dept'";
 	$sql = sqlsrv_query($conn, $query);
@@ -37,11 +37,11 @@ if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
 	echo json_encode($arrker);
 	exit;
 }
-	
+
 #action get group
 if(isset($_GET['action']) && $_GET['action'] == "getIndi") {
 	$unitKrj = $_GET['unitKrj'];
-	
+
 #ambil data group
 	//$query = "SELECT * FROM V_Group WHERE KdUnit = '$unitKrj' ORDER BY Deskripsi";
 	// $query = "SELECT * FROM V_GroupIndi WHERE Unit_Kerja = '$unitKrj' AND Status = 'X'";
@@ -68,7 +68,7 @@ $cek = $sql_hasil['id'];
 $kode = substr($cek,1,6);
 
 $tambah = $kode + 1;
-	
+
 	if($tambah<10){
 		$id = "P00000".$tambah;
 		}else{
@@ -80,7 +80,7 @@ $tambah = $kode + 1;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">  
+<meta charset="utf-8">
 <title>Indikator - Create</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -97,7 +97,7 @@ $tambah = $kode + 1;
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<style> 
+<style>
 td{
   padding-left: 3px;
 }
@@ -123,37 +123,37 @@ document.form2.image();
      	$(document).ready(function()
 			{
 				$('#departemen').change(function()
-				{ 
+				{
 					$.getJSON('M_Indikator_Create.php',{action:'getUnker', kode_dept:$(this).val()}, function(json)
-					{ 
+					{
 						$('#unit_kerja').html('');
 						$('#unit_kerja').append('<option value="">---------------- P I L I H ----------------</option>');
-						$.each(json, function(index, row) 
-						{	
+						$.each(json, function(index, row)
+						{
 							//$('#unit_kerja').append('<option value="'+row.kode_unit+'">'+row.kode_unit+'</option>');
 							$('#unit_kerja').append('<option value="'+row.Unit_Kerja+'">'+row.Unit_Kerja+'</option>');
 						});
-						
+
 					});
 				});
 				$('#unit_kerja').change(function()
-				{ 
+				{
 					$.getJSON('M_Indikator_Create.php',{action:'getIndi', unitKrj:$(this).val()}, function(json)
 					{
 						$('#group_unit').html('');
-						
+
 						$('#group_unit').append('<option value="">---------------- P I L I H ----------------</option>');
-						$.each(json, function(index, row) 
+						$.each(json, function(index, row)
 						{
 							// ini bisa $('#group_unit').append('<option value="'+row.UnitGroup+'">'+row.UnitGroup+'</option>');
-							$('#group_unit').append('<option value="'+row.Deskripsi+'">'+row.Deskripsi+'</option>');	
+							$('#group_unit').append('<option value="'+row.Deskripsi+'">'+row.Deskripsi+'</option>');
 						});
-						
-					});	
+
+					});
 				});
 			});
     </script>
-	
+
     <script type="text/javascript" src="libs/jquery.min.js"></script>
 
 </head>
@@ -203,13 +203,13 @@ document.form2.image();
             <tr>
               <td>Laporan Kejadian</td>
               <td>:</td>
-              <td colspan="2"><input type="radio" name="statlap" id="Ya" checked>
+              <td colspan="2"><input type="radio" name="statlap" id="Ya_lap" checked>
               Ya</td>
             </tr>
             <tr>
               <td height="24">&nbsp;</td>
               <td>&nbsp;</td>
-              <td colspan="2"><input type="radio" name="statlap" id="Tidak">
+              <td colspan="2"><input type="radio" name="statlap" id="Tidak_lap">
               Tidak</td>
             </tr>
             <tr>
@@ -233,23 +233,23 @@ document.form2.image();
             <tr>
               <td>Numerator</td>
               <td> : </td>
-              <td colspan="2"><input type="radio" name="statnum" id="Ya" checked>Ya</td>
+              <td colspan="2"><input type="radio" name="statnum" id="Ya_num" checked>Ya</td>
             </tr>
             <tr>
               <td height="24">&nbsp;</td>
               <td>&nbsp;</td>
-              <td colspan="2"><input type="radio" name="statnum" id="Tidak">
+              <td colspan="2"><input type="radio" name="statnum" id="Tidak_num">
               Tidak</td>
             </tr>
             <tr>
               <td>Denominator</td>
               <td>:</td>
-              <td colspan="2"><input type="radio" name="statden" id="Ya" checked>Ya</td>
+              <td colspan="2"><input type="radio" name="statden" id="Ya_den" checked>Ya</td>
             </tr>
             <tr>
               <td height="24">&nbsp;</td>
               <td>&nbsp;</td>
-              <td colspan="2"><input type="radio" name="statden" id="Tidak">
+              <td colspan="2"><input type="radio" name="statden" id="Tidak_den">
               Tidak</td>
             </tr>
             <tr>
@@ -257,7 +257,7 @@ document.form2.image();
               <td>:</td>
               <td colspan="2"><span class="inputan">
             <select id="departemen" name="departemen">
-           
+
 			  <option value="">---------------- P I L I H ----------------</option>
               <?php
 			foreach ($arrdept as $dept=>$kode) {
@@ -293,8 +293,8 @@ document.form2.image();
             <button onClick="clearindikator();">Reset</button></td>
             </tr>
           </table>
-          <p>       
-          </p> 		
+          <p>
+          </p>
         </div>
         <!-- /span12 -->
       </div>
@@ -347,7 +347,7 @@ document.form2.image();
     // var numerator;
     // var denominator;
 
-	
+
     kode		= document.getElementById('kode').value;
 
     aspek		= document.getElementById('aspek').value;
@@ -363,23 +363,23 @@ document.form2.image();
     // numerator = document.getElementById('numerator').value;
 
     // denominator = document.getElementById('denominator').value;
-	
 
-    var cekradiobuttonlap = document.getElementById('Ya');
+
+    var cekradiobuttonlap = document.getElementById('Ya_lap');
     if (cekradiobuttonlap.checked){
       statlap = "X";
     }else{
       statlap = "";
     }
 
-    var cekradiobuttonnum = document.getElementById('Ya');
+    var cekradiobuttonnum = document.getElementById('Ya_num');
     if (cekradiobuttonnum.checked){
       statnum = "X";
     }else{
       statnum = "";
     }
 
-    var cekradiobuttonden = document.getElementById('Ya');
+    var cekradiobuttonden = document.getElementById('Ya_den');
     if (cekradiobuttonden.checked){
       statden = "X";
     }else{
@@ -397,7 +397,7 @@ document.form2.image();
     }else if(document.getElementById('ISKP').checked) {
       stat_group = "ISKP";
     }
-	
+
     var cekradiobutton = document.getElementById('aktif');
     if (cekradiobutton.checked){
       statindikator = "X";
@@ -408,8 +408,8 @@ document.form2.image();
     var simpan;
     simpan = "baru";
 
-	 
-	
+
+
     if (aspek) {
       window.location.href='M_Indikator_Save.php?kode=' + kode + '&aspek=' + aspek + '&standar=' + standar + '&tolakukur=' + tolakukur + '&departemen=' + departemen + '&unit=' + unit_kerja + '&statindikator=' + statindikator + '&statlap=' + statlap + '&stat_group=' + stat_group + '&statnum=' + statnum + '&statden=' + statden + '&simpan=' + simpan;
     } else {
@@ -430,7 +430,7 @@ document.form2.image();
     radiobtn.checked = false;
   }
 </script>
-		
+
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.js"></script>

@@ -5,7 +5,7 @@ if (isset($_GET['katakunci']))
     $katakunci = $_GET['katakunci'];
     $query = "SELECT * FROM M_Indikator WHERE Kode like '%". $katakunci ."%'
 												OR Kategori like '%". $katakunci ."%'
-												OR Target like '%". $katakunci ."%'                                        
+												OR Target like '%". $katakunci ."%'
 												OR Departemen like '%". $katakunci ."%'
 												OR Unit like '%". $katakunci ."%'
 												OR Group_indikator like '%". $katakunci . "%'
@@ -14,7 +14,7 @@ if (isset($_GET['katakunci']))
                                                 OR Numerator like '%". $katakunci ."%'
                                                 OR Denominator like '%". $katakunci ."%'
 												OR Status like '%". $katakunci ."%' ORDER BY Kode ASC";
-												
+
     $sql = sqlsrv_query($conn,$query);
     if ($sql){
         echo "
@@ -83,18 +83,18 @@ if (isset($_GET['katakunci']))
         // $("#statden").val(statden);
 
         if (statnum=="X"){
-            radiobtn = document.getElementById("Ya");
+            radiobtn = document.getElementById("Ya_num");
             radiobtn.checked = true;
         } else if(statnum==""){
-            radiobtn = document.getElementById("Tidak");
+            radiobtn = document.getElementById("Tidak_num");
             radiobtn.checked = true;
         }
 
         if (statden=="X"){
-            radiobtn = document.getElementById("Ya");
+            radiobtn = document.getElementById("Ya_den");
             radiobtn.checked = true;
         } else if(statden==""){
-            radiobtn = document.getElementById("Tidak");
+            radiobtn = document.getElementById("Tidak_den");
             radiobtn.checked = true;
         }
 
@@ -110,10 +110,10 @@ if (isset($_GET['katakunci']))
         }
 
         if (statlap=="X"){
-            radiobtn = document.getElementById("Ya");
+            radiobtn = document.getElementById("Ya_lap");
             radiobtn.checked = true;
         } else if(statlap==""){
-            radiobtn = document.getElementById("Tidak");
+            radiobtn = document.getElementById("Tidak_lap");
             radiobtn.checked = true;
         }
 
@@ -126,7 +126,7 @@ if (isset($_GET['katakunci']))
         }
 
 		change1();
-		
+
         modal.style.display = "none";
     })
 </script>

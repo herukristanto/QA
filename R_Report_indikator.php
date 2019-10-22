@@ -200,15 +200,15 @@ function ExportToExcel(testTable){
   function click1(){
   var bulan     = $('#bulan').val();
 	var tahun     = $('#tahun').val();
-  var unit      = $('#kode_u').val();
+  var kode_u    = $('#kode_u').val();
   var filter    = $('#filter').val();
-  
+
 	$.ajax({
 		//Alamat url harap disesuaikan dengan lokasi script pada komputer anda
 		url	     : 'R_Data_Show.php',
 		type     : 'GET',
 		dataType : 'html',
-		data     : 'bulan='+bulan+'&tahun='+tahun+'&unit='+unit+'&filter='+filter,
+		data     : 'bulan='+bulan+'&tahun='+tahun+'&kode_u='+kode_u+'&filter='+filter,
     success: function(info) {
      $("#tabel_range").html(info);   }
    });

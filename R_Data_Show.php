@@ -9,15 +9,17 @@ if (isset($_GET['filter'])) {
 
   $bulan    = $_GET['bulan'];
   $tahun    = $_GET['tahun'];
-  $unit    = $_GET['unit'];
+  // $kode_u    = $_GET['kode_u'];
 
- // echo "$bulan";
- // echo "$tahun";
+ echo "$bulan";
+ echo "$tahun";
+echo "$kode_u";
 
-  if (isset($bulan) AND isset($tahun) AND isset($unit)) {
-    $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun AND kode_u = $unit ORDER BY Indikator ASC";
+  if (isset($bulan) OR isset($tahun) OR isset($unit)) {
+    // $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun AND kode_u = $kode_u ORDER BY Indikator ASC";
+    $query = "SELECT * FROM T_Kejadian WHERE month(Tgl)= $bulan AND YEAR(Tgl)= $tahun ORDER BY Indikator ASC";
   }
-  
+
    $data    = sqlsrv_query($conn, $query);
    $no=1;
 

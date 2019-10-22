@@ -564,7 +564,6 @@ $tambah = $kode + 1;
   											<button class="btn" type="reset" name="Reset">Reset</button>
   										</div>
 
-
                     </form>
                   </div>
 
