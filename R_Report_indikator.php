@@ -37,11 +37,11 @@ function ExportToExcel(testTable){
 
     {
       #ambil data semua indikator
-        $query = "SELECT * FROM V_Indikator_Kejadian WHERE status = 'X' ";
+        $query = "SELECT * FROM T_Kejadian ";
         $sql  = sqlsrv_query($conn, $query);
         $arrind = array();
         while ($row = sqlsrv_fetch_array($sql)) {
-          $arrind [ $row['kode_u'] ] = $row['kode_u'];
+          $arrind [ $row['kode_unit'] ] = $row['kode_unit'];
 
         }
 
@@ -72,7 +72,7 @@ function ExportToExcel(testTable){
             		  Proses simpan <strong>gagal</strong>!. Data Gagal Disimpan.
             		</div>
             	<?php } ?>
-          <div>
+          </div>
 
 
 
@@ -157,7 +157,8 @@ function ExportToExcel(testTable){
 
             </div>
             <br>
-          </div>
+
+
 
           <div>
             <div id="tabel_range"></div>
@@ -167,6 +168,7 @@ function ExportToExcel(testTable){
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- /main -->
 
@@ -197,6 +199,11 @@ function ExportToExcel(testTable){
 <!-- Placed at the end of the document so the pages load faster -->
 
 <script>
+// $(document).ready(function() {
+//   $$( "#target" ).click(function() {
+//     click1();
+//   });
+// });
   function click1(){
   var bulan     = $('#bulan').val();
 	var tahun     = $('#tahun').val();

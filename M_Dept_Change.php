@@ -31,56 +31,114 @@ td.mid{
 </head>
 <body>
 <div id="header_mstr"></div>
+
+<!-- mulai -->
 <div class="main">
   <div class="main-inner">
     <div class="container">
       <div class="row">
-        <div class="span12 mainPage">
-					
-					<br>
-					<span class="style1">Change Departemen</span><br>
-					<table>
-						<tr>
-							<td>Kode Departemen</td>
-							<td> : </td>
-							<td><input type="text" id="kd_dept" name="kodedepartemen" disabled></td>
-						</tr>
-						<tr>
-							<td>Deskripsi</td>
-							<td> : </td>
-							<td><textarea name="deskripsi" id="desk_dept"></textarea></td>
-						</tr>
-						<tr>
-						  <td>Aktif</td>
-						  <td>:</td>
-						  <td colspan="2"><input type="radio" name="statdept" id="aktif" checked>
-					      Aktif</td>
-					  </tr>
-						<tr>
-						  <td height="52">&nbsp;</td>
-						  <td>&nbsp;</td>
-						  <td colspan="2"><input type="radio" name="statdept" id="nonaktif">
-					      Non-Aktif</td>
-					  </tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td colspan="2"><button id="myBtn">Search</button> &nbsp;
-											<button onClick="savedepartemen();">Save</button> &nbsp;
-											<button onClick="cleardepartemen();">Cancel</button> &nbsp;</td>
-						</tr>
-					</table>
 
-					<?php include "M_Dept_Search.php"; ?>
-        </div>
-        <!-- /span12 -->
+        <form class="" action="M_Dept_Save.php" method="GET">
+        <div class="span12">
+          <div class="widget ">
+            <div class="widget-header">
+              <i class="icon-edit"></i>
+              <h3><span>Change Departemen </span</h3>
+            </div> <!-- /widget-header -->
+
+            <div class="widget-content">
+            <div class="tabbable">
+            <br>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="formcontrols">
+                <div id="edit-profile" class="form-horizontal">
+
+
+
+
+                  <div class="control-group">
+                    <label class="control-label" for="lokasi">Kode Departemen</label>
+                    <div class="controls">
+                      <input type="text" class="span3" name="kd_dept" id="kd_dept" maxlength="3" readonly>
+                    </div> <!-- /controls -->
+                  </div> <!-- /control-group -->
+
+                  <div class="control-group">
+                    <label class="control-label" for="lokasi">Deskripsi</label>
+                    <div class="controls">
+                      <input type="text" class="span3" name="desk_dept" id="desk_dept" >
+                    </div> <!-- /controls -->
+                  </div> <!-- /control-group -->
+
+                  <div class="control-group">
+                    <label class="control-label">Status</label>
+                      <div class="controls">
+                        <label class="radio inline">
+                          <input type="radio" name="statdept" id="aktif" checked value="X" > Aktif
+                        </label>
+                    </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input type="radio" name="statdept" id="nonaktif" value=" " > Non-Aktif
+                      </label>
+                  </div>	<!-- /controls -->
+                  </div> <!-- /control-group -->
+
+                  <div class="form-actions">
+                      <input type="button" id="myBtn" class="btn btn-success" value="Search">
+
+                      <button  name="simpan" value="ubah" class="btn btn-success">Save</button>
+                      <button class="btn btn-danger" type="reset">Reset</button>
+                    </div>
+
+                    </div>
+
+                    </form>
+
+                  </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div> <!-- /widget-content -->
+
+        </div> <!-- /widget -->
+
       </div>
-      <!-- /row -->
-    </div>
-    <!-- /container -->
+      <!-- /span12 -->
+
+    <!-- /row -->
   </div>
-  <!-- /main-inner -->
+  <!-- /container -->
 </div>
+<!-- /main-inner -->
+
+<!-- tutup -->
+<div class="">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+
+<!-- tutp -->
+
+	<?php include "M_Dept_Search.php"; ?>
+
+
 <!-- /main -->
 <div class="extra">
   <div class="extra-inner">
@@ -113,40 +171,7 @@ td.mid{
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script>
-	function savedepartemen(){
-		var kd_dept;
-		var desk_dept;
-		var statdept;
-		
-		kd_dept = document.getElementById('kd_dept').value;
-		desk_dept = document.getElementById('desk_dept').value;
 
-		var cekradiobutton = document.getElementById('aktif');
-		if (cekradiobutton.checked){
-			statdept = "X";
-		}else{
-			statdept = "";
-		}
-		var simpan;
-		simpan = "ubah";
-
-		if (desk_dept) {
-			window.location.href='M_Dept_Save.php?kd_dept=' + kd_dept + '&desk_dept=' + desk_dept + '&statdept=' + statdept + '&simpan=' + simpan;
-		} else {
-			alert("Kolom 'Nama' harus diisi..");
-		}
-	}
-
-	function cleardepartemen(){
-		document.getElementById('desk_dept').value = '';
-		document.getElementById('kd_dept').value = '';
-		radiobtn = document.getElementById("aktif");
-		radiobtn.checked = true;
-		radiobtn = document.getElementById("nonaktif");
-		radiobtn.checked = false;
-	}
-</script>
 
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>

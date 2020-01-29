@@ -208,7 +208,7 @@ td.mid{
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button>  
-					<button>Exit</button></td>
+					<button onclick="document.location.href='main.php';">Exit</button></td>
 						</tr>
 					</table>
 					<input type="hidden" id="unit" disabled="disabled"></input>

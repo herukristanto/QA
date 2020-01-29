@@ -13,8 +13,8 @@
           <tr>
               <td>Masukan Transaksi</td>
               <td> : </td>
-              <td><input type="text" id="katakunci" name="katakunci"></td>
-              <td><button id="saringtabel">Saring</button></td>
+              <td><input type="text" id="katakunci" name="katakunci">
+              <input type="button" id="saringtabel" class="btn btn-info" value="Saring"></td>
           </tr>
       </table>
       <div id="tampiltabel">

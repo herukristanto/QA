@@ -8,7 +8,7 @@ include "koneksi.php";
     while ($row = sqlsrv_fetch_array($sql)) {
       $arrind [ $row['Kode'] ] = $row['Insiden'];
     }
-  } 
+  }
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Change Tipe Insiden</span><br>
 					<table>
@@ -96,7 +96,7 @@ td.mid{
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button> &nbsp;
 											<button onClick="savetipeinsiden();">Save</button> &nbsp;
-											<button onClick="cleartipeinsiden();">Cancel</button> &nbsp;</td>
+											<button onClick="cleartipeinsiden();">Reset</button> &nbsp;</td>
 						</tr>
 					</table>
 

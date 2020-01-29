@@ -9,12 +9,14 @@ if ($kodeindi = $_GET['r1']) {
     $denominator        = $_GET['r4'];
     $analisa            = $_GET['r5'];
     $tdklanjut          = $_GET['r6'];
+		$unit          = $_GET['unit'];
+		$tahun          = $_GET['tahun'];
 
 	#get date time current
 
 	$date_time 	= date("Y-m-d H:i:s");
 
-	$indikator =   LEFT( $kodeindi , 7);
+	// $indikator =   LEFT( $kodeindi , 7);
 
 	$sql = "INSERT INTO T_Kejadian VALUES('".$analisa."',
 																								'".$tdklanjut."',
@@ -22,7 +24,8 @@ if ($kodeindi = $_GET['r1']) {
                                                 '".$kodeindi."',
 																								'".$numerator."',
 																								'".$denominator."',
-																								'".$jumlah."'
+																								'".$jumlah."',
+																								'".$unit."'
 
 																							)";
 
@@ -32,9 +35,11 @@ if ($kodeindi = $_GET['r1']) {
 				if($result1){
 
 					$something = "Submission successful.";
-					header("location:R_Report_indikator.php?success");
+					header("location:R_Report_1.php?success");
+
+
 				}else{
-					header("location:R_Report_indikator.php?failed");
+					header("location:R_Report_1.php?failed");
 				}
 
     }

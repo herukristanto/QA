@@ -21,17 +21,13 @@ date_default_timezone_set("Asia/Bangkok");
 		 $kronologi			= $_POST['kronologi'];
 		 $radioKlinis		= $_POST['radioKlinis'];
 		 $radioProb			= $_POST['radioProbabilitas'];
-		 $tipe_lain			= $_POST['tipe_lain'];
-		 $cedera_lain		= $_POST['cedera_lain'];
+
+		 $tipe_lain			= "kosong";
+		 $cedera_lain		= "kosong";
 		 $created_by		= $_POST['user'];
 
-		 // echo $created_by;
-
-		 $kd_indikator			= substr($indikator,0,7);
-
+		 $kd_indikator	= substr($indikator,0,7);
 		 $DateTjd				= substr($TglTjd,6,4)."-".substr($TglTjd,3,2)."-".substr($TglTjd,0,2);
-
-
 
 		 if ($radioKlinis == 5 && $radioProb == 5) {
 			 $hasil_grading = "Ekstrim";
@@ -87,9 +83,9 @@ date_default_timezone_set("Asia/Bangkok");
 
 			$hasil_grading;
 			$kej_terjadi			= $_POST['kejadian_terjadi'];
-			$pas_cedera			= $_POST['cedera'];
-			$pas_mengetahui			= $_POST['pasien_mengetahui'];
-			$hasil			= $_POST['hasil'];
+			$pas_cedera				= $_POST['cedera'];
+			$pas_mengetahui		= $_POST['pasien_mengetahui'];
+			$hasil						= $_POST['hasil'];
 
 			$tanggal 	= date("Y-m-d");
 			$jam 			= date("H:i:s");
@@ -123,26 +119,27 @@ date_default_timezone_set("Asia/Bangkok");
 														'".$created_by."'
 														)";
 
+//27 filed
 					$result = sqlsrv_query( $conn, $tsql);
 
-					// if ( $result )
-					// {
-					//     $something = "Submission successful.";
-					// 		echo
-					// 		"
-					//  		<script>
-					//  		alert('Data Dengan No. Laporan : ".$nolap."  Berhasil Ditambah');
-					//  		window.location.href='T_Kejadian_A_Create.php';
-					//  		</script>";
-					// }
-					// else
-					// {
-					//      $something = "Submission unsuccessful.";
-					//      die( print_r( sqlsrv_errors(), true));
-					// }
-					// $output=$something;
-					// /* Free statement and connection resources. */
-					// sqlsrv_free_stmt( $result);
-					// sqlsrv_close( $conn);
+					if ( $result )
+					{
+					    $something = "Submission successful.";
+							echo
+							"
+					 		<script>
+					 		alert('Data Dengan No. Laporan : ".$nolap."  Berhasil Ditambah');
+					 		window.location.href='T_Kejadian_A_Create.php';
+					 		</script>";
+					}
+					else
+					{
+					     $something = "Submission unsuccessful.";
+					     die( print_r( sqlsrv_errors(), true));
+					}
+					$output=$something;
+					/* Free statement and connection resources. */
+					sqlsrv_free_stmt( $result);
+					sqlsrv_close( $conn);
 
 				?>

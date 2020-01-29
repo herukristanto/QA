@@ -17,12 +17,12 @@
 	<script src="js/Script.js"></script>
 	<script src="js/base.js"></script>
     <style type="text/css">
-<!--
+/* <!--
 .style1 {
 	font-size: 17px;
 	font-weight: bold;
 }
--->
+--> */
     </style>
 </head>
 <body>
@@ -32,7 +32,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Group Change</span><br>
 						<table>
@@ -88,7 +88,7 @@
 								<td colspan="2">
 									<button id="myBtn">Search</button>  
 									<button onClick="savegroup();">Save</button>  
-									<button onClick="cleargroup();">Cancel</button>
+									<button onClick="cleargroup();">Reset</button>
 								</td>
 							</tr>
 						</table>

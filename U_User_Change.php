@@ -1,19 +1,19 @@
 <?php
 include "koneksi.php";
-	
+
 #ambil data
 $query = "SELECT * FROM M_Departemen WHERE Status = 'X'";
 $sql = sqlsrv_query($conn, $query);
 $arrdept = array();
 while ($row = sqlsrv_fetch_array($sql)) {
 	$arrdept [ $row['Deskripsi'] ] = $row['Kode'];
-	
-}		
+
+}
 
 #action get unitkerja
 if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
 	$kode_dept = $_GET['kode_dept'];
-	
+
 #ambil data unitkerja
 	$query = "Select * from V_UnitKerja where kode_dept= '$kode_dept'";
 	$sql = sqlsrv_query($conn, $query);
@@ -65,7 +65,7 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Change User </span><br>
 					<table>
@@ -109,7 +109,7 @@ td.mid{
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button>  
-					<button>Exit</button></td>
+					<button onclick="document.location.href='main.php';">Exit</button></td>
 						</tr>
 					</table>
 
@@ -202,13 +202,13 @@ td.mid{
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
-			
+
 				$('#departemen').change(function()
-				{	
+				{
 					$.getJSON('T_Transaction.php',{action:'getUnker', kode_dept:$(this).val()}, function(json)
-					{	
+					{
 						$('#unitkerja').html('');
-						$.each(json, function(index, row) 
+						$.each(json, function(index, row)
 						{
 							$('#unitkerja').append('<option value="'+row.Unit_Kerja+'">'+row.Unit_Kerja+'</option>');
 						});

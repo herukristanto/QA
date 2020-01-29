@@ -14,7 +14,7 @@
               <td>Masukan Kode atau Deskripsi Departemen</td>
               <td> : </td>
               <td><input type="text" id="katakunci" name="katakunci"></td>
-              <td><button id="saringtabel">Saring</button></td>
+              <td><button class="btn btn-primary" id="saringtabel">Saring</button></td>
           </tr>
       </table>
       <div id="tampiltabel">

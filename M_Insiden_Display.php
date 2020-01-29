@@ -36,14 +36,14 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Display Insiden</span><br>
 					<table>
 						<tr>
 							<td>Kode Insiden</td>
 							<td> : </td>
-							<td><input type="text" id="kd_insiden" name="kodeinsiden" size="8" maxlength="6" readonly="readonly" disabled="disabled" 
+							<td><input type="text" id="kd_insiden" name="kodeinsiden" size="8" maxlength="6" readonly="readonly" disabled="disabled"
         style="text-align:center;font-weight:bold;font-size:16px" /></td>
 						</tr>
 						<tr>
@@ -67,7 +67,7 @@ td.mid{
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button> &nbsp;
-					<button>Exit</button></td>
+					<button onclick="document.location.href='main.php';">Exit</button></td>
 						</tr>
 					</table>
 
@@ -119,7 +119,7 @@ td.mid{
 		var kd_insiden;
 		var desk_insiden;
 		var statinsiden;
-		
+
 		kd_insiden = document.getElementById('kd_insiden').value;
 		desk_insiden = document.getElementById('desk_insiden').value;
 

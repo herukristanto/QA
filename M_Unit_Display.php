@@ -23,7 +23,7 @@ include "koneksi.php";
 		while ($row = sqlsrv_fetch_array($sql)) {
 			$arrind [ $row['Kode'] ] = $row['Kode'];
 		}
-	}	
+	}
 ?>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -44,70 +44,122 @@ td.mid{
 </head>
 <body>
 <div id="header_mstr"></div>
+
+<!-- mulai -->
 <div class="main">
   <div class="main-inner">
     <div class="container">
       <div class="row">
-        <div class="span12 mainPage">
-					
-					<br>
-					<span class="style1">Display Unit</span><br>
-					<table>
-						<tr>
-							<td>Kode Unit </td>
-							<td> : </td>
-							<td><input type="text" id="kd_unit" name="kodeunit" disabled></td>
-						</tr>
-						<tr>
-							<td>Deskripsi</td>
-							<td> : </td>
-							<td><input type="text" id="desk_unit" name="deskripsi" maxlength="50" disabled></td>
-						</tr>
-						<tr>
-						  <td>Departemen</td>
-						  <td>:</td>
-						  <td colspan="2"><span class="inputan">
-						    <select id="departemen" name="departemen" disabled="disabled">
-                              <option value=""></option>
-                              <?php
-			foreach ($arrind as $Kode=>$Kode) {
-				echo "<option value='$Kode'>$Kode</option>";
-			}
-			?>
-                            </select>
-						  </span></td>
-					  </tr>
-						<tr>
-						  <td>Aktif</td>
-						  <td>: </td>
-						  <td colspan="2"><input type="radio" name="statunit" id="aktif" checked disabled>
-					      Aktif</td>
-					  </tr>
-						<tr>
-						  <td height="50">&nbsp;</td>
-						  <td>&nbsp;</td>
-						  <td colspan="2"><input type="radio" name="statunit" id="nonaktif" disabled>
-					      Non-Aktif</td>
-					  </tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td colspan="2"><button id="myBtn">Search</button>  
-					<button>Exit</button></td>
-						</tr>
-					</table>
 
-					<?php include "M_Unit_Search.php"; ?>
+        <div class="span12">
+          <div class="widget ">
+            <div class="widget-header">
+              <i class="icon-desktop"></i>
+              <h3><span>Display Unit </span</h3>
+            </div> <!-- /widget-header -->
 
-        </div>
-        <!-- /span12 -->
+            <div class="widget-content">
+            <div class="tabbable">
+            <br>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="formcontrols">
+
+								<div id="edit-profile" class="form-horizontal">
+
+
+                  <div class="control-group">
+                    <label class="control-label" for="lokasi">Kode Unit</label>
+                    <div class="controls">
+                      <input type="text" class="span3" name="kodeunit" id="kd_unit" maxlength="6" value="" disabled>
+                    </div> <!-- /controls -->
+                  </div> <!-- /control-group -->
+
+                  <div class="control-group">
+                    <label class="control-label" for="lokasi">Deskripsi</label>
+                    <div class="controls">
+                      <input type="text" class="span3" name="desk_unit" id="desk_unit" maxlength="50" value="" disabled>
+                    </div> <!-- /controls -->
+                  </div> <!-- /control-group -->
+
+									<div class="control-group">
+										<label class="control-label" for="departemen">Departemen</label>
+
+										<div class="controls">
+											<span class="inputan">
+
+												<select id="departemen" name="departemen" class="span3" disabled="disabled">
+													<option value=""></option>
+													<?php
+														foreach ($arrind as $Kode=>$Kode) {
+															echo "<option value='$Kode'>$Kode</option>";
+														}
+													?>
+												</select>
+											</span>
+										</div>
+									</div>
+
+                  <div class="control-group">
+                    <label class="control-label">Status</label>
+                      <div class="controls">
+                        <label class="radio inline">
+                          <input type="radio" name="statunit" id="aktif" checked value="X" disabled> Aktif
+                        </label>
+                    </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input type="radio" name="statunit" id="nonaktif" value="" disabled> Non-Aktif
+                      </label>
+                  </div>	<!-- /controls -->
+                  </div> <!-- /control-group -->
+
+                  <div class="form-actions">
+                      <button id="myBtn"  class="btn btn-success">Search</button>
+                      <button class="btn btn-danger" onclick="document.location.href='main.php';">Exit</button>
+                    </div>
+
+                  	</div>
+                  </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div> <!-- /widget-content -->
+
+        </div> <!-- /widget -->
+
       </div>
-      <!-- /row -->
-    </div>
-    <!-- /container -->
+      <!-- /span12 -->
+
+    <!-- /row -->
   </div>
-  <!-- /main-inner -->
+  <!-- /container -->
 </div>
+<!-- /main-inner -->
+
+<!-- tutup -->
+<div class="">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+	<br>
+
+</div>
+<?php include "M_Unit_Search.php"; ?>
+
+<!-- tutp -->
+
 <!-- /main -->
 <div class="extra">
   <div class="extra-inner">
@@ -140,41 +192,6 @@ td.mid{
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script>
-	function saveunit(){
-		var kd_unit;
-		var desk_unit;
-		var departemen;
-		var statunit;
-		
-		kd_unit = document.getElementById('kd_unit').value;
-		desk_unit = document.getElementById('desk_unit').value;
-		departemen = document.getElementById('departemen').value;
-
-		var cekradiobutton = document.getElementById('aktif');
-		if (cekradiobutton.checked){
-			statunit = "X";
-		}else{
-			statunit = " ";
-		}
-
-		if (desk_unit) {
-			window.location.href='M_Unit_Save.php?kd_unit=' + kd_unit + '&desk_unit=' + desk_unit + '&departemen=' + departemen + '&statunit=' + statunit;
-		} else {
-			alert("Kolom 'Deskripsi' harus diisi..");
-		}
-	}
-
-	function clearunit(){
-		document.getElementById('desk_unit').value = '';
-		document.getElementById('kd_unit').value = '';
-		document.getElementById('departemen').value = '';
-		radiobtn = document.getElementById("aktif");
-		radiobtn.checked = true;
-		radiobtn = document.getElementById("nonaktif");
-		radiobtn.checked = false;
-	}
-</script>
 
 <script src="js/excanvas.min.js"></script>
 <script src="js/chart.min.js" type="text/javascript"></script>
@@ -194,7 +211,7 @@ td.mid{
 					$.getJSON('M_Unit_Display.php',{action:'getdepartemen', departemen:$(this).val()}, function(json)
 					{
 						$('#departemen').html('');
-						$.each(json, function(index, row) 
+						$.each(json, function(index, row)
 						{
 							$('#departemen').append('<option value="'+row.kode+'">'+row.nama+'</option>');
 						});

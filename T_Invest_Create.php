@@ -445,7 +445,7 @@ td.mid{
               <td height="43">&nbsp;</td>
               <td>&nbsp;</td>
               <td colspan="2"><button onClick="saveinvest();">Save</button>  
-            <button onClick="clearinvest();">Reset</button></td>
+            <button onclick="document.location.href='index_main.html';" >Exit</button></td>
             </tr>
 
 

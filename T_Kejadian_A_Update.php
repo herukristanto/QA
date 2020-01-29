@@ -4,26 +4,29 @@ include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
 	 // Check If form submitted, insert form data into users table.
-	 if(isset($_GET['Submit'])) {
-		 $no_lap				= $_GET['nolap'];
-		 $TglTjd				= $_GET['tgl_kejadian'];
-		 $jam_kejadian	= $_GET['jam_kejadian'];
-		 $lokasi				= $_GET['lokasi'];
-		 $no_rm					= $_GET['no_rm'];
-		 $unit 					= $_GET['kode_u'];
-		 $nolap_unit		= $_GET['no_lap_1'];
-		 $radiolayanan	= $_GET['tipe_layanan'];
-		 $rawat_lain		= $_GET['rawat_lain'];
-		 $radiocedera		= $_GET['tingkat_cidera'];
-		 $cedera_lain		= $_GET['cedera_lain'];
-		 $indikator			= $_GET['kode_indikator'];
-		 $jenis_insiden	= $_GET['kode_insiden'];
-		 $tipe_insiden	= $_GET['tipe_insiden'];
-		 $sub_tipe			= $_GET['kode_sub'];
-		 $kronologi			= $_GET['kronologis'];
-		 $radioKlinis		= $_GET['skor_dampak'];
-		 $radioProb			= $_GET['skor_prob'];
-
+	 if(isset($_POST['Submit'])) {
+		 $nolap					= $_POST['nolap'];
+		 $TglTjd				= $_POST['TglTjd'];
+		 $jam_kejadian	= $_POST['jam_kejadian'];
+		 $lokasi				= $_POST['lokasi'];
+		 $no_rm					= $_POST['no_rm'];
+		 $unit 					= $_POST['unit_kerja'];
+		 $nolap_unit		= $_POST['nolap_unit'];
+		 $radiolayanan	= $_POST['radiolayanan'];
+		 $radiocedera		= $_POST['radiocedera'];
+		 $indikator			= $_POST['indikator'];
+		 $jenis_insiden	= $_POST['jenis_insiden'];
+		 $tipe_insiden	= $_POST['tipe_insiden'];
+		 $sub_tipe			= $_POST['sub_tipe'];
+		 $kronologi			= $_POST['kronologi'];
+		 $radioKlinis		= $_POST['radioKlinis'];
+		 $radioProb			= $_POST['radioProbabilitas'];
+		 // $created_by		= "admin";
+		 // $tipe_lain			= "kosong";
+		 // $cedera_lain		= "kosong";
+		 // $flag		= "kosong";
+		 // $created_by		= $_POST['user'];
+		 // $created_by		= "admin";
 
 		 $DateTjd				= substr($TglTjd,6,4)."-".substr($TglTjd,3,2)."-".substr($TglTjd,0,2);
 
@@ -80,22 +83,23 @@ date_default_timezone_set("Asia/Bangkok");
 		 }
 
 			$hasil_grading;
-			$kej_terjadi			= $_GET['kejadian_terjadi'];
-			$pas_cedera				= $_GET['cedera'];
-			$pas_mengetahui		= $_GET['pasien_mengetahui'];
-			$hasil						= $_GET['hasil'];
 
-			$tanggal 					= date("Y-m-d");
+			$kej_terjadi			= $_POST['kejadian_terjadi'];
+			$pas_cedera				= $_POST['cedera'];
+			$pas_mengetahui		= $_POST['pasien_mengetahui'];
+			$hasil						= $_POST['hasil'];
+
+			$tanggal 					= date("d-m-Y");
 			$jam 							= date("H:i:s");
-
-			$sql = "UPDATE T_Kejadian_a SET lokasi = '".$lokasi."',
-
+//28
+			$sql = "UPDATE T_Kejadian_a SET
 			tgl_kejadian = '".$DateTjd."',
 			jam_kejadian = '".$jam_kejadian."',
+			lokasi = '".$lokasi."',
 			no_rm = '".$no_rm."',
-			kode_u = '".$unit."' ,
-			no_lap_1 = '".$nolap_unit."' ,
-			tipe_layanan = '".$radiolayanan."' ,
+			kode_u = '".$unit."',
+			no_lap_1 = '".$nolap_unit."',
+			tipe_layanan = '".$radiolayanan."',
 			tingkat_cidera = '".$radiocedera."',
 			kode_indikator = '".$indikator."',
 			kode_insiden = '".$jenis_insiden."',
@@ -106,12 +110,14 @@ date_default_timezone_set("Asia/Bangkok");
 			skor_prob = '".$radioProb."',
 			hasil_skor = '".$hasil_grading."',
 			kejadian_terjadi = '".$kej_terjadi."',
-			pasien_mengetahui = '".$pas_mengetahui."',
 			cedera = '".$pas_cedera."',
-			rawat_lain = '".$rawat_lain."',
-			cedera_lain = '".$cedera_lain."',
-			hasil = '".$hasil."' WHERE no_lap = '".$no_lap."'";
+			pasien_mengetahui = '".$pas_mengetahui."',
+			hasil = '".$hasil."'
 
+
+			WHERE no_lap = '".$nolap."'";
+
+			// echo "$sql";
 			$result = sqlsrv_query( $conn, $sql);
 
 			if ( $result ){

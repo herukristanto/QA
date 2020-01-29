@@ -39,14 +39,14 @@ if (isset($_GET['katakunci']))
         var desk_unit = res[1];
         var departemen = res[2];
         var statunit = res[3];
-        
+
         $("#kd_unit").val(kd_unit);
         $("#desk_unit").val(desk_unit);
         $("#departemen").val(departemen);
         if (statunit=="X"){
             radiobtn = document.getElementById("aktif");
             radiobtn.checked = true;
-        } else if(statunit==" "){
+        } else if(statunit==""){
             radiobtn = document.getElementById("nonaktif");
             radiobtn.checked = true;
         }

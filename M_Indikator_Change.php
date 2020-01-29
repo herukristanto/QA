@@ -169,7 +169,7 @@
 								<td colspan="2">
 									<button id="myBtn">Search</button>  
 									<button onClick="saveindikator();">Save</button>  
-									<button onClick="clearindikator();">Cancel</button>
+									<button onClick="clearindikator();">Reset</button>
 								</td>
 							</tr>
 						</table>

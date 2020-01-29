@@ -1,32 +1,4 @@
-<?php
-  include "koneksi.php";
-  session_start();
 
-  //Cek variabel user dan pass
-  if (empty($_SESSION["username"])){
-    echo "
-    <script>
-      alert('Silahkan Login Terlebih Dahulu');
-      window.location.href = 'index.html';
-    </script>
-    ";
-  }else{
-    $page = basename($_SERVER['PHP_SELF']);
-    $quer = "select count(*) as hasil from M_Authorization where User_ID = '".$_SESSION["username"]."' and Form_ID = '".$page."'";
-    $sql_execute = sqlsrv_query($conn,$quer);
-    $rs = sqlsrv_fetch_array($sql_execute, SQLSRV_FETCH_ASSOC);
-    if($rs["hasil"] == 0)
-    {
-      echo '<script>
-      alert("Anda tidak berhak membuka halaman ini");
-      window.location="main.php";
-      </script>';
-    }
-  }
-
-  $username = $_SESSION["username"];
-
-?>
 
 <?php
 include "koneksi.php";
@@ -37,15 +9,15 @@ $sql = sqlsrv_query($conn, $query);
 $arrunit = array();
 while ($row = sqlsrv_fetch_array($sql)) {
   $arrunit [ $row['Deskripsi'] ] = $row['Deskripsi'];
-}      
+}
 
 
 #action get indikator
 if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
   $kode_unit = $_GET['Deskripsi'];
-  
+
 #ambil data indikator
-  $query = "SELECT * FROM V_Unit_Indikator WHERE Deskripsi= '$kode_unit' AND status_indikator='X'";
+  $query = "SELECT * FROM M_Indikator WHERE Unit= '$kode_unit' AND Status='X' ORDER BY Kode ASC";
   $sql = sqlsrv_query($conn, $query);
   $arrind = array();
   while ($row = sqlsrv_fetch_array($sql)) {
@@ -55,13 +27,16 @@ if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
   exit;
 }
 
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>T - Laporan Kejadian - Change</title>
+<title>T - Laporan Kejadian - Display</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -71,6 +46,25 @@ if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
 <script src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="libs/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function()
+      {
+
+        $('#unit_kerja').change(function()
+        {
+          $.getJSON('test.php',{action:'getUnker', Deskripsi:$(this).val()}, function(json)
+          {
+            $('#indikator').html('');
+            $.each(json, function(index, row)
+            {
+              $('#indikator').append('<option value="'+row.Kode+' - '+row.Kategori+'">'+row.Kode+' - '+row.Kategori+'</option>');
+
+            });
+          });
+        });
+      });
+    </script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -87,16 +81,6 @@ include "koneksi.php";
       $arrind_display [ $row['Kode'] ] = $row['Kategori'];
     }
   }
-
-// {
-//   #ambil data semua indikator
-//     $query = "SELECT * FROM M_Indikator WHERE Status = 'X' ORDER BY Kode ASC";
-//     $sql   = sqlsrv_query($conn, $query);
-//     $arrind = array();
-//     while ($row = sqlsrv_fetch_array($sql)) {
-//       $arrind [ $row['Kode'] ] = $row['Kategori'];
-//     }
-//   }
 
 {
   #ambil data semua insiden
@@ -145,7 +129,26 @@ $date = '2019-02-15 16:56:01';
 // echo "<br>";
 
 //Create Autonumber
-
+// $sql = "SELECT MAX(No_lap) AS id FROM T_Kejadian_a";
+// $sql_execute = sqlsrv_query($conn,$sql);
+// $sql_hasil = sqlsrv_fetch_array($sql_execute);
+// $cek = $sql_hasil['id'];
+//
+// $kode = substr($cek,10,14);
+//
+// $tambah = $kode + 1;
+//
+//   if($tambah<=9){
+//     $id = "L/".$month."/".$year."/0000".$tambah;
+//     }else if($tambah>9 && $tambah<99){
+//     $id = "L/".$month."/".$year."/000".$tambah;
+//     }else if($tambah>99 && $tambah<999){
+//     $id = "L/".$month."/".$year."/00".$tambah;
+//     }else if($tambah>999 && $tambah<9999){
+//     $id = "L/".$month."/".$year."/0".$tambah;
+//     }else if($tambah>9999 && $tambah<99999){
+//     $id = "L/".$month."/".$year."/".$tambah;
+//     }
 ?>
 
 <style>
@@ -162,38 +165,25 @@ td.mid{
 }
 </style>
 
-
 <script type="text/javascript" src="libs/jquery.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function()
       {
-      
+
         $('#unit_kerja').change(function()
-        { 
+        {
           $.getJSON('test.php',{action:'getUnker', Deskripsi:$(this).val()}, function(json)
-          { 
+          {
             $('#indikator').html('');
-            $.each(json, function(index, row) 
+            $.each(json, function(index, row)
             {
               $('#indikator').append('<option value="'+row.Kode+' - '+row.Kategori+'">'+row.Kode+' - '+row.Kategori+'</option>');
-              
+
             });
           });
         });
       });
     </script>
-
-<script type="text/javascript">
-    function Angkasaja(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-    return false;
-    return true;
-    }
-</script>
-    
-    <script type="text/javascript" src="libs/jquery.min.js"></script>
-
 
 </head>
 <body>
@@ -202,393 +192,409 @@ td.mid{
   <div class="main-inner">
     <div class="container">
       <div class="row">
-        <div class="span12 mainPage">
-  <br>
 
-</br>
-  <span class="style1">Change Laporan Kejadian</span><br>
-    <td>&nbsp;</td>
-<form action="T_Kejadian_A_Update.php" method="get">
 
-  <table>
-    <tr>
-      <tr>
-        <td>Insiden Sudah Terjadi ?</td>
-        <td>  </td>
-        <td colspan="2"><input type="radio" name="kejadian_terjadi" id="kjd_ya" value="Ya">Ya</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="kejadian_terjadi" id="kjd_tidak" value="Tidak">Tidak</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-      </tr>
 
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-      </tr>
+          <!-- mulai -->
+          <form class="" action="T_Kejadian_A_Update.php" method="post">
 
-      <tr>
-        <td>Apakah Pasien Mengetahui ?</td>
-        <td>  </td>
-        <td colspan="2"><input type="radio" name="pasien_mengetahui" id="pasien_ya" value="Ya">Ya</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="pasien_mengetahui" id="pasien_tidak" value="Tidak">Tidak</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-      </tr>
 
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-      </tr>
+          <div class="span12">
+	      		<div class="widget ">
+	      			<div class="widget-header">
+	      				<i class="icon-edit"></i>
+	      				<h3>Change Laporan Kejadian</h3>
+	  				  </div> <!-- /widget-header -->
 
-      <tr>
-        <td>Pasien Mengalami Cedera ?</td>
-        <td>  </td>
-        <td colspan="2"><input type="radio" name="cedera" id="cedera_ya" value="Ya">Ya</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="cedera" id="cedera_tidak" value="Tidak">Tidak</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-      </tr>
+              <div class="widget-content">
+						  <div class="tabbable">
+						  <br>
 
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-      </tr>
+							<div class="tab-content">
+								<div class="tab-pane active" id="formcontrols">
+								<div id="edit-profile" class="form-horizontal">
+									<fieldset>
 
-      <tr>
-        <td>Hasil Cidera</td>
-        <td>  </td>
-        <td colspan="2"><input type="radio" name="hasil" id="KTC" value="KTC">KTC</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="hasil" id="KNC" value="KNC">KNC</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="hasil" id="KPC" value="KPC">KPC</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="hasil" id="KTD" value="KTD">KTD</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="radio" name="hasil" id="Sentinel" value="Sentinel">Sentinel</td>
-        <td>&nbsp;</td>
-        <td colspan="2">&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-    </tr>
-  </table>
+                    <div class="control-group">
+                      <label class="control-label">Insiden Sudah Terjadi?</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input type="radio" name="kejadian_terjadi" id="kjd_ya" value="Ya"> Ya
+                          </label>
 
-  <table>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td>No. Laporan</td>
-        <td> : </td>
-        <td><input name="nolap" id="no_lap" type="text" readonly style="text-align:center;font-weight:bold;font-size:14px"></td>
-      </tr>
-      <tr>
-        <td>Tanggal Kejadian </td>
-        <td>:</td>
-        <td><input  name="tgl_kejadian" id="tgl_kejadian" type="text" value="<?php
-        if(isset($app['App_Date']))
-          {echo $app['App_Date']->format('d/m/Y');}
-        else
-          {echo date('d/m/Y');} ?>" maxlength="10" style="text-align:center;font-weight:bold;font-size:15px"/></td>
-      </tr>
-        <tr>
-          <td>Jam Kejadian</td>
-          <td> : </td>
-          <td><input   value="<?php echo $jam;?>" id="jam_kejadian" name="jam_kejadian" maxlength="50" style="text-align:center;font-weight:bold;font-size:14px"></td>
-        </tr>
-        <tr>
-          <td>Lokasi Kejadian</td>
-          <td> : </td>
-          <td><input  type="text" id="lokasi" name="lokasi" maxlength="50"></td>
-        </tr>
-        <tr>
-          <td>No. Rekam Medis</td>
-          <td> : </td>
-          <td><input  type="text" id="no_rm" name="no_rm" maxlength="50" onkeypress="return Angkasaja(event)"/></td>
-        </tr>
-        <tr>
-          <td>Unit terkait</td>
-          <td> : </td>
-          <td colspan="2">
-            <span class="inputan">
-              <select id="unit_kerja" name="unit_kerja" style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                  <?php
-                    foreach ($arrunit as $Unit=>$Kode) {
-                      echo "<option value='$Kode'>$Kode</option>";
-                    }
-                    ?>
-              </select>
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>No. Laporan unit terkait</td>
-          <td> : </td>
-          <td><input name="no_lap_1" type="text" id="no_lap_1" maxlength="50"></td>
-        </tr>
-          <td>&nbsp;</td>
-        <tr>
-          <td>Tipe Layanan</td>
-          <td colspan="2">
-            <input onclick="enable11('rawat_lain')" type="radio" name="tipe_layanan" id="rawatinap" value="Rawat Inap">Rawat Inap          </td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2">
-            <input onclick="enable11('rawat_lain')" type="radio" name="tipe_layanan" id="rawatjalan" value="Rawat Jalan">Rawat Jalan          </td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2">
-            <input onclick="enable1('rawat_lain')" type="radio" name="tipe_layanan" id="rawatlain" value="Rawat Lain">Lainnya &nbsp;
-            <input type="text" id="rawat_lain" name="rawat_lain" maxlength="50" >          </td>
-        </tr>
-          <td>&nbsp;</td>
-        <tr>
-          <td>Tingkat Cedera</td>
-          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="kematian" value="kematian">Kematian</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="berat" value="berat">Cedera Berat</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="sedang" value="sedang">Cedera Sedang</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="ringan" value="ringan">Cedera Ringan</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="tidak ada" value="tidak ada">Tidak Ada Cedera</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="enable22('cedera_lain')" type="radio" name="tingkat_cidera" id="lain" value="lain">Lainnya&nbsp;
-            <input  type="text" id="cedera_lain" name="cedera_lain" maxlength="50"></td>
-        </tr>
-          <td>&nbsp;</td>
-        <tr>
-          <td>Indikator terkait</td>
-          <td> : </td>
-          <td colspan="2">
-            <select id="indikator" name="indikator" onChange="();">
-          <option value="">---------------- P I L I H ----------------</option>
-          </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Jenis insiden</td>
-          <td> : </td>
-          <td colspan="2">
-            <span class="inputan">
-              <select id="kode_insiden" name="kode_insiden"  style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                <?php
-                foreach ($arrinsiden as $Kode=>$Kode) {
-                  echo "<option value='$Kode'>$Kode</option>";
-                }
-                ?>
-              </select>
-            </span>          </td>
-        </tr>
-        <tr>
-          <td>Tipe insiden</td>
-          <td> : </td>
-          <td colspan="2">
-            <span class="inputan">
-              <select id="tipe_insiden" name="tipe_insiden"  style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                <?php
-                  foreach ($arrtipe as $Kode=>$Kode) {
-                    echo "<option value='$Kode'>$Kode</option>";
-                  }
-                ?>
-              </select>
-            </span></td>
-        </tr>
-        <tr>
-          <td>Sub Tipe insiden</td>
-          <td> : </td>
-          <td colspan="2">
-            <span class="inputan">
-              <select id="kode_sub" name="kode_sub"  style="width:auto">
-                <option value="">---------------- P I L I H ----------------</option>
-                <?php
-                  foreach ($arrsub as $Kode=>$Kode) {
-                    echo "<option value='$Kode'>$Kode</option>";
-                  }
-                ?>
-              </select>
-            </span>          </td>
-        </tr>
-        <tr>
-          <td>Kronologi Kejadian</td>
-          <td> : </td>
-          <td><textarea name="kronologis" id="kronologis" rows="1" style="
-          overflow: hidden;
-          padding: 0;
-          border-style: solid;
-          border-width: 1px;
-          background-color: white;
-          font-size: 14px;
-          height: 25px; width: 150;"></textarea></td>
-        </tr>
-          <td height="43">&nbsp;</td>
-          <td>&nbsp;</td>
-        <tr>
-          <td>Analisa Matriks grading resiko</td>
-        </tr>
-        <tr>
-          <td height="43">&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>i. Skor dampak klinis/ severity</td>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="5"  value="5">Katastropil (merah-5)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="4"  value="4">Mayor (orange-4)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="3"  value="3">Moderat (kuning-3)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="2"  value="2">Minor (hijau-2)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_dampak" id="1"  value="1">Tidak Signifikan (biru-1)</td></tr>
-        </tr>
-        <tr>
-          <td height="43">&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>ii. Skor probabilitas/ frekuensi</td>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_5"  value="5">Sangat sering terjadi (merah-5)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_4"  value="4">Sering terjadi (orange-4)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_3"  value="3">Mungkin terjadi (kuning-3)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_2"  value="2">Jarang terjadi (hijau-2)</td></tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="2"><input onclick="clik();" type="radio" name="skor_prob" id="prob_1"  value="1">Sangat jarang terjadi (biru-1)</td></tr>
-        </tr>
-          <td>&nbsp;</td>
-        <tr>
-          <td>Hasil matriks grading resiko</td>
-          <td> : </td>
-          <td><input type="text" id="hasil_skor" name="hasil_skor" style="text-align:center;font-weight:bold;font-size:14px;color:black" disabled="disabled" maxlength="15" ></td>
-        </tr>
-        <tr>
-          <td height="43">&nbsp;</td>
-          <td>&nbsp;</td>
-            <td>
-            <button type="submit" name="Submit" style=" background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      padding: 6px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 8px;">Update</button>  
-            <button type="reset" name="Reset" style=" background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      padding: 6px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 8px;">Reset</button>
-      &nbsp;
-            <input type="button" id="myBtn" value="Search" style=" background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      padding: 6px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      border-radius: 8px;">
-            </td>
-        </tr>
-      </table>
-      </form>
-      <!-- <table>
-        <tr>
-          <td colspan="2">&nbsp;</td>
-          <td colspan="2">&nbsp;</td>
-          <td><button id="myBtn">Search</button></td>
-        </tr>
-      </table> -->
+                          <label class="radio inline">
+                            <input type="radio" name="kejadian_terjadi" id="kjd_tidak" value="Tidak"> Tidak
+                          </label>
+                      </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
 
-          <p>
-            <?php include "T_Kejadian_A_Search.php"; ?>
-          </p>
+                    <div class="control-group">
+                      <label class="control-label">Apakah Pasien Mengetahui?</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input type="radio" name="pasien_mengetahui" id="pasien_ya" value="Ya"> Ya
+                          </label>
 
-        </div>
+                          <label class="radio inline">
+                            <input type="radio" name="pasien_mengetahui" id="pasien_tidak" value="Tidak"> Tidak
+                          </label>
+                      </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+                    <div class="control-group">
+                      <label class="control-label">Pasien Mengalami Cedera?</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input type="radio" name="cedera" id="cedera_ya" value="Ya"> Ya
+                          </label>
+
+                          <label class="radio inline">
+                            <input type="radio" name="cedera" id="cedera_tidak" value="Tidak"> Tidak
+                          </label>
+                      </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+                    <div class="control-group">
+                      <label class="control-label">Hasil Cedera</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input type="radio" name="hasil" id="KTC" value="KTC"> KTC
+                          </label>
+
+                          <label class="radio inline">
+                            <input type="radio" name="hasil" id="KNC" value="KNC"> KNC
+                          </label>
+
+                          <label class="radio inline">
+                            <input type="radio" name="hasil" id="KPC" value="KPC"> KPC
+                          </label>
+
+                          <label class="radio inline">
+                            <input type="radio" name="hasil" id="KTD" value="KTD"> KTD
+                          </label>
+
+                          <label class="radio inline">
+                            <input type="radio" name="hasil" id="Sentinel" value="Sentinel"> Sentinel
+                          </label>
+                      </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+
+
+										<div class="control-group">
+											<label class="control-label" for="nolap">No. Laporan</label>
+											<div class="controls">
+												<input type="text" class="span2 disabled" name="nolap" id="no_lap"  readonly="true" style="text-align:center;font-weight:bold;font-size:14px">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+										<div class="control-group">
+											<label class="control-label" for="TglTjd">Tanggal Kejadian</label>
+											<div class="controls">
+												<input type="text" class="span2" name="TglTjd" id="TglTjd" value="<?php
+                        if(isset($app['App_Date']))
+                          {echo $app['App_Date']->format('d/m/Y');}
+                        else
+                          {echo date('d/m/Y');} ?>"  style="text-align:center;font-weight:bold;font-size:14px">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+											<label class="control-label" for="jam_kejadian">Jam Kejadian</label>
+											<div class="controls">
+												<input type="text" class="span2" name="jam_kejadian" id="jam_kejadian" style="text-align:center;font-weight:bold;font-size:14px" value="<?php echo $jam;?>" style="text-align:center;">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+											<label class="control-label" for="lokasi">Lokasi Kejadian</label>
+											<div class="controls">
+												<input type="text" class="span3" name="lokasi" id="lokasi" value="">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+											<label class="control-label" for="no_rm">No. Rekam Medis</label>
+											<div class="controls">
+												<input type="text" class="span3" name="no_rm" id="no_rm" value="">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+                      <label class="control-label" for="unit_kerja">Unit Terkait</label>
+
+                      <div class="controls">
+                        <span class="inputan">
+
+                          <select id="unit_kerja" name="unit_kerja" class="span3">
+                            <option value="">--------------------- P I L I H ---------------------</option>
+                              <?php
+                                foreach ($arrunit as $Unit=>$Kode) {
+                                  echo "<option value='$Kode'>$Kode</option>";
+                                }
+                                ?>
+                          </select>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="control-group">
+											<label class="control-label" for="nolap_unit">No. Laporan Unit Terkait</label>
+											<div class="controls">
+												<input type="text" class="span3" name="nolap_unit" id="no_lap_1" value="">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+
+                    <div class="control-group">
+                      <label class="control-label">Tipe Layanan</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input type="radio" onclick="enable33('text_layanan')"name="radiolayanan" id="rawatinap" checked value="Rawat Inap"> Rawat Inap
+                          </label>
+                      </div>	<!-- /controls -->
+                      <div class="controls">
+                        <label class="radio inline">
+                          <input type="radio" onclick="enable33('text_layanan')"name="radiolayanan" id="rawatjalan" value="Rawat Jalan"> Rawat Jalan
+                        </label>
+                    </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input type="radio" onclick="enable3('text_layanan')" name="radiolayanan" id="rawatlain" value="Rawat Lain"> Lainnya
+                        <input type="text" class="span3" disabled="true" name="radiolayanan" id="text_layanan" value="" >
+                      </label>
+                  </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+
+
+                    <div class="control-group">
+                      <label class="control-label">Tingkat Cedera</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input type="radio" name="radiocedera" onclick="enable22('text_cedera')" id="kematian" checked value="kematian"> Kematian
+                          </label>
+                      </div>	<!-- /controls -->
+                      <div class="controls">
+                        <label class="radio inline">
+                          <input type="radio" name="radiocedera" onclick="enable22('text_cedera')" id="berat" value="berat"> Cedera Berat
+                        </label>
+                    </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input type="radio" name="radiocedera" onclick="enable22('text_cedera')" id="sedang" value="sedang"> Cedera Sedang
+                      </label>
+                  </div>	<!-- /controls -->
+                  <div class="controls">
+                    <label class="radio inline">
+                      <input type="radio" name="radiocedera" onclick="enable22('text_cedera')" id="ringan" value="ringan"> Cedera Ringan
+                    </label>
+                </div>	<!-- /controls -->
+                <div class="controls">
+                  <label class="radio inline">
+                    <input type="radio" name="radiocedera" onclick="enable22('text_cedera')" id="tidak ada" value="tidak ada"> Tidak Ada Cedera
+                  </label>
+              </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input type="radio" onclick="enable2('text_cedera')" name="radiocedera" id="lain" value="lain"> Lainnya
+                        <input type="text" class="span3" id="text_cedera" name="radiocedera" value="" disabled="true">
+                      </label>
+                  </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+                      <label class="control-label" for="radiobtns">Indikator Terkait</label>
+
+                      <div class="controls">
+                        <span class="inputan">
+                          <select id="indikator" name="indikator" onChange="();" class="span3">
+                        <option value="">---------------- P I L I H ----------------</option>
+                        <?php
+                          foreach ($arrind_display as $Kode=>$Kategori) {
+                            echo "<option value='$Kode'>$Kode - $Kategori</option>";
+                          }
+                          ?>
+                        </select>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="control-group">
+                      <label class="control-label" for="radiobtns">Jenis insiden</label>
+
+                      <div class="controls">
+
+                        <span class="inputan">
+                          <select id="kode_insiden" name="jenis_insiden" class="span3">
+                            <option value="">---------------- P I L I H ----------------</option>
+                            <?php
+                            foreach ($arrinsiden as $Kode=>$Kode) {
+                              echo "<option value='$Kode'>$Kode</option>";
+                            }
+                            ?>
+                          </select>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="control-group">
+                      <label class="control-label" for="radiobtns">Tipe Insiden</label>
+
+                      <div class="controls">
+                        <span class="inputan">
+                          <select id="tipe_insiden" name="tipe_insiden" class="span3">
+                            <option value="">---------------- P I L I H ----------------</option>
+                            <?php
+                              foreach ($arrtipe as $Kode=>$Kode) {
+                                echo "<option value='$Kode'>$Kode</option>";
+                              }
+                            ?>
+                          </select>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="control-group">
+                      <label class="control-label" for="radiobtns">Sub Tipe Insiden</label>
+
+                      <div class="controls">
+                        <span class="inputan">
+                          <select id="kode_sub" name="sub_tipe" class="span3">
+                            <option value="">---------------- P I L I H ----------------</option>
+                            <?php
+                              foreach ($arrsub as $Kode=>$Kode) {
+                                echo "<option value='$Kode'>$Kode</option>";
+                              }
+                            ?>
+                          </select>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="control-group">
+											<label class="control-label" for="lastname">Kronologi Kejadian</label>
+											<div class="controls">
+                        <textarea name="kronologi" rows="1" id="kronologis" class="span3"></textarea>
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+                      <h4>Analisa Matriks grading resiko</h4>
+                      <label class="control-label">i. Skor dampak klinis/ severity</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input onclick="clik();" type="radio" name="radioKlinis" id="5" value="5">Katastropil (merah-5)
+                          </label>
+                      </div>	<!-- /controls -->
+                      <div class="controls">
+                        <label class="radio inline">
+                          <input onclick="clik();" type="radio" name="radioKlinis" id="4" value="4">Mayor (orange-4)
+                        </label>
+                    </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input onclick="clik();" type="radio" name="radioKlinis" id="3" value="3">Moderat (kuning-3)
+                      </label>
+                  </div>	<!-- /controls -->
+                  <div class="controls">
+                    <label class="radio inline">
+                      <input onclick="clik();" type="radio" name="radioKlinis" id="2" value="2">Minor (hijau-2)
+                    </label>
+                  </div>	<!-- /controls -->
+                  <div class="controls">
+                  <label class="radio inline">
+                    <input onclick="clik();" type="radio" name="radioKlinis" id="1" value="1">Tidak Signifikan (biru-1)
+                  </label>
+                  </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+                    <div class="control-group">
+
+                      <label class="control-label">ii. Skor probabilitas/ frekuensi</label>
+                        <div class="controls">
+                          <label class="radio inline">
+                            <input onclick="clik();" type="radio" name="radioProbabilitas" id="prob_5" value="5">Sangat sering terjadi (merah-5)
+                          </label>
+                      </div>	<!-- /controls -->
+                      <div class="controls">
+                        <label class="radio inline">
+                          <input onclick="clik();" type="radio" name="radioProbabilitas" id="prob_4" value="4">Sering terjadi (orange-4)
+                        </label>
+                    </div>	<!-- /controls -->
+                    <div class="controls">
+                      <label class="radio inline">
+                        <input onclick="clik();" type="radio" name="radioProbabilitas" id="prob_3" value="3">Mungkin terjadi (kuning-3)
+                      </label>
+                  </div>	<!-- /controls -->
+                  <div class="controls">
+                    <label class="radio inline">
+                      <input onclick="clik();" type="radio" name="radioProbabilitas" id="prob_2" value="2">Jarang terjadi (hijau-2)
+                    </label>
+                  </div>	<!-- /controls -->
+                  <div class="controls">
+                  <label class="radio inline">
+                    <input onclick="clik();" type="radio" name="radioProbabilitas" id="prob_1" value="1">Sangat jarang terjadi (biru-1)
+                  </label>
+                  </div>	<!-- /controls -->
+                    </div> <!-- /control-group -->
+
+
+                    <div class="control-group">
+											<label class="control-label" for="lastname">Hasil matriks grading resiko</label>
+											<div class="controls">
+												<input type="text" id="hasil_skor" maxlength="50" disabled="disabled" style="text-align:center;font-weight:bolder;font-size:14px;color:black">
+											</div> <!-- /controls -->
+										</div> <!-- /control-group -->
+
+
+                    <div hidden="hidden" class="control-group">
+											<!-- <label class="control-label" for="lastname">Created By</label> -->
+										 <!-- /controls -->
+										</div> <!-- /control-group -->
+
+                    <div class="form-actions">
+                        <input type="button" id="myBtn" class="btn btn-success" value="Search">
+                        <button class="btn btn-danger" type="reset" name="Reset">Reset</button>
+                        <button class="btn btn-success" name="Submit">Update</button>
+  										</div>
+
+
+                    </div>
+                  </div>
+                </form>
+                 
+
+                  </div>
+                  <?php include "T_Kejadian_A_Search.php"; ?>
+
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div> <!-- /widget-content -->
+
+				</div> <!-- /widget -->
+
+      
         <!-- /span12 -->
       </div>
-      <!-- /row -->
-    </div>
     <!-- /container -->
   </div>
   <!-- /main-inner -->
@@ -626,24 +632,25 @@ td.mid{
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
-function enable1(id){
-  var elemen = document.getElementById(id);
 
-    elemen.disabled = false;
-    document.getElementById(id).value;
+function enable3(id){
+var elemen = document.getElementById(id);
+  elemen.disabled = false;
 
 }
-function enable11(id){
-  var elemen = document.getElementById(id);
 
+
+function enable33(id){
+  var elemen = document.getElementById(id);
     elemen.disabled = true;
-    document.getElementById(id).value = '';
+    document.getElementById('text_layanan').value = "";
 
 }
 function enable2(id){
   var elemen = document.getElementById(id);
-  elemen.disabled = false;
-  document.getElementById(id).value;
+
+    elemen.disabled = false;
+
 
 }
 
@@ -652,73 +659,75 @@ function enable22(id){
   var elemen = document.getElementById(id);
 
     elemen.disabled = true;
-    document.getElementById(id).value = '';
+    document.getElementById('text_cedera').value = "";
 
 }
 
 
+
+
    function clik(){
 
-    const rk = $('input[name=skor_dampak]:checked').val();
-    const rp = $('input[name=skor_prob]:checked').val();
+    const rk = $('input[name=radioKlinis]:checked').val();
+    const rp = $('input[name=radioProbabilitas]:checked').val();
 
-    var hg;
+    var hasil_skor;
 
     if (rk == 5 && rp == 5) {
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 5 && rp == 4){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 5 && rp == 3){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 5 && rp == 2){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 5 && rp == 1){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 4 && rp == 5){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 4 && rp == 4){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 4 && rp == 3){
-      hg = "Ekstrim";
+      hasil_skor = "Ekstrim";
     }else if(rk == 4 && rp == 2){
-      hg = "Tinggi";
+      hasil_skor = "Tinggi";
     }else if(rk == 4 && rp == 1){
-      hg = "Tinggi";
+      hasil_skor = "Tinggi";
     }else if(rk == 3 && rp == 5){
-      hg = "Tinggi";
+      hasil_skor = "Tinggi";
     }else if(rk == 3 && rp == 4){
-      hg = "Tinggi";
+      hasil_skor = "Tinggi";
     }else if(rk == 3 && rp == 3){
-      hg = "Tinggi";
+      hasil_skor = "Tinggi";
     }else if(rk == 3 && rp == 2){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 3 && rp == 1){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 2 && rp == 5){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 2 && rp == 4){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 2 && rp == 3){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 2 && rp == 2){
-      hg = "Rendah";
+      hasil_skor = "Rendah";
     }else if(rk == 2 && rp == 1){
-      hg = "Rendah";
+      hasil_skor = "Rendah";
     }else if(rk == 1 && rp == 5){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 1 && rp == 4){
-      hg = "Moderat";
+      hasil_skor = "Moderat";
     }else if(rk == 1 && rp == 3){
-      hg = "Rendah";
+      hasil_skor = "Rendah";
     }else if(rk == 1 && rp == 2){
-      hg = "Rendah";
+      hasil_skor = "Rendah";
     }else if(rk == 1 && rp == 1){
-      hg = "Rendah";
+      hasil_skor = "Rendah";
     }
 
       $("#rkb").val(rk);
       $("#rpb").val(rp);
-      $("#hasil_skor").val(hg);
+      $("#hasil_skor").val(hasil_skor);
 
     var inputVal = document.getElementById("hasil_skor");
      if (inputVal.value == "Ekstrim") {
@@ -734,6 +743,7 @@ function enable22(id){
      }
 
 }
+
 var textarea = document.querySelector('textarea');
 
 textarea.addEventListener('keydown', autosize);
@@ -747,6 +757,7 @@ function autosize(){
     el.style.cssText = 'height:' + el.scrollHeight + 'px';
   },0);
 }
+
 </script>
 
 <script src="js/excanvas.min.js"></script>

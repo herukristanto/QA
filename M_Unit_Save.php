@@ -2,7 +2,7 @@
 include "koneksi.php";
 date_default_timezone_set("Asia/Bangkok");
 
-$kd_unit		= $_GET['kd_unit'];
+$kd_unit	= $_GET['kd_unit'];
 $desk_unit		= $_GET['desk_unit'];
 $statunit		= $_GET['statunit'];
 $dept 			= $_GET['departemen'];
@@ -26,6 +26,7 @@ else{
 
 
 if ($simpan == "ubah"){
+
 	$sql = "update M_Unit set Deskripsi = '".$desk_unit."', Departemen = '".$dept."', Status = '".$statunit."' where Kode = '".$kd_unit."'";
 	$sql_execute = sqlsrv_query($conn,$sql);
 
@@ -63,25 +64,25 @@ if ($simpan == "ubah"){
 
 				$query3 = "INSERT INTO M_unit VALUES('".$kodehasil."','".$desk_unit."','".$dept."' , '".$deptunit."' ,'".$statunit."')";
 
-				$Sql3 = sqlsrv_query($conn,$query3);	
+				$Sql3 = sqlsrv_query($conn,$query3);
 
 				echo
 				"<script>
 				alert('Unit Kerja ".$kodehasil." - ".$desk_unit." Berhasil Ditambah');
 				window.location.href='M_Unit_Create.php';
-				</script>"; 	
-		
+				</script>";
+
 			}else{
 
 				$satusatu1 = $getRun_no_unit + 1;
-			
+
 				$pnjgsatu1 = strlen($satusatu1);
 
 				if ($pnjgsatu1 == 1)
 				{
 					$hasilakhir1= '0'.$satusatu1;
 				}
-				
+
 				elseif ($pnjgsatu1 == 2)
 				{
 					$hasilakhir1= $satusatu1;
@@ -95,19 +96,19 @@ if ($simpan == "ubah"){
 				$kodehasil2 = $run_kd_unit."-".$hasilakhir1 ;
 
 				$deptunit2 = $kodehasil2."-".$desk_unit;
-			
-				$query5 = "INSERT INTO M_unit VALUES ('".$kodehasil2."','".$desk_unit."','".$dept."' , '".$deptunit2."' ,'".$statunit."')";
-				$Sql5 = sqlsrv_query($conn,$query5);	
 
-				
+				$query5 = "INSERT INTO M_unit VALUES ('".$kodehasil2."','".$desk_unit."','".$dept."' , '".$deptunit2."' ,'".$statunit."')";
+				$Sql5 = sqlsrv_query($conn,$query5);
+
+
 				echo
 				"<script>
 				alert('Unit Kerja ".$kodehasil2." - ".$desk_unit." Berhasil Ditambah');
 				window.location.href='M_Unit_Create.php';
-				</script>"; 
-			
+				</script>";
+
 				}
-		}			
+		}
 
 	} else {
 		echo

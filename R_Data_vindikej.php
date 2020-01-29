@@ -105,7 +105,8 @@ $no=1;
         <td class='center'></td>
         <td style='text-align: center;'>
           <button type='button' class='btn btn-success' data-toggle='modal'
-           onClick='datapost(\"$indikator\", \"$sttl\", \"$numerator\", \"$denominator\")' data-target='#myModal'>Add</button>
+           onClick='datapost(\"$indikator\", \"$sttl\", \"$numerator\", \"$denominator\")'  data-target='#myModal'>Add</button>
+
         </td>
 
         </tr>";
@@ -142,6 +143,23 @@ $no=1;
   }
 }
    ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <style>
+  textarea{
+
+
+
+width:500px;
+font-size:14;
+
+padding:10px;
+}
+</style>
+</head>
+  <body>
+
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -151,23 +169,25 @@ $no=1;
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <br>
           <h4 class="modal-title">Input Indikator Mutu</h4>
         </div>
         <div class="modal-body">
           <label for="">Indikaor</label>
-          <input type="text" id="kodeindi"  name="" value="" readonly style="height: 26px; width: 100%;">
+          <input type="text" id="kodeindi"  name="" value="" readonly style="height: 26px; width: 510px;">
           <label for="">Jumlah</label>
-          <input type="text" name="" id="jumlah" value="" readonly style="height: 26px;">
+          <input type="text" name="" id="jumlah" value="" readonly >
           <label for="">Numerator</label>
-          <input type="text" name="" id="numerator" value="" style="height: 26px;">
+          <input type="text" name="" id="numerator" value="" >
           <label for="">Denominator</label>
-          <input type="text" name="" id="denominator" value="" style="height: 26px;">
+          <input type="text" name="" id="denominator" value="" >
           <label for="">Analisa</label>
-          <textarea type="text" name="" id="analisa" value="" style="height: 26px; width: 100%;"></textarea>
+          <textarea type="text" name="" id="analisa" value="" rows='1'></textarea>
           <label for="">Tindak Lanjut</label>
-          <textarea type="text" name="" id="tindaklanjut" value="" style="height: 26px; width: 100%;"></textarea>
+          <textarea type="text" name="" id="tindaklanjut" value="" rows='1'></textarea>
         </div>
         <div class="modal-footer">
+          <button class="btn btn-danger" onClick='cleardata()'>Clear</button>
           <button type="button" id="btn" onclick="clik()" class="btn btn-success" data-dismiss="modal">Save</button>
         </div>
       </div>
@@ -196,41 +216,83 @@ $no=1;
           elemen2.disabled = true;
         }
 
+        document.getElementById('numerator').value = '';
+        document.getElementById('denominator').value = '';
+        document.getElementById('analisa').value  = '';
+        document.getElementById('tindaklanjut').value = '';
+
+      }
+
+      function cleardata(){
+
+
+        document.getElementById('numerator').value = '';
+        document.getElementById('denominator').value = '';
+        document.getElementById('analisa').value  = '';
+        document.getElementById('tindaklanjut').value = '';
+        //document.getElementById('kode').value = '';
+
+
       }
 
       function clik(){
+        var unit = "<?php echo $unit ?>";
+        var tahun = "<?php echo $tahun ?>";
         var kodeindikator = document.getElementById('kodeindi').value;
         var jumlah = document.getElementById('jumlah').value;
         var numerator = document.getElementById('numerator').value;
         var denominator = document.getElementById('denominator').value;
         var analisa = document.getElementById('analisa').value;
         var tindaklanjut = document.getElementById('tindaklanjut').value;
-        if (kodeindikator) {
-            window.location.href = "R_Data_Save.php?r1=" + kodeindikator +
-            "&r2=" + jumlah +
-            "&r3=" + numerator +
-            "&r4=" + denominator +
-            "&r5=" + analisa +
-            "&r6=" + tindaklanjut;
 
-      }
-    }
+
+
+         $.ajax({
+          type: 'GET',
+          url: "R_Data_Save.php",
+          data: "r1=" + kodeindikator +
+          "&r2=" + jumlah +
+          "&r3=" + numerator +
+          "&r4=" + denominator +
+          "&r5=" + analisa +
+          "&unit=" + unit +
+          "&tahun=" + tahun +
+          "&r6=" + tindaklanjut,
+
+         });
+         return false;
+        }
+
+
+
+
 
     var textarea1 = document.getElementById('analisa');
     var textarea2 = document.getElementById('tindaklanjut');
 
     textarea1.addEventListener('keydown', autosize);
     textarea2.addEventListener('keydown', autosize);
-    function autosize(){
-      var el = this;
-      setTimeout(function(){
-        el.style.cssText = 'height:auto; padding:0';
-        // for box-sizing other than "content-box" use:
-        // el.style.cssText = '-moz-box-sizing:content-box';
-        el.style.cssText = 'height:' + el.scrollHeight + 'px';
-      },0);
-    }
+
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+
+
+
 
    </script>
+   <!-- <script src='js/autosize.js'></script>
+   <script>
+		autosize(document.querySelectorAll('textarea'));
+	</script> -->
 
    <script src="js/jquery-1.7.2.min.js"></script>
+ </body>
+</html>

@@ -12,7 +12,7 @@
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
 <script src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="libs/jquery.min.js"></script>
@@ -46,6 +46,22 @@
       <div class="row">
         <div class="span12 mainPage">
           <div class="w3-container">
+
+              <?php if(isset($_GET["success"])) {?>
+                <div class="alert alert-success" role="alert">
+                  Data Berhasil Disimpan
+                  <button type="button" style="none" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <?php } ?>
+                <?php if(isset($_GET["failed"])) {?>
+                  <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    Proses simpan <strong>gagal</strong>!. Data Gagal Disimpan.
+                  </div>
+                <?php } ?>
+
             <form name="frmrange" method="post">
             <table style="margin-top:10px;">
               <tr>
@@ -128,9 +144,15 @@
 
 
 <script>
- $('select[id=tahun]').change(function(){
-  R_Data_vindikej();
- });
+$(document).ready(function() {
+  $('select[id=tahun]').change(function(){
+   R_Data_vindikej();
+  });
+  $('select[id=kode_u]').change(function(){
+   R_Data_vindikej();
+  });
+});
+
 
  function R_Data_vindikej(){
   var a = $('#kode_u').val();

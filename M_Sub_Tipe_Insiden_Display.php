@@ -8,7 +8,7 @@ include "koneksi.php";
     while ($row = sqlsrv_fetch_array($sql)) {
       $arrind [ $row['Kode'] ] = $row['Insiden'];
     }
-  } 
+  }
 
 
 {
@@ -19,7 +19,7 @@ include "koneksi.php";
     while ($row = sqlsrv_fetch_array($sql)) {
       $arrtipe [ $row['Kode_tipe'] ] = $row['Tipe_insiden'];
     }
-  } 
+  }
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Display Sub Tipe Insiden</span><br>
 					<table>
@@ -122,7 +122,7 @@ td.mid{
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button> &nbsp;
-					<button>Exit</button></td>
+					<button onclick="document.location.href='main.php';">Exit</button></td>
 						</tr>
 					</table>
 

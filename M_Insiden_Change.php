@@ -36,7 +36,7 @@ td.mid{
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Change Insiden</span><br>
 					<table>
@@ -68,7 +68,7 @@ td.mid{
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button> &nbsp;
 											<button onClick="saveinsiden();">Save</button> &nbsp;
-											<button onClick="clearinsiden();">Cancel</button> &nbsp;</td>
+											<button onClick="clearinsiden();">Reset</button> &nbsp;</td>
 						</tr>
 					</table>
 
@@ -119,7 +119,7 @@ td.mid{
 		var kd_insiden;
 		var desk_insiden;
 		var statinsiden;
-		
+
 		kd_insiden = document.getElementById('kd_insiden').value;
 		desk_insiden = document.getElementById('desk_insiden').value;
 

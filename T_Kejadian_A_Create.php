@@ -1,33 +1,6 @@
-<?php
-  include "koneksi.php";
-  session_start();
 
-  //Cek variabel user dan pass
-  if (empty($_SESSION["username"])){
-    echo "
-    <script>
-      alert('Silahkan Login Terlebih Dahulu');
-      window.location.href = 'index.html';
-    </script>
-    ";
-  }else{
-    $page = basename($_SERVER['PHP_SELF']);
-    $quer = "select count(*) as hasil from M_Authorization where User_ID = '".$_SESSION["username"]."' and Form_ID = '".$page."'";
-    $sql_execute = sqlsrv_query($conn,$quer);
-    $rs = sqlsrv_fetch_array($sql_execute, SQLSRV_FETCH_ASSOC);
-    if($rs["hasil"] == 0)
-    {
-      echo '<script>
-      alert("Anda tidak berhak membuka halaman ini");
-      window.location="main.php";
-      </script>';
-    }
-  }
-
-  $username = $_SESSION["username"];
-
-?>
-
+<?php include "_session.php" ?>
+<?php include "_permission.php" ?>
 <?php
 include "koneksi.php";
 
@@ -45,7 +18,7 @@ if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
   $kode_unit = $_GET['Deskripsi'];
 
 #ambil data indikator
-  $query = "SELECT * FROM V_Unit_Indikator WHERE Deskripsi= '$kode_unit' AND status_indikator='X'";
+  $query = "SELECT * FROM M_Indikator WHERE Unit= '$kode_unit' AND Status='X' ORDER BY Kode ASC";
   $sql = sqlsrv_query($conn, $query);
   $arrind = array();
   while ($row = sqlsrv_fetch_array($sql)) {
@@ -186,17 +159,15 @@ $tambah = $kode + 1;
   <div class="main-inner">
     <div class="container">
       <div class="row">
-        <div class="span12 mainPage">
 
 
           <!-- mulai -->
           <!-- <form class="" action="T_Kejadian_A_Save.php" method="post"> -->
 
-
           <div class="span12">
 	      		<div class="widget ">
 	      			<div class="widget-header">
-	      				<i class="icon-user"></i>
+	      				<i class="icon-pencil"></i>
 	      				<h3>Create Laporan Kejadian</h3>
 	  				  </div> <!-- /widget-header -->
 
@@ -206,7 +177,7 @@ $tambah = $kode + 1;
 
 							<div class="tab-content">
 								<div class="tab-pane active" id="formcontrols">
-								<form id="edit-profile" action="T_Kejadian_A_Save.php" method="post" class="form-horizontal">
+								<form id="edit-profile" action="T_Kejadian_A_Save.php" method="POST" class="form-horizontal">
 									<fieldset>
 
                     <div class="control-group">
@@ -290,7 +261,7 @@ $tambah = $kode + 1;
                         if(isset($app['App_Date']))
                           {echo $app['App_Date']->format('d/m/Y');}
                         else
-                          {echo date('d/m/Y');} ?>"  style="text-align:center;">
+                          {echo date('d/m/Y');} ?>"  style="text-align:center;font-weight:bold;font-size:14px">
 											</div> <!-- /controls -->
 										</div> <!-- /control-group -->
 
@@ -298,7 +269,7 @@ $tambah = $kode + 1;
                     <div class="control-group">
 											<label class="control-label" for="jam_kejadian">Jam Kejadian</label>
 											<div class="controls">
-												<input type="text" class="span2" name="jam_kejadian" id="jam_kejadian" value="<?php echo $jam;?>" style="text-align:center;">
+												<input type="text" class="span2" name="jam_kejadian" id="jam_kejadian" value="<?php echo $jam;?>" style="text-align:center;font-weight:bold;font-size:14px">
 											</div> <!-- /controls -->
 										</div> <!-- /control-group -->
 
@@ -351,18 +322,18 @@ $tambah = $kode + 1;
                       <label class="control-label">Tipe Layanan</label>
                         <div class="controls">
                           <label class="radio inline">
-                            <input type="radio" onclick="enable11('tipe_lain')"name="radiolayanan" id="rawatinap" value="Rawat Inap"> Rawat Inap
+                            <input type="radio" onclick="enable33('tipe_lain')"name="radiolayanan" id="rawatinap" checked value="Rawat Inap"> Rawat Inap
                           </label>
                       </div>	<!-- /controls -->
                       <div class="controls">
                         <label class="radio inline">
-                          <input type="radio" onclick="enable11('tipe_lain')"name="radiolayanan" id="rawatjalan" value="Rawat Jalan"> Rawat Jalan
+                          <input type="radio" onclick="enable33('tipe_lain')"name="radiolayanan" id="rawatjalan" value="Rawat Jalan"> Rawat Jalan
                         </label>
                     </div>	<!-- /controls -->
                     <div class="controls">
                       <label class="radio inline">
-                        <input type="radio" onclick="enable1('tipe_lain')" name="radiolayanan" id="rawatlain" value="Rawat Lain"> Lainnya
-                        <input type="text" class="span3" name="tipe_lain" id="tipe_lain" value="" disabled="disabled">
+                        <input type="radio" onclick="enable3('tipe_lain')" name="radiolayanan" id="rawatlain" value="Rawat Lain"> Lainnya
+                        <input type="text" class="span3" disabled="true" name="radiolayanan" id="tipe_lain" value="" >
                       </label>
                   </div>	<!-- /controls -->
                     </div> <!-- /control-group -->
@@ -373,7 +344,7 @@ $tambah = $kode + 1;
                       <label class="control-label">Tingkat Cedera</label>
                         <div class="controls">
                           <label class="radio inline">
-                            <input type="radio" name="radiocedera" onclick="enable22('cedera_lain')" id="kematian" value="kematian"> Kematian
+                            <input type="radio" name="radiocedera" onclick="enable22('cedera_lain')" id="kematian" checked value="kematian"> Kematian
                           </label>
                       </div>	<!-- /controls -->
                       <div class="controls">
@@ -399,7 +370,7 @@ $tambah = $kode + 1;
                     <div class="controls">
                       <label class="radio inline">
                         <input type="radio" onclick="enable2('cedera_lain')" name="radiocedera" id="lain" value="lain"> Lainnya
-                        <input type="text" class="span3" id="cedera_lain" name="cedera_lain" value="" disabled="disabled">
+                        <input type="text" class="span3" id="cedera_lain" name="radiocedera" value="" disabled="true">
                       </label>
                   </div>	<!-- /controls -->
                     </div> <!-- /control-group -->
@@ -554,35 +525,34 @@ $tambah = $kode + 1;
 											<!-- <label class="control-label" for="lastname">Created By</label> -->
 											<div class="controls">
 												<input type="text" id="username" name="user"
-                          value="<?php echo $username; ?>">
+                          value="<?php echo "$username" ?>">
 											</div> <!-- /controls -->
 										</div> <!-- /control-group -->
 
 
                     <div class="form-actions">
   											<button type="submit" name="submit"  class="btn btn-success">Simpan</button>
-  											<button class="btn" type="reset" name="Reset">Reset</button>
+  											<button class="btn btn-danger" type="reset" name="Reset">Reset</button>
   										</div>
 
                     </form>
-                  </div>
+                    </div>
 
-                  </div>
+                    </div>
 
+  								</div>
 
-								</div>
+  							</div>
 
-							</div>
+  						</div>
 
-						</div>
+  					</div> <!-- /widget-content -->
 
-					</div> <!-- /widget-content -->
-
-				</div> <!-- /widget -->
+  				</div> <!-- /widget -->
 
         </div>
         <!-- /span12 -->
-      </div>
+
       <!-- /row -->
     </div>
     <!-- /container -->
@@ -639,16 +609,18 @@ $tambah = $kode + 1;
 <!-- Placed at the end of the document so the pages load faster -->
 <script>
 
+function enable3(id){
+var elemen = document.getElementById(id);
+if (rawatlain.checked==true){
+  elemen.disabled = false;
 
-
-function enable1(id){
-  var elemen = document.getElementById(id);
-
-    elemen.disabled = false;
-
+}else{
+  elemen.disabled = true;
+  }
 }
 
-function enable11(id){
+
+function enable33(id){
   var elemen = document.getElementById(id);
 
     elemen.disabled = true;
@@ -658,6 +630,7 @@ function enable2(id){
   var elemen = document.getElementById(id);
 
     elemen.disabled = false;
+
 
 }
 

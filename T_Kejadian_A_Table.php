@@ -55,8 +55,8 @@ if (isset($_GET['katakunci']))
             "|".$rs['skor_prob'].
             "|".$rs['skor_prob'].
             "|".$rs['hasil_skor'].
-            "|".$rs['rawat_lain'].
-            "|".$rs['cedera_lain'].
+            // "|".$rs['rawat_lain'].
+            // "|".$rs['cedera_lain'].
 
             "'>
 
@@ -124,8 +124,8 @@ if (isset($_GET['katakunci']))
         var skor_prob = res[21];
         var hasil_skor = res[22];
 
-        var rawat_lain      = res[23];
-        var cedera_lain     = res[24];
+        // var rawat_lain      = res[23];
+        // var cedera_lain     = res[24];
 
         $("#no_lap").val(no_lap);
         $("#tgl_kejadian").val(tgl_kejadian);
@@ -144,8 +144,8 @@ if (isset($_GET['katakunci']))
         $("#skor_prob").val(skor_prob);
         $("#skor_dampak").val(skor_dampak);
         $("#hasil_skor").val(hasil_skor);
-        $("#rawat_lain").val(rawat_lain);
-        $("#cedera_lain").val(cedera_lain);
+        // $("#rawat_lain").val(rawat_lain);
+        // $("#cedera_lain").val(cedera_lain);
 
         if (kjd_terjadi=="Ya"){
             radiobtn = document.getElementById("kjd_ya");
@@ -188,51 +188,62 @@ if (isset($_GET['katakunci']))
             radiobtn.checked = true;
         }
 
-        var elemen = document.getElementById("rawat_lain")
+        var elemen = document.getElementById("text_layanan")
 
         if (tipe_layanan=="Rawat Inap"){
             radiobtn = document.getElementById("rawatinap");
             radiobtn.checked = true;
             elemen.disabled = true;
+            document.getElementById('text_layanan').value = "";
         }else if(tipe_layanan=="Rawat Jalan"){
             radiobtn = document.getElementById("rawatjalan");
             radiobtn.checked = true;
             elemen.disabled = true;
-        }else if(tipe_layanan=="Rawat Lain"){
+            document.getElementById('text_layanan').value = "";
+        }else{
             radiobtn = document.getElementById("rawatlain");
             radiobtn.checked = true;
-            // elemen.disabled = false;
+            elemen.disabled = false;
+            document.getElementById('text_layanan').value = "";
+            if (elemen.disabled == false) {
+              $("#text_layanan").val(tipe_layanan);
+            }
         }
 
-        var elemen1 = document.getElementById("cedera_lain")
+        var elemen1 = document.getElementById("text_cedera")
 
         if(tingkat_cidera=="kematian"){
             radiobtn = document.getElementById("kematian");
             radiobtn.checked = true;
             elemen1.disabled = true;
+            document.getElementById('text_cedera').value = "";
         }else if(tingkat_cidera=="berat"){
             radiobtn = document.getElementById("berat");
             radiobtn.checked = true;
             elemen1.disabled = true;
+            document.getElementById('text_cedera').value = "";
         }else if(tingkat_cidera=="sedang"){
             radiobtn = document.getElementById("sedang");
             radiobtn.checked = true;
             elemen1.disabled = true;
+            document.getElementById('text_cedera').value = "";
         }else if(tingkat_cidera=="ringan"){
             radiobtn = document.getElementById("ringan");
             radiobtn.checked = true;
             elemen1.disabled = true;
+            document.getElementById('text_cedera').value = "";
         }else if(tingkat_cidera=="tidak ada"){
             radiobtn = document.getElementById("tidak ada");
             radiobtn.checked = true;
             elemen1.disabled = true;
-        }else if(tingkat_cidera=="lain"){
+            document.getElementById('text_cedera').value = "";
+        }else{
             radiobtn = document.getElementById("lain");
             radiobtn.checked = true;
-            // elemen1.disabled = true;
-            // if (radiobtn.checked == true) {
-            //   elemen.disabled = false;
-            // }
+            elemen1.disabled = false;
+            if (elemen.disabled == false) {
+              $("#text_cedera").val(tingkat_cidera);
+            }
         }
 
         if (skor_dampak=="5"){

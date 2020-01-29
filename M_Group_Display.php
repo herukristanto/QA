@@ -1,19 +1,19 @@
 <?php
 include "koneksi.php";
-	
+
 #ambil data
 $query = "SELECT * FROM M_Departemen WHERE Status ='X' ";
 $sql = sqlsrv_query($conn, $query);
 $arrdept = array();
 while ($row = sqlsrv_fetch_array($sql)) {
 	$arrdept [ $row['Deskripsi'] ] = $row['Kode'];
-	
-}		
+
+}
 
 #action get unitkerja
 if(isset($_GET['action']) && $_GET['action'] == "getUnker") {
 	$kode_dept = $_GET['kode_dept'];
-	
+
 #ambil data unitkerja
 	$query = "Select * from V_UnitKerja where kode_dept= '$kode_dept'";
 	$sql = sqlsrv_query($conn, $query);
@@ -68,25 +68,25 @@ document.form2.image();
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
-			
+
 				$('#departemen').change(function()
-				{	
+				{
 					$.getJSON('M_Group_Change.php',{action:'getUnker', kode_dept:$(this).val()}, function(json)
-					{	
+					{
 						$('#unitkerja').html('');
-						$.each(json, function(index, row) 
+						$.each(json, function(index, row)
 						{
 							//$('#unitkerja').append('<option value="'+row.kode_unit+' - '+row.Unit_Kerja+'">'+row.kode_unit+' - '+row.Unit_Kerja+'</option>');
 							$('#unitkerja').append('<option value="'+row.Unit_Kerja+'">'+row.Unit_Kerja+'</option>');
-							
+
 						});
 					});
 				});
 			});
 		</script>
-		
+
 		<script type="text/javascript" src="libs/jquery.min.js"></script>
-		
+
 </head>
 <body>
 <div id="header_mstr"></div>
@@ -95,7 +95,7 @@ document.form2.image();
     <div class="container">
       <div class="row">
         <div class="span12 mainPage">
-					
+
 					<br>
 					<span class="style1">Display Group</span><br>
 					<table>
@@ -151,7 +151,7 @@ document.form2.image();
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td colspan="2"><button id="myBtn">Search</button>  
-					<button>Exit</button></td>
+					<button onclick="document.location.href='main.php';">Exit</button></td>
 						</tr>
 					</table>
 					<input type="hidden" id="unit" disabled="disabled"></input>
@@ -219,7 +219,7 @@ document.form2.image();
 		var unit_kerja;
 		var DeskUnit;
 		var statgroup;
-		
+
 		kd_group	= document.getElementById('kd_group').value;
 		desk_group	= document.getElementById('desk_group').value;
 		departemen	= document.getElementById('departemen').value;
